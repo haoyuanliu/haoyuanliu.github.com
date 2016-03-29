@@ -179,7 +179,7 @@ duoshuo_shortname: haoyuanliu
 #Available value: button
 #    button | slide
 baidushare: true 
-##  type: button
+## type: button
 
 # Share
 #jiathis: true
@@ -257,3 +257,8 @@ images: images
 
 # Theme version
 version: 0.5.0
+#title, chinese available
+links_title: 友情链接 
+## links
+links:
+	博客园: http://www.cnblogs.com/zuilehongdou/
