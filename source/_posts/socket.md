@@ -249,5 +249,3 @@ void ethernet_setpormisc(int fd,int i_flags)
 ![终端抓包结果] [terminal]
 [terminal]: https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-3-29/2016-3-29-2.png
 得到的结果是各种乱码，需要继续进行解析调试。
-
-
