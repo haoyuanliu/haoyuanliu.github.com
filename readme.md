@@ -1,8 +1,3 @@
-layout: '[post]'
-title: '写在最开始!'
-date: 2016-03-28 11:32:34
-tags: 闲扯 
-categories: 闲文
 ---
 # 写在最开始！
 
