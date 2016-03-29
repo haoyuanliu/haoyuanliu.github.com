@@ -29,7 +29,7 @@ int sockfd=socket(PF_PACKET,SOCK_PACKET,htons(ETH_P_ALL))；//这个socket可以
 int sockfd=socket(PF_PACKET,SOCK_RAW,htons(ETH_P_IP))；//这个socket可以访问处理链路层及以上所有的IP数据包
 ```
 ---
-
+<!-- more --> 
  ## 原始套接字权限
 
 　　原始套接字需要root权限即管理员权限才能够创建，所以需要sudo和su进入root模式，而且在使用原始套接字进行抓包的过程中需要设置网卡为混杂模式。
