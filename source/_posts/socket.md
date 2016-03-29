@@ -108,8 +108,13 @@ int main()
     return 0;
 }
 ```
-    使用wireshark抓包可以得到如下结果
-    ![wireshark抓包结果](file:///./opt/hexo/images/2016-3-29-1.png)
+
+使用wireshark进行抓包，得到如下结果：
+
+![wireshark] [socket]
+[socket]: https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-3-29/2016-3-29-1.png
+
+------
 
 ## 原始套接字收包解析
 
@@ -240,12 +245,9 @@ void ethernet_setpormisc(int fd,int i_flags)
 }
 
 ```
-
-    抓取到的数据包如下所示
-    ![原始套接字抓包结果](/opt/hexo/images/2016-3-29-2.png)
-    　
-    因为以%s字符串形式打印出来，所以有很多乱码，这里需要再写包解析函数进行解析！
-
-
+在终端显示抓包结果如下：
+![终端抓包结果] [terminal]
+[terminal]: https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-3-29/2016-3-29-2.png
+得到的结果是各种乱码，需要继续进行解析调试。
 
 
