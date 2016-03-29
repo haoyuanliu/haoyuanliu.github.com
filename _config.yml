@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
-timezone:
+title: 扯代码的皮
+subtitle: 面向工资编程
+description: 刘浩远的个人博客
+author: 刘浩远
+language: zh-Hans
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://haoyuanliu.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -63,9 +63,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: git@github.com:haoyuanliu/haoyuanliu.github.com.git
+  branch: master
