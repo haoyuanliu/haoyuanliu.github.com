@@ -187,7 +187,7 @@ add_this_id: ra-56f8cd3aef56f3f1
 
 # Share
 duoshuo_share: true
-duoshuo_hotartical: true
+#duoshuo_hotartical: true
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
