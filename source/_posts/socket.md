@@ -4,7 +4,6 @@ date: 2016-03-29 09:26:55
 tags: [原始套接字, socket]
 categories: C语言
 ---
-# 原始套接字学习笔记(1)
 
 一般来说，我们会用到如下三种套接字：
 
@@ -16,10 +15,12 @@ categories: C语言
 
 对于TCP和UDP两种套接字，相对来说只要配置好IP地址和端口号就可以了，比较简单，这里我们主要介绍原始套接字的使用。
 
+------
 ## 原始套接字简介
 
 　　原始套接字的强大之处在于，不同与UDP和TCP套接字只能访问传输层和传输层以上的数据包，原始套接字可以访问传输层以下的数据包，实现上至应用层下至链路层的数据操作，尤其适合用来进行抓包等工作。
-　　
+
+------　　
 ## 原始套接字的建立
 
 　　常用的原始套接字的建立方式有如下两种：
@@ -28,15 +29,16 @@ categories: C语言
 int sockfd=socket(PF_PACKET,SOCK_PACKET,htons(ETH_P_ALL))；//这个socket可以访问处理链路层及以上所有的数据包
 int sockfd=socket(PF_PACKET,SOCK_RAW,htons(ETH_P_IP))；//这个socket可以访问处理链路层及以上所有的IP数据包
 ```
----
 <!-- more --> 
+
+------
  ## 原始套接字权限
 
 　　原始套接字需要root权限即管理员权限才能够创建，所以需要sudo和su进入root模式，而且在使用原始套接字进行抓包的过程中需要设置网卡为混杂模式。
 
 　　下面给出两个例子，供大家参考
 
-## 原始套接字进行发包（wireshark抓包测试）
+## 原始套接字进行发包
 
 ```c
 #include <stdio.h>
@@ -249,3 +251,5 @@ void ethernet_setpormisc(int fd,int i_flags)
 ![终端抓包结果] [terminal]
 [terminal]: https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-3-29/2016-3-29-2.png
 得到的结果是各种乱码，需要继续进行解析调试。
+
+------
