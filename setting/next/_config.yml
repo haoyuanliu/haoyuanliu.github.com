@@ -31,7 +31,7 @@ menu:
   categories: /categories
   tags: /tags
   about: /about
-  commonweal: /404.html
+#  commonweal: /404.html
 
 
 # Enable/Disable menu icons.
@@ -181,7 +181,7 @@ duoshuo_shortname: haoyuanliu
 # Baidu Share
 #Available value: button
 #    button | slide
-baidushare: true 
+baidushare: true
 ## type: button
 
 # Share
