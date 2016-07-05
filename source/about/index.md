@@ -5,8 +5,9 @@ comments: false
 ---
 ## 个人信息
 
- - 刘浩远/男/1992
- - 硕士/通信工程(本)/通信信息系统(硕)
+ - 刘浩远/男/1993
+ - 北京交通大学：通信工程(本)
+ - 北京交通大学：通信信息系统(硕)
  - 技术博客：http://haoyuanliu.github.io
  - Github: https://github.com/haoyuanliu
 
