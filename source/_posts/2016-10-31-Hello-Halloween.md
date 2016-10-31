@@ -2,7 +2,7 @@ layout: '[post]'
 title: Hello Halloween!
 date: 2016-10-31 20:04:50
 tags: [github, halloween]
-categories: [心迹]
+categories: 心迹
 ---
 今天的GitHub为了庆祝万圣节，小小很惊喜！
 ![GitHub][1]
