@@ -4,7 +4,7 @@ date: 2016-11-17 22:51:06
 tags: [APUE, 5-15, UNIX, Linux]
 categories: UNIX/Linux
 ---
-# 内存流之冲洗内存流与null追加策略（APUE F5-15）
+
 最近一直在拜读APUE(Advanced Programming in the UNIX Environment)，在读到标准I/O库的时候，对于**图 5-15**的代码和内存流的写入方式发现冲洗内存流和`null`字节的追加策略书上没有说明白，到底是如何追加‘null`字节的，调用`fclose`为什么没有追加`null`字节等等，对于这一系列问题通过代码测试终于搞清楚整体的写入追加策略，特此记录一下。
 解决问题的关键在于书上这一句话：
 > * 任何时候需要增加流缓冲区中的数据量以及调用fclose、fflush、fseek、fseeko以及fsetpos时都会在当前位置写入一个`null`字节！
@@ -37,8 +37,8 @@ int main()
 	memset(buf, 'b', BSZ-2);
 	buf[BSZ-2] = '\0';
 	buf[BSZ-1] = 'X';
-	fprintf(fp, "hello, world"); //继续写进
-    fseek(fp, 0, SEEK_CUR); //保持偏移值冲洗之后的位置
+	fprintf(fp, "hello, world");
+	fseek(fp, 0, SEEK_CUR); //保持偏移值冲洗之后的位置
 	printf("After  fseek: %s\n", buf);
 	printf("Len of string in buf = %ld\n\n", (long)strlen(buf));
 
@@ -64,8 +64,8 @@ int main()
 
 程序执行的结果为：
 ```
-Initial buffer contents: 
-Before flush: 
+Initial buffer contents:
+Before flush:
 
 After fflush: hello, world
 Len of string in buf = 12
@@ -173,47 +173,47 @@ int main()
 	FILE *fp1, *fp2, *fp3;
 	char buf1[BSZ], buf2[BSZ], buf3[BSZ];
 
-    //方案一
+	//方案一
 	memset(buf1, 'a', BSZ-2);
 	buf1[BSZ-2] = '\0';
 	buf1[BSZ-1] = 'X';
 	if ((fp1 = fmemopen(buf1, BSZ, "w+")) == NULL)
 		err_sys("fmemopen failed");
-	fprintf(fp1, "hello, world"); 
+	fprintf(fp1, "hello, world");
 	//调用fflush函数引起缓冲区冲洗
-	fflush(fp1); 
+	fflush(fp1);
 	printf("1.After fflush: %s\n", buf1);
 	printf("1.Len of string in buf = %ld\n", (long)strlen(buf1));
 	memset(buf1, 'b', BSZ-2);
 	buf1[BSZ-2] = '\0';
 	buf1[BSZ-1] = 'X';
 	//二次输入数据为"nihao"，长度较短
-	fprintf(fp1, "nihao"); 
-    fclose(fp1);
+	fprintf(fp1, "nihao");
+	fclose(fp1);
 	printf("1.After close: %s\n", buf1);
 	printf("1.Len of string in buf = %ld\n\n", (long)strlen(buf1));
 
-    //方案二
+	//方案二
 	memset(buf2, 'a', BSZ-2);
 	buf2[BSZ-2] = '\0';
 	buf2[BSZ-1] = 'X';
 	if ((fp2 = fmemopen(buf2, BSZ, "w+")) == NULL)
 		err_sys("fmemopen failed");
-	fprintf(fp2, "hello, world"); 
+	fprintf(fp2, "hello, world");
 	//调用fseek函数引起缓冲区冲洗，偏移值设为首部
-	fseek(fp2, 0, SEEK_SET); 
+	fseek(fp2, 0, SEEK_SET);
 	printf("2.After fseek: %s\n", buf2);
 	printf("2.Len of string in buf = %ld\n", (long)strlen(buf2));
 	memset(buf2, 'b', BSZ-2);
 	buf2[BSZ-2] = '\0';
 	buf2[BSZ-1] = 'X';
 	//二次输入数据为"nihao"，长度较短
-	fprintf(fp2, "nihao"); 
-    fclose(fp2);
+	fprintf(fp2, "nihao");
+	fclose(fp2);
 	printf("2.After close: %s\n", buf2);
 	printf("2.Len of string in buf = %ld\n\n", (long)strlen(buf2));
 
-    //方案三
+	//方案三
 	memset(buf3, 'a', BSZ-2);
 	buf3[BSZ-2] = '\0';
 	buf3[BSZ-1] = 'X';
@@ -221,15 +221,15 @@ int main()
 		err_sys("fmemopen failed");
 	fprintf(fp3, "hello, world");
 	//调用fseek函数引起缓冲区冲洗，偏移值设为首部
-	fseek(fp3, 0, SEEK_SET); 
+	fseek(fp3, 0, SEEK_SET);
 	printf("3.After fseek: %s\n", buf3);
 	printf("3.Len of string in buf = %ld\n", (long)strlen(buf3));
 	memset(buf2, 'b', BSZ-2);
 	buf2[BSZ-2] = '\0';
 	buf2[BSZ-1] = 'X';
 	//二次输入数据为"hello, world! How are you?"，长度较长
-	fprintf(fp3, "hello, world! How are you?"); 
-    fclose(fp3);
+	fprintf(fp3, "hello, world! How are you?");
+	fclose(fp3);
 	printf("3.After close: %s\n", buf3);
 	printf("3.Len of string in buf = %ld\n\n", (long)strlen(buf3));
 
