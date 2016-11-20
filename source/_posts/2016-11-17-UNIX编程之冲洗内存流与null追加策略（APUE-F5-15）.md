@@ -1,7 +1,7 @@
 layout: '[post]'
 title: UNIX编程之冲洗内存流与null追加策略（APUE F5-15）
 date: 2016-11-17 22:51:06
-tags: [APUE, 5-15, UNIX, Linux]
+tags: [APUE, APUE 5-15, UNIX, Linux]
 categories: UNIX/Linux
 ---
 
@@ -10,7 +10,9 @@ categories: UNIX/Linux
 > * 任何时候需要增加流缓冲区中的数据量以及调用fclose、fflush、fseek、fseeko以及fsetpos时都会在当前位置写入一个`null`字节！
 
 看似是一旦调用`fclose`就要追加`null`，可以书上给的例子可不是这样哦，下面随着文章我们来一步一步地分析。
+
 <!--more-->
+
 ## 内存流写入代码
 ```
 #include "apue.h"
