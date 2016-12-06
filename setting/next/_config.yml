@@ -31,7 +31,7 @@ menu:
   categories: /categories
   tags: /tags
   about: /about
-  commonweal: /LeetCodes
+  commonweal: /LeetCode
 
 
 # Enable/Disable menu icons.
@@ -47,7 +47,8 @@ menu_icons:
   categories: th
   tags: tags
   archives: archive
-  commonweal: heartbeat
+  commonweal: code
+      #heartbeat
 
 
 
