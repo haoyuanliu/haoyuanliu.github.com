@@ -3,12 +3,12 @@ title: LeetCodes
 date: 2016-12-06 20:49:38
 ---
 
-# LeetCode 题解
+## LeetCode 题解
 ------
 
 
 |#|Title|Difficulity|Language|Accepted|
-|--|--|--|--|--|
+|:-:|:----------:|:-:|:-:|:-:|
 |1|Two Sum |Easy|C++|√|
 |2|Add Two Numbers|Medium|C++|√|
 |3|Longest Substring Without Repeating Characters|Medium|C++|√|
