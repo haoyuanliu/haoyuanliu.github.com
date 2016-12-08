@@ -8,7 +8,7 @@ date: 2016-12-06 20:49:38
 
 
 |#|Title|Difficulity|Language|Accepted|
-|:-:|:----------|:-|:-|:-:|
+|:-:|:----------|:-:|:-:|:-:|
 |1|Two Sum |Easy|C++|√|
 |2|Add Two Numbers|Medium|C++|√|
 |3|Longest Substring Without Repeating Characters|Medium|C++|√|
@@ -69,3 +69,9 @@ date: 2016-12-06 20:49:38
 |58|Length of Last Word|Easy|C++|√|
 |59|Spiral Matrix II|Medium|C++|√|
 |60|Permutation Sequence|Medium|C++|√|
+|61|[Rotate List][1]|Medium|C++|√|
+|189|[Rotate Array][2]|Easy|C++|√|
+
+
+  [1]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [2]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
