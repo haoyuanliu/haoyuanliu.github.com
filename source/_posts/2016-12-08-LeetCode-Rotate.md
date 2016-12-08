@@ -7,7 +7,7 @@ tags: [Leetcode]
 
 本文包含如下题目：
 [61. Rotate List][1]
-[62. 189. Rotate Array][2]
+[189. Rotate Array][2]
 
 <!--more-->
 
