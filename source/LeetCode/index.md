@@ -70,8 +70,52 @@ date: 2016-12-06 20:49:38
 |59|Spiral Matrix II|Medium|C++|√|
 |60|Permutation Sequence|Medium|C++|√|
 |61|[Rotate List][1]|Medium|C++|√|
-|189|[Rotate Array][2]|Easy|C++|√|
+|62|[Unique Paths][2]|Medium|C++|√|
+|63|[Unique Paths II][3]|Medium|C++|√|
+|64|[Minimum Path Sum][4]|Medium|C++|√|
+|65|Valid Number|Hard|C++||
+|66|Plus One|Easy|C++||
+|67|Add Binary|Easy|C++||
+|68|Text Justification|Hard|C++||
+|69|Sqrt(x)|Medium|C++||
+|70|Climbing Stairs|Easy|C++||
+|71|Simplify Path|Medium|C++||
+|72|Edit Distance|Hard|C++||
+|73|Set Matrix Zeroes|Medium|C++||
+|74|Search a 2D Matrix|Medium|C++||
+|75|Sort Colors|Medium|C++||
+|76|Minimum Window Substring|Hard|C++||
+|77|Combinations|Medium|C++||
+|78|Subsets|Medium|C++||
+|79|Word Search|Medium|C++||
+|80|Remove Duplicates from Sorted Array II |Medium|C++||
+|81|Search in Rotated Sorted Array II|Medium|C++||
+|82|Remove Duplicates from Sorted List II|Medium|C++||
+|83|Remove Duplicates from Sorted List |Easy|C++||
+|84|Largest Rectangle in Histogram|Hard|C++||
+|85|Maximal Rectangle|Hard|C++||
+|86|Partition List|Medium|C++||
+|87|Scramble String|Hard|C++||
+|88|Merge Sorted Array|Easy|C++||
+|89|Gray Code|Medium|C++||
+|90|Subsets II|Medium|C++||
+|91|Decode Ways|Medium|C++||
+|92|Reverse Linked List II|Medium|C++||
+|93|Restore IP Addresses|Medium|C++||
+|94|Binary Tree Inorder Traversal|Medium|C++||
+|95|Unique Binary Search Trees II|Medium|C++||
+|96|Unique Binary Search Trees|Medium|C++||
+|97|Interleaving String|Hard|C++||
+|98|Validate Binary Search Tree|Medium|C++||
+|99|Recover Binary Search Tree|Hard|C++||
+|100|Same Tree|Easy|C++||
+|174|[Dungeon Game][5]|Hard|C++|√|
+|189|[Rotate Array][6]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [2]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [2]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [3]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [4]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [5]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [6]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
