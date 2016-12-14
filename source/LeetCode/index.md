@@ -51,7 +51,7 @@ date: 2016-12-06 20:49:38
 |40|Combination Sum II  |Medium|C++|√|
 |41|First Missing Positive  |Hard|C++|√|
 |42|Trapping Rain Water  |Hard|C++|√|
-|43|Multiply Strings  |Medium|C++|√|
+|43|[Multiply Strings][3]|Medium|C++|√|
 |44|Wildcard Matching  |Hard|C++|√|
 |45|Jump Game II  |Hard|C++|√|
 |46|Permutations  |Medium|C++|√|
@@ -69,14 +69,14 @@ date: 2016-12-06 20:49:38
 |58|Length of Last Word|Easy|C++|√|
 |59|Spiral Matrix II|Medium|C++|√|
 |60|Permutation Sequence|Medium|C++|√|
-|61|[Rotate List][3]|Medium|C++|√|
-|62|[Unique Paths][4]|Medium|C++|√|
-|63|[Unique Paths II][5]|Medium|C++|√|
-|64|[Minimum Path Sum][6]|Medium|C++|√|
-|65|[Valid Number][7]|Hard|C++|√|
-|66|Plus One|Easy|C++|√|
-|67|Add Binary|Easy|C++|√|
-|68|[Text Justification][8]|Hard|C++|√|
+|61|[Rotate List][4]|Medium|C++|√|
+|62|[Unique Paths][5]|Medium|C++|√|
+|63|[Unique Paths II][6]|Medium|C++|√|
+|64|[Minimum Path Sum][7]|Medium|C++|√|
+|65|[Valid Number][8]|Hard|C++|√|
+|66|[Plus One|Easy][9]|C++|√|
+|67|[Add Binary][10]|Easy|C++|√|
+|68|[Text Justification][11]|Hard|C++|√|
 |69|Sqrt(x)|Medium|C++||
 |70|Climbing Stairs|Easy|C++||
 |71|Simplify Path|Medium|C++||
@@ -109,17 +109,22 @@ date: 2016-12-06 20:49:38
 |98|Validate Binary Search Tree|Medium|C++||
 |99|Recover Binary Search Tree|Hard|C++||
 |100|Same Tree|Easy|C++||
-|174|[Dungeon Game][9]|Hard|C++|√|
-|189|[Rotate Array][10]|Easy|C++|√|
+|174|[Dungeon Game][12]|Hard|C++|√|
+|189|[Rotate Array][13]|Easy|C++|√|
+|415|[Add Strings][14]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [2]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
-  [3]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [4]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [3]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [4]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
   [5]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [6]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [7]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
-  [8]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
-  [9]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [10]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [7]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [8]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
+  [9]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [10]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [11]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
+  [12]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [13]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [14]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
