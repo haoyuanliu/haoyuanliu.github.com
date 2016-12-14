@@ -74,9 +74,9 @@ date: 2016-12-06 20:49:38
 |63|[Unique Paths II][5]|Medium|C++|√|
 |64|[Minimum Path Sum][6]|Medium|C++|√|
 |65|[Valid Number][7]|Hard|C++|√|
-|66|Plus One|Easy|C++||
-|67|Add Binary|Easy|C++||
-|68|Text Justification|Hard|C++||
+|66|Plus One|Easy|C++|√|
+|67|Add Binary|Easy|C++|√|
+|68|[Text Justification][8]|Hard|C++|√|
 |69|Sqrt(x)|Medium|C++||
 |70|Climbing Stairs|Easy|C++||
 |71|Simplify Path|Medium|C++||
@@ -109,8 +109,8 @@ date: 2016-12-06 20:49:38
 |98|Validate Binary Search Tree|Medium|C++||
 |99|Recover Binary Search Tree|Hard|C++||
 |100|Same Tree|Easy|C++||
-|174|[Dungeon Game][8]|Hard|C++|√|
-|189|[Rotate Array][9]|Easy|C++|√|
+|174|[Dungeon Game][9]|Hard|C++|√|
+|189|[Rotate Array][10]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
@@ -120,5 +120,6 @@ date: 2016-12-06 20:49:38
   [5]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [6]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [7]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
-  [8]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [9]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [8]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
+  [9]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [10]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
