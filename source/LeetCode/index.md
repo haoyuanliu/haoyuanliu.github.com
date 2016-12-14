@@ -2,7 +2,6 @@
 title: LeetCodes
 date: 2016-12-06 20:49:38
 ---
-
 ## LeetCode 题解
 ------
 
@@ -58,7 +57,7 @@ date: 2016-12-06 20:49:38
 |47|Permutations II  |Medium|C++|√|
 |48|Rotate Image  |Medium|C++|√|
 |49|Group Anagrams  |Medium|C++|√|
-|50|Pow(x, n) |Medium|C++|√|
+|50|[Pow(x, n)][4] |Medium|C++|√|
 |51|N-Queens|Hard|C++|√|
 |52|N-Queens II|Hard|C++|√|
 |53|Maximum Subarray|Medium|C++|√|
@@ -69,15 +68,15 @@ date: 2016-12-06 20:49:38
 |58|Length of Last Word|Easy|C++|√|
 |59|Spiral Matrix II|Medium|C++|√|
 |60|Permutation Sequence|Medium|C++|√|
-|61|[Rotate List][4]|Medium|C++|√|
-|62|[Unique Paths][5]|Medium|C++|√|
-|63|[Unique Paths II][6]|Medium|C++|√|
-|64|[Minimum Path Sum][7]|Medium|C++|√|
-|65|[Valid Number][8]|Hard|C++|√|
-|66|[Plus One|Easy][9]|C++|√|
-|67|[Add Binary][10]|Easy|C++|√|
-|68|[Text Justification][11]|Hard|C++|√|
-|69|Sqrt(x)|Medium|C++||
+|61|[Rotate List][5]|Medium|C++|√|
+|62|[Unique Paths][6]|Medium|C++|√|
+|63|[Unique Paths II][7]|Medium|C++|√|
+|64|[Minimum Path Sum][8]|Medium|C++|√|
+|65|[Valid Number][9]|Hard|C++|√|
+|66|[Plus One|Easy][10]|C++|√|
+|67|[Add Binary][11]|Easy|C++|√|
+|68|[Text Justification][12]|Hard|C++|√|
+|69|[Sqrt(x)][13]|Medium|C++|√|
 |70|Climbing Stairs|Easy|C++||
 |71|Simplify Path|Medium|C++||
 |72|Edit Distance|Hard|C++||
@@ -109,22 +108,28 @@ date: 2016-12-06 20:49:38
 |98|Validate Binary Search Tree|Medium|C++||
 |99|Recover Binary Search Tree|Hard|C++||
 |100|Same Tree|Easy|C++||
-|174|[Dungeon Game][12]|Hard|C++|√|
-|189|[Rotate Array][13]|Easy|C++|√|
-|415|[Add Strings][14]|Easy|C++|√|
+|174|[Dungeon Game][14]|Hard|C++|√|
+|189|[Rotate Array][15]|Easy|C++|√|
+|367|[Valid Perfect Square][16]|Medium|C++|√|
+|372|[Super Pow][17]|Medium|C++|√|
+|415|[Add Strings][18]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [2]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [3]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
-  [4]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [5]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [4]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [5]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
   [6]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [7]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [8]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
-  [9]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [8]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [9]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [10]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
-  [11]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
-  [12]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [13]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [14]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [11]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [12]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
+  [13]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [14]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [15]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [16]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [17]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [18]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
