@@ -118,7 +118,7 @@ date: 2016-12-06 20:49:38
 |289|[Game of Life][27]|Medium|C++|√|
 |324|[Wiggle Sort II][28]|Medium|C++|√|
 |367|[Valid Perfect Square][29]|Medium|C++|√|
-|372|[Super Pow|Medium][30]|C++|√|
+|372|[Super Pow][30]|Medium|C++|√|
 |415|[Add Strings][31]|Easy|C++|√|
 
 
