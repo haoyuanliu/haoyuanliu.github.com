@@ -9,12 +9,14 @@ tags: [LeetCode, Array]
 [73. Set Matrix Zeroes][1]
 [289. Game of Life][2]
 
+<!--more-->
+
 ## 73. Set Matrix Zeroes
 ### 解题思路I
 > * 直接使用一个m长和n长的数组存储矩阵中0的位置；
 > * 空间复杂度（m+n）；
 
-<!--more-->
+
 
 ### 代码
 ```
