@@ -3,7 +3,6 @@ title: LeetCodes
 date: 2016-12-06 20:49:38
 ---
 
-
 ## LeetCode 题解
 ------
 
@@ -83,7 +82,7 @@ date: 2016-12-06 20:49:38
 |71|[Simplify Path][15]|Medium|C++|√|
 |72|[Edit Distance][16]|Hard|C++|√|
 |73|[Set Matrix Zeroes][17]|Medium|C++|√|
-|74|Search a 2D Matrix|Medium|C++||
+|74|[Search a 2D Matrix][18]|Medium|C++|√|
 |75|Sort Colors|Medium|C++||
 |76|Minimum Window Substring|Hard|C++||
 |77|Combinations|Medium|C++||
@@ -110,12 +109,13 @@ date: 2016-12-06 20:49:38
 |98|Validate Binary Search Tree|Medium|C++||
 |99|Recover Binary Search Tree|Hard|C++||
 |100|Same Tree|Easy|C++||
-|174|[Dungeon Game][18]|Hard|C++|√|
-|189|[Rotate Array][19]|Easy|C++|√|
-|289|[Game of Life][20]|Medium|C++|√|
-|367|[Valid Perfect Square][21]|Medium|C++|√|
-|372|[Super Pow][22]|Medium|C++|√|
-|415|[Add Strings][23]|Easy|C++|√|
+|174|[Dungeon Game][19]|Hard|C++|√|
+|189|[Rotate Array][20]|Easy|C++|√|
+|240|[Search a 2D Matrix II][21]|Medium|C++|√|
+|289|[Game of Life][22]|Medium|C++|√|
+|367|[Valid Perfect Square][23]|Medium|C++|√|
+|372|[Super Pow][24]|Medium|C++|√|
+|415|[Add Strings][25]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
@@ -135,9 +135,11 @@ date: 2016-12-06 20:49:38
   [15]: http://haoyuanliu.github.io/2016/12/15/71-Simplify-Path/
   [16]: http://haoyuanliu.github.io/2016/12/15/72-Edit-Distance/
   [17]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
-  [18]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [19]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [20]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
-  [21]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [22]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [23]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [18]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
+  [19]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [20]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [21]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
+  [22]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [23]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [24]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [25]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
