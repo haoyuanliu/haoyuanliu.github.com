@@ -38,7 +38,7 @@ date: 2016-12-06 20:49:38
 |27|Remove Element|Easy|C++|√|
 |28|Implement strStr()  |Easy|C++|√|
 |29|Divide Two Integers  |Medium|C++|√|
-|30|Substring with Concatenation of All Words  |Hard|C++|√|
+|30|[Substring with Concatenation of All Words][4]|Hard|C++|√|
 |31|Next Permutation  |Medium|C++|√|
 |32|Longest Valid Parentheses  |Hard|C++|√|
 |33|Search in Rotated Sorted Array  |Hard|C++|√|
@@ -51,14 +51,14 @@ date: 2016-12-06 20:49:38
 |40|Combination Sum II  |Medium|C++|√|
 |41|First Missing Positive  |Hard|C++|√|
 |42|Trapping Rain Water  |Hard|C++|√|
-|43|[Multiply Strings][4]|Medium|C++|√|
+|43|[Multiply Strings][5]|Medium|C++|√|
 |44|Wildcard Matching  |Hard|C++|√|
 |45|Jump Game II  |Hard|C++|√|
 |46|Permutations  |Medium|C++|√|
 |47|Permutations II  |Medium|C++|√|
 |48|Rotate Image  |Medium|C++|√|
 |49|Group Anagrams  |Medium|C++|√|
-|50|[Pow(x, n)][5] |Medium|C++|√|
+|50|[Pow(x, n)][6] |Medium|C++|√|
 |51|N-Queens|Hard|C++|√|
 |52|N-Queens II|Hard|C++|√|
 |53|Maximum Subarray|Medium|C++|√|
@@ -69,22 +69,22 @@ date: 2016-12-06 20:49:38
 |58|Length of Last Word|Easy|C++|√|
 |59|Spiral Matrix II|Medium|C++|√|
 |60|Permutation Sequence|Medium|C++|√|
-|61|[Rotate List][6]|Medium|C++|√|
-|62|[Unique Paths][7]|Medium|C++|√|
-|63|[Unique Paths II][8]|Medium|C++|√|
-|64|[Minimum Path Sum][9]|Medium|C++|√|
-|65|[Valid Number][10]|Hard|C++|√|
-|66|[Plus One|Easy][11]|C++|√|
-|67|[Add Binary][12]|Easy|C++|√|
-|68|[Text Justification][13]|Hard|C++|√|
-|69|[Sqrt(x)][14]|Medium|C++|√|
-|70|[Climbing Stairs][15]|Easy|C++|√|
-|71|[Simplify Path][16]|Medium|C++|√|
-|72|[Edit Distance][17]|Hard|C++|√|
-|73|[Set Matrix Zeroes][18]|Medium|C++|√|
-|74|[Search a 2D Matrix][19]|Medium|C++|√|
-|75|[Sort Colors][20]|Medium|C++|√|
-|76|Minimum Window Substring|Hard|C++||
+|61|[Rotate List][7]|Medium|C++|√|
+|62|[Unique Paths][8]|Medium|C++|√|
+|63|[Unique Paths II][9]|Medium|C++|√|
+|64|[Minimum Path Sum][10]|Medium|C++|√|
+|65|[Valid Number][11]|Hard|C++|√|
+|66|[Plus One|Easy][12]|C++|√|
+|67|[Add Binary][13]|Easy|C++|√|
+|68|[Text Justification][14]|Hard|C++|√|
+|69|[Sqrt(x)][15]|Medium|C++|√|
+|70|[Climbing Stairs][16]|Easy|C++|√|
+|71|[Simplify Path][17]|Medium|C++|√|
+|72|[Edit Distance][18]|Hard|C++|√|
+|73|[Set Matrix Zeroes][19]|Medium|C++|√|
+|74|[Search a 2D Matrix][20]|Medium|C++|√|
+|75|[Sort Colors][21]|Medium|C++|√|
+|76|[Minimum Window Substring][22]|Hard|C++|√|
 |77|Combinations|Medium|C++||
 |78|Subsets|Medium|C++||
 |79|Word Search|Medium|C++||
@@ -109,47 +109,53 @@ date: 2016-12-06 20:49:38
 |98|Validate Binary Search Tree|Medium|C++||
 |99|Recover Binary Search Tree|Hard|C++||
 |100|Same Tree|Easy|C++||
-|147|[Insertion Sort List][21]|Medium|C++|√|
-|148|[Sort List][22]|Medium|C++|√|
-|174|[Dungeon Game][23]|Hard|C++|√|
-|189|[Rotate Array][24]|Easy|C++|√|
-|215|[Kth Largest Element in an Array][25]|Medium|C++|√|
-|240|[Search a 2D Matrix II][26]|Medium|C++|√|
-|289|[Game of Life][27]|Medium|C++|√|
-|324|[Wiggle Sort II][28]|Medium|C++|√|
-|367|[Valid Perfect Square][29]|Medium|C++|√|
-|372|[Super Pow][30]|Medium|C++|√|
-|415|[Add Strings][31]|Easy|C++|√|
+|147|[Insertion Sort List][23]|Medium|C++|√|
+|148|[Sort List][24]|Medium|C++|√|
+|174|[Dungeon Game][25]|Hard|C++|√|
+|189|[Rotate Array][26]|Easy|C++|√|
+|209|[Minimum Size Subarray Sum][27]|Medium|C++|√|
+|215|[Kth Largest Element in an Array][28]|Medium|C++|√|
+|239|[Sliding Window Maximum][29]|Hard|C++|√|
+|240|[Search a 2D Matrix II][30]|Medium|C++|√|
+|289|[Game of Life][31]|Medium|C++|√|
+|324|[Wiggle Sort II][32]|Medium|C++|√|
+|367|[Valid Perfect Square][33]|Medium|C++|√|
+|372|[Super Pow][34]|Medium|C++|√|
+|415|[Add Strings][35]|Easy|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [2]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [3]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [4]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
-  [5]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [6]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [7]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [4]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [5]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [6]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [7]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
   [8]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [9]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [10]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
-  [11]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [10]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [11]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
   [12]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
-  [13]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
-  [14]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [15]: http://haoyuanliu.github.io/2016/12/14/70-Climbing-Stairs/
-  [16]: http://haoyuanliu.github.io/2016/12/15/71-Simplify-Path/
-  [17]: http://haoyuanliu.github.io/2016/12/15/72-Edit-Distance/
-  [18]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
-  [19]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
-  [20]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [13]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [14]: http://haoyuanliu.github.io/2016/12/14/68-Text-Justification/
+  [15]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [16]: http://haoyuanliu.github.io/2016/12/14/70-Climbing-Stairs/
+  [17]: http://haoyuanliu.github.io/2016/12/15/71-Simplify-Path/
+  [18]: http://haoyuanliu.github.io/2016/12/15/72-Edit-Distance/
+  [19]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [20]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
   [21]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [22]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [23]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [24]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [25]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [26]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
-  [27]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [22]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [23]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [24]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [25]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
+  [26]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [27]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
   [28]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [29]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [30]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [31]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [29]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [30]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
+  [31]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [32]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [33]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [34]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [35]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
