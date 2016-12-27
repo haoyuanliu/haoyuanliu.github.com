@@ -123,29 +123,35 @@ date: 2016-12-06 20:49:38
 |209|[Minimum Size Subarray Sum][43]|Medium|C++|√|
 |215|[Kth Largest Element in an Array][44]|Medium|C++|√|
 |216|[Combination Sum III][45]|Medium|C++|√|
-|231|[Power of Two][46]|Easy|C++|√|
-|239|[Sliding Window Maximum][47]|Hard|C++|√|
-|240|[Search a 2D Matrix II][48]|Medium|C++|√|
-|260|[Single Number III][49]|Medium|C++|√|
-|268|[Missing Number][50]|Medium|C++|√|
-|289|[Game of Life][51]|Medium|C++|√|
-|318|[Maximum Product of Word Lengths][52]|Medium|C++|√|
-|324|[Wiggle Sort II][53]|Medium|C++|√|
-|338|[Counting Bits][54]|Medium|C++|√|
-|342|[Power of Four][55]|Easy|C++|√|
-|367|[Valid Perfect Square][56]|Medium|C++|√|
-|371|[Sum of Two Integers][57]|Easy|C++|√|
-|372|[Super Pow][58]|Medium|C++|√|
-|377|[Combination Sum IV][59]|Medium|C++|√|
-|389|[Find the Difference][60]|Easy|C++|√|
-|393|[UTF-8 Validation][61]|Medium|C++|√|
-|397|[Integer Replacement][62]|Medium|C++|√|
-|401|[Binary Watch][63]|Easy|C++|√|
-|405|[Convert a Number to Hexadecimal][64]|Easy|C++|√|
-|415|[Add Strings][65]|Easy|C++|√|
-|421|[Maximum XOR of Two Numbers in an Array][66]|Medium|C++|√|
-|461|[Hamming Distance][67]|Easy|C++|√|
-|477|[Total Hamming Distance][68]|Medium|C++|√|
+|218|[The Skyline Problem][46]|Hard|C++|√|
+|231|[Power of Two][47]|Easy|C++|√|
+|239|[Sliding Window Maximum][48]|Hard|C++|√|
+|240|[Search a 2D Matrix II][49]|Medium|C++|√|
+|241|[Different Ways to Add Parentheses][50]|Medium|C++|√|
+|260|[Single Number III][51]|Medium|C++|√|
+|268|[Missing Number][52]|Medium|C++|√|
+|282|[Expression Add Operators][53]|Hard|C++|√|
+|289|[Game of Life][54]|Medium|C++|√|
+|312|[Burst Balloons][55]|Hard|C++|√|
+|315|[Count of Smaller Numbers After Self][56]|Hard|C++|√|
+|318|[Maximum Product of Word Lengths][57]|Medium|C++|√|
+|324|[Wiggle Sort II][58]|Medium|C++|√|
+|327|[Count of Range Sum][59]|Hard|C++|√|
+|338|[Counting Bits][60]|Medium|C++|√|
+|342|[Power of Four][61]|Easy|C++|√|
+|367|[Valid Perfect Square][62]|Medium|C++|√|
+|371|[Sum of Two Integers][63]|Easy|C++|√|
+|372|[Super Pow][64]|Medium|C++|√|
+|377|[Combination Sum IV][65]|Medium|C++|√|
+|389|[Find the Difference][66]|Easy|C++|√|
+|393|[UTF-8 Validation][67]|Medium|C++|√|
+|397|[Integer Replacement][68]|Medium|C++|√|
+|401|[Binary Watch][69]|Easy|C++|√|
+|405|[Convert a Number to Hexadecimal][70]|Easy|C++|√|
+|415|[Add Strings][71]|Easy|C++|√|
+|421|[Maximum XOR of Two Numbers in an Array][72]|Medium|C++|√|
+|461|[Hamming Distance][73]|Easy|C++|√|
+|477|[Total Hamming Distance][74]|Medium|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/13/LeetCode-String-and-Integer/
@@ -193,26 +199,32 @@ date: 2016-12-06 20:49:38
   [43]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
   [44]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
   [45]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
-  [46]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [47]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
-  [48]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
-  [49]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [50]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [51]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [46]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [47]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [48]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [49]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
+  [50]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [51]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
   [52]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [53]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [54]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [55]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [56]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [57]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [58]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [59]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
-  [60]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [53]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [54]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [55]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [56]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [57]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [58]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [59]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [60]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
   [61]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [62]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [62]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
   [63]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [64]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [65]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [64]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [65]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
   [66]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
   [67]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
   [68]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [69]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [70]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [71]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [72]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [73]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [74]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
