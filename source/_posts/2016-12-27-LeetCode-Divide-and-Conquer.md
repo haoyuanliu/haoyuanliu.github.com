@@ -128,9 +128,7 @@ class Solution
 ### 结题思路
 > * 使用dfs进行深度搜索，用两个参数pre和val保持计算优先级；
 > * pre表示已经计算的出的结果，val表示先阶段计算得出的结果但是不确定后面的运算符是+还是×，如果是×就需要考虑优先级；
-> * +： pre = pre + val; val = temp;
-> * -:  pre = pre + val; val = -temp;
-> * *:  pre = pre; val = val * temp;
+> * `+: pre = pre + val; val = temp;`, `-: pre = pre + val; val = -temp;`, `*: pre = pre; val = val * temp;`
     
 ### 代码
 ```
