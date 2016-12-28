@@ -5,7 +5,6 @@ categories: LeetCode
 tags: [LeetCode, Divide and Conquer]
 ---
 
-
 本文包含如下题目：
 
 [218. The Skyline Problem][1]
@@ -128,7 +127,9 @@ class Solution
 ### 结题思路
 > * 使用dfs进行深度搜索，用两个参数pre和val保持计算优先级；
 > * pre表示已经计算的出的结果，val表示先阶段计算得出的结果但是不确定后面的运算符是+还是×，如果是×就需要考虑优先级；
-> * `+: pre = pre + val; val = temp;`, `-: pre = pre + val; val = -temp;`, `*: pre = pre; val = val * temp;`
+> * +： pre = pre + val; val = temp;
+    -:  pre = pre + val; val = -temp;
+    *:  pre = pre; val = val * temp;
     
 ### 代码
 ```
@@ -195,8 +196,7 @@ class Solution
                 {
                         for(int j = i; j < i+k; ++j)
                         {
-                            dp[i][i+k-1] = max(dp[i][i+k-1], dp[i][j-1] 
-                                + nums[i-1]*nums[j]*nums[i+k] + dp[j+1][i+k-1]); 
+                            dp[i][i+k-1] = max(dp[i][i+k-1], dp[i][j-1] + nums[i-1]*nums[j]*nums[i+k] + dp[j+1][i+k-1]); 
                         }
                 }
             }
@@ -206,7 +206,61 @@ class Solution
 ```
 
 ## 315. Count of Smaller Numbers After Self
-### 解题思路
+### 解题思路I
+> * 使用归并排序，在归并排序的过程中一段一段地去计算结果；
+> * 对于每一阶段归并排序的左右两部分，左半部分每个元素都去右半部分中找`Smaller Number`，由于是在归并排序之后再去找，所以只需要扫描一遍；
+> * 具体分析可以看[这里][8]！
+
+### 代码
+```
+class Solution
+{
+    public:
+        vector<int> countSmaller(vector<int> &nums)
+        {
+            int len = nums.size();
+            vector<int> res(len, 0);
+            vector<int> index;
+            for(int i = 0; i < len; ++i)
+                index.push_back(i);
+            vector<int> numUpdate = nums;
+            vector<int> indexUpdate = index;
+            solve(res, nums, index, 0, len, numUpdate, indexUpdate);
+            return res;
+        }
+        void solve(vector<int> &res, vector<int> &nums, vector<int> &index, int start, int end, vector<int> &numUpdate, vector<int> &indexUpdate)
+        {
+            if(end - start <= 1)
+                return;
+            int mid = (start + end) / 2;
+            solve(res, nums, index, mid, end, numUpdate, indexUpdate);
+            solve(res, nums, index, start, mid, numUpdate, indexUpdate);
+            int r = mid;
+            int t = mid;
+            int s = start;
+            for(int l = start; l < mid; ++l)
+            {
+                while(nums[l] > nums[r] && r < end)
+                    r++;
+                while(t < end && nums[t] <= nums[l])
+                {
+                    numUpdate[s] = nums[t];
+                    indexUpdate[s++] = index[t++];
+                }
+                numUpdate[s] = nums[l];
+                indexUpdate[s++] = index[l];
+                res[index[l]] += r - mid;
+            }
+            for(int i = start; i < end; ++i)
+            {
+                nums[i] = numUpdate[i];
+                index[i] = indexUpdate[i];
+            }
+        }
+};
+
+```
+### 解题思路II
 > * 首先对数据进行拷贝排序，使用map保存其序列号值；
 > * 使用了Fenwick树结构，保存数据的大小个数等信息；
 > * 遍历数组结构，每次获得当前数值的结果后，将当前数值添加进树结构中，并进行树结构更新；
@@ -270,7 +324,7 @@ class Solution
 
 ## 327. Count of Range Sum
 ### 解题思路
-> * 详细讲解看[这里][8]！
+> * 详细讲解看[这里][9]！
 
 ### 代码
 ```
@@ -281,10 +335,10 @@ public:
     {
         int size=nums.size();
         if(size==0)  
-        	return 0;
+            return 0;
         vector<long> sums(size+1, 0);
         for(int i=0; i<size; i++)  
-        	sums[i+1]=sums[i]+nums[i];
+            sums[i+1]=sums[i]+nums[i];
         return solve(sums, 0, size+1, lower, upper);
     }
    
@@ -292,25 +346,24 @@ public:
     {
         if(end-start<=1)  return 0;
         int mid=(start+end)/2;
-        int count=solve(sums, start, mid, lower, upper) 
-            + solve(sums, mid, end, lower, upper);
+        int count=solve(sums, start, mid, lower, upper) + solve(sums, mid, end, lower, upper);
         int m=mid, n=mid, t=mid, len=0;
         vector<long> cache(end-start, 0);
         for(int i=start, s=0; i<mid; i++, s++)
         {
             while(m<end && sums[m]-sums[i]<lower) 
-            	m++;
+                m++;
             while(n<end && sums[n]-sums[i]<=upper) 
-            	n++;
+                n++;
             count+=n-m;
             while(t<end && sums[t]<sums[i]) 
-            	cache[s++]=sums[t++];
+                cache[s++]=sums[t++];
             cache[s]=sums[i];
             len=s;
         }
         
         for(int i=0; i<=len; i++)  
-        	sums[start+i]=cache[i];
+            sums[start+i]=cache[i];
         return count;
     }
 };
@@ -324,4 +377,5 @@ public:
   [5]: https://leetcode.com/problems/count-of-smaller-numbers-after-self/
   [6]: https://leetcode.com/problems/count-of-range-sum/
   [7]: https://briangordon.github.io/2014/08/the-skyline-problem.html
-  [8]: https://discuss.leetcode.com/topic/33738/share-my-solution
+  [8]: https://discuss.leetcode.com/topic/73300/share-my-c-mergesort-solution
+  [9]: https://discuss.leetcode.com/topic/33738/share-my-solution
