@@ -10,7 +10,7 @@ date: 2016-12-06 20:49:38
 |#|Title|Difficulity|Language|Accepted|
 |:-:|:----------|:-:|:-:|:-:|
 |1|Two Sum |Easy|C++|√|
-|2|[Add Two Numbers|Medium][1]|C++|√|
+|2|[Add Two Numbers][1]|Medium|C++|√|
 |3|Longest Substring Without Repeating Characters|Medium|C++|√|
 |4|Median of Two Sorted Arrays|Hard|C++|√|
 |5|Longest Palindromic Substring|Medium|C++|√|
@@ -74,7 +74,7 @@ date: 2016-12-06 20:49:38
 |63|[Unique Paths II][21]|Medium|C++|√|
 |64|[Minimum Path Sum][22]|Medium|C++|√|
 |65|[Valid Number][23]|Hard|C++|√|
-|66|[Plus One|Easy][24]|C++|√|
+|66|[Plus One][24]|Easy|C++|√|
 |67|[Add Binary][25]|Easy|C++|√|
 |68|[Text Justification][26]|Hard|C++|√|
 |69|[Sqrt(x)][27]|Medium|C++|√|
