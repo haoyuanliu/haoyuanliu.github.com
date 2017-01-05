@@ -4,6 +4,9 @@ date: 2016-12-06 20:49:38
 ---
 
 ## LeetCode 题解
+
+本部分是LeetCode的刷题记录，我会在刷题的过程中一点一点更新上去，现所有题目使用C++进行编写，点击题目链接即可看到详细内容，欢迎读者指出不足之处，欢迎与我交流讨论！！
+
 ------
 
 
@@ -102,68 +105,81 @@ date: 2016-12-06 20:49:38
 |91|Decode Ways|Medium|C++||
 |92|[Reverse Linked List II][40]|Medium|C++|√|
 |93|Restore IP Addresses|Medium|C++||
-|94|Binary Tree Inorder Traversal|Medium|C++||
-|95|Unique Binary Search Trees II|Medium|C++||
-|96|Unique Binary Search Trees|Medium|C++||
+|94|[Binary Tree Inorder Traversal][41]|Medium|C++|√|
+|95|[Unique Binary Search Trees II][42]|Medium|C++|√|
+|96|[Unique Binary Search Trees][43]|Medium|C++|√|
 |97|Interleaving String|Hard|C++||
-|98|Validate Binary Search Tree|Medium|C++||
-|99|Recover Binary Search Tree|Hard|C++||
-|100|Same Tree|Easy|C++||
-|109|[Convert Sorted List to Binary Search Tree][41]|Medium|C++|√|
-|136|[Single Number][42]|Easy|C++|√|
-|137|[Single Number II][43]|Medium|C++|√|
-|138|[Copy List with Random Pointer][44]|Hard|C++|√|
-|141|[Linked List Cycle][45]|Easy|C++|√|
-|142|[Linked List Cycle II][46]|Medium|C++|√|
-|143|[Reorder List][47]|Medium|C++|√|
-|147|[Insertion Sort List][48]|Medium|C++|√|
-|148|[Sort List][49]|Medium|C++|√|
-|160|[Intersection of Two Linked Lists][50]|Easy|C++|√|
-|169|[Majority Element][51]|Easy|C++|√|
-|174|[Dungeon Game][52]|Hard|C++|√|
-|187|[Repeated DNA Sequences][53]|Medium|C++|√|
-|189|[Rotate Array][54]|Easy|C++|√|
-|190|[Reverse Bits][55]|Easy|C++|√|
-|191|[Number of 1 Bits][56]|Easy|C++|√|
-|201|[Bitwise AND of Numbers Range][57]|Medium|C++|√|
-|203|[Remove Linked List Elements][58]|Easy|C++|√|
-|206|[Reverse Linked List][59]|Easy|C++|√|
-|209|[Minimum Size Subarray Sum][60]|Medium|C++|√|
-|215|[Kth Largest Element in an Array][61]|Medium|C++|√|
-|216|[Combination Sum III][62]|Medium|C++|√|
-|218|[The Skyline Problem][63]|Hard|C++|√|
-|231|[Power of Two][64]|Easy|C++|√|
-|234|[Palindrome Linked List][65]|Easy|C++|√|
-|237|[Delete Node in a Linked List][66]|Easy|C++|√|
-|239|[Sliding Window Maximum][67]|Hard|C++|√|
-|240|[Search a 2D Matrix II][68]|Medium|C++|√|
-|241|[Different Ways to Add Parentheses][69]|Medium|C++|√|
-|260|[Single Number III][70]|Medium|C++|√|
-|268|[Missing Number][71]|Medium|C++|√|
-|282|[Expression Add Operators][72]|Hard|C++|√|
-|289|[Game of Life][73]|Medium|C++|√|
-|312|[Burst Balloons][74]|Hard|C++|√|
-|315|[Count of Smaller Numbers After Self][75]|Hard|C++|√|
-|318|[Maximum Product of Word Lengths][76]|Medium|C++|√|
-|324|[Wiggle Sort II][77]|Medium|C++|√|
-|327|[Count of Range Sum][78]|Hard|C++|√|
-|328|[Odd Even Linked List][79]|Medium|C++|√|
-|338|[Counting Bits][80]|Medium|C++|√|
-|342|[Power of Four][81]|Easy|C++|√|
-|367|[Valid Perfect Square][82]|Medium|C++|√|
-|371|[Sum of Two Integers][83]|Easy|C++|√|
-|372|[Super Pow][84]|Medium|C++|√|
-|377|[Combination Sum IV][85]|Medium|C++|√|
-|389|[Find the Difference][86]|Easy|C++|√|
-|393|[UTF-8 Validation][87]|Medium|C++|√|
-|397|[Integer Replacement][88]|Medium|C++|√|
-|401|[Binary Watch][89]|Easy|C++|√|
-|405|[Convert a Number to Hexadecimal][90]|Easy|C++|√|
-|415|[Add Strings][91]|Easy|C++|√|
-|421|[Maximum XOR of Two Numbers in an Array][92]|Medium|C++|√|
-|445|[Add Two Numbers II][93]|Medium|C++|√|
-|461|[Hamming Distance][94]|Easy|C++|√|
-|477|[Total Hamming Distance][95]|Medium|C++|√|
+|98|[Validate Binary Search Tree][44]|Medium|C++|√|
+|99|[Recover Binary Search Tree][45]|Hard|C++|√|
+|100|[Same Tree][46]|Easy|C++|√|
+|101|[Symmetric Tree][47]|Easy|C++|√|
+|102|[Binary Tree Level Order Traversal][48]|Easy|C++|√|
+|103|[Binary Tree Zigzag Level Order Traversal][49]|Medium|C++|√|
+|104|[Maximum Depth of Binary Tree][50]|Easy|C++|√|
+|105|[Construct Binary Tree from Preorder and Inorder Traversal][51]|Medium|C++|√|
+|106|[Construct Binary Tree from Inorder and Postorder Traversal][52]|Medium|C++|√|
+|107|[Binary Tree Level Order Traversal II][53]|Easy|C++|√|
+|108|[Convert Sorted Array to Binary Search Tree][54]|Medium|C++|√|
+|110|[Balanced Binary Tree][55]|Easy|C++|√|
+|111|[Minimum Depth of Binary Tree][56]|Easy|C++|√|
+|112|[Path Sum][57]|Easy|C++|√|
+|113|[Path Sum II][58]|Medium|C++|√|
+|109|[Convert Sorted List to Binary Search Tree][59]|Medium|C++|√|
+|136|[Single Number][60]|Easy|C++|√|
+|137|[Single Number II][61]|Medium|C++|√|
+|138|[Copy List with Random Pointer][62]|Hard|C++|√|
+|141|[Linked List Cycle][63]|Easy|C++|√|
+|142|[Linked List Cycle II][64]|Medium|C++|√|
+|143|[Reorder List][65]|Medium|C++|√|
+|147|[Insertion Sort List][66]|Medium|C++|√|
+|148|[Sort List][67]|Medium|C++|√|
+|160|[Intersection of Two Linked Lists][68]|Easy|C++|√|
+|169|[Majority Element][69]|Easy|C++|√|
+|174|[Dungeon Game][70]|Hard|C++|√|
+|187|[Repeated DNA Sequences][71]|Medium|C++|√|
+|189|[Rotate Array][72]|Easy|C++|√|
+|190|[Reverse Bits][73]|Easy|C++|√|
+|191|[Number of 1 Bits][74]|Easy|C++|√|
+|201|[Bitwise AND of Numbers Range][75]|Medium|C++|√|
+|203|[Remove Linked List Elements][76]|Easy|C++|√|
+|206|[Reverse Linked List][77]|Easy|C++|√|
+|209|[Minimum Size Subarray Sum][78]|Medium|C++|√|
+|215|[Kth Largest Element in an Array][79]|Medium|C++|√|
+|216|[Combination Sum III][80]|Medium|C++|√|
+|218|[The Skyline Problem][81]|Hard|C++|√|
+|231|[Power of Two][82]|Easy|C++|√|
+|234|[Palindrome Linked List][83]|Easy|C++|√|
+|237|[Delete Node in a Linked List][84]|Easy|C++|√|
+|239|[Sliding Window Maximum][85]|Hard|C++|√|
+|240|[Search a 2D Matrix II][86]|Medium|C++|√|
+|241|[Different Ways to Add Parentheses][87]|Medium|C++|√|
+|260|[Single Number III][88]|Medium|C++|√|
+|268|[Missing Number][89]|Medium|C++|√|
+|282|[Expression Add Operators][90]|Hard|C++|√|
+|289|[Game of Life][91]|Medium|C++|√|
+|312|[Burst Balloons][92]|Hard|C++|√|
+|315|[Count of Smaller Numbers After Self][93]|Hard|C++|√|
+|318|[Maximum Product of Word Lengths][94]|Medium|C++|√|
+|324|[Wiggle Sort II][95]|Medium|C++|√|
+|327|[Count of Range Sum][96]|Hard|C++|√|
+|328|[Odd Even Linked List][97]|Medium|C++|√|
+|338|[Counting Bits][98]|Medium|C++|√|
+|342|[Power of Four][99]|Easy|C++|√|
+|367|[Valid Perfect Square][100]|Medium|C++|√|
+|371|[Sum of Two Integers][101]|Easy|C++|√|
+|372|[Super Pow][102]|Medium|C++|√|
+|377|[Combination Sum IV][103]|Medium|C++|√|
+|389|[Find the Difference][104]|Easy|C++|√|
+|393|[UTF-8 Validation][105]|Medium|C++|√|
+|397|[Integer Replacement][106]|Medium|C++|√|
+|401|[Binary Watch][107]|Easy|C++|√|
+|405|[Convert a Number to Hexadecimal][108]|Easy|C++|√|
+|415|[Add Strings][109]|Easy|C++|√|
+|421|[Maximum XOR of Two Numbers in an Array][110]|Medium|C++|√|
+|437|[Path Sum III][111]|Easy|C++|√|
+|445|[Add Two Numbers II][112]|Medium|C++|√|
+|461|[Hamming Distance][113]|Easy|C++|√|
+|477|[Total Hamming Distance][114]|Medium|C++|√|
 
 
   [1]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
@@ -206,58 +222,77 @@ date: 2016-12-06 20:49:38
   [38]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
   [39]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
   [40]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [41]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [42]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [43]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [44]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [45]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [46]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [47]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [48]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [49]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [50]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [51]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [52]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
-  [53]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [54]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
-  [55]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [56]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [57]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [58]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [41]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [42]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [43]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [44]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [45]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [46]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [47]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [48]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [49]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [50]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [51]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [52]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [53]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [54]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [55]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [56]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [57]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [58]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
   [59]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [60]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
-  [61]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [62]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
-  [63]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [64]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [60]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [61]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [62]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [63]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [64]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
   [65]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [66]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [67]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
-  [68]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
-  [69]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [70]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [66]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [67]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [68]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [69]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [70]: http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/
   [71]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [72]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [73]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
-  [74]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [75]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [76]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [77]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
-  [78]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
-  [79]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [80]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
-  [81]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [82]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [83]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [84]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
-  [85]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
-  [86]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [87]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [88]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [89]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [90]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [91]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
-  [92]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [93]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
-  [94]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
-  [95]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [72]: http://haoyuanliu.github.io/2016/12/08/LeetCode-Rotate/
+  [73]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [74]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [75]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [76]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [77]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [78]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [79]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [80]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
+  [81]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [82]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [83]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [84]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [85]: http://haoyuanliu.github.io/2016/12/20/LeetCode-Substring-and-Subarray/
+  [86]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Search-2D-Matrix/
+  [87]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [88]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [89]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [90]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [91]: http://haoyuanliu.github.io/2016/12/16/LeetCode-Matrix-Setting/
+  [92]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [93]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [94]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [95]: http://haoyuanliu.github.io/2016/12/16/LeetCode-List-Sort/
+  [96]: http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/
+  [97]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [98]: http://haoyuanliu.github.io/2016/12/24/LeetCode-Bit-Manipulation-I/
+  [99]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [100]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [101]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [102]: http://haoyuanliu.github.io/2016/12/14/LeetCode-Sqrt-and-Square/
+  [103]: http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/
+  [104]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [105]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [106]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [107]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [108]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [109]: http://haoyuanliu.github.io/2016/12/14/LeetCode-String-Calculation/
+  [110]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [111]: http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/
+  [112]: http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/
+  [113]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
+  [114]: http://haoyuanliu.github.io/2016/12/25/LeetCode-Bit-Manipulation-II/
