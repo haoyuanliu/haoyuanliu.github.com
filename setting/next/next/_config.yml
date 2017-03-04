@@ -31,7 +31,8 @@ menu:
   categories: /categories
   tags: /tags
   about: /about
-  #commonweal: /404.html
+  commonweal: /LeetCode
+  footprint: /FootPrint
 
 
 # Enable/Disable menu icons.
@@ -48,7 +49,7 @@ menu_icons:
   tags: tags
   archives: archive
   commonweal: heartbeat
-
+  #footprint: map-signs
 
 
 
