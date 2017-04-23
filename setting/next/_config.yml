@@ -32,7 +32,6 @@ menu:
   tags: /tags
   about: /about
   commonweal: /LeetCode
-  #footprint: /FootPrint
 
 
 # Enable/Disable menu icons.
@@ -49,7 +48,6 @@ menu_icons:
   tags: tags
   archives: archive
   commonweal: code
-  #footprint: map-signs
       #heartbeat
 
 
@@ -176,10 +174,10 @@ search:
 baidu_analytics: 2e86699d83dec1e4c38adb84472aa692
 
 # Duoshuo ShortName
-duoshuo_shortname: haoyuanliu
+#duoshuo_shortname: haoyuanliu
 
 # Disqus
-#disqus_shortname: haoyuanliu
+disqus_shortname: haoyuanliu
 
 # Baidu Share
 #Available value: button
@@ -192,7 +190,7 @@ baidushare: true
 add_this_id: ra-56f8cd3aef56f3f1
 
 # Share
-duoshuo_share: true
+#duoshuo_share: true
 #duoshuo_hotartical: true
 
 # Google Webmaster tools verification setting
@@ -211,11 +209,11 @@ google_analytics: UA-75661126-1
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: true
-  user_id: 6266974846815568641
-  admin_nickname: 博主大大
+#duoshuo_info:
+#ua_enable: true
+#admin_enable: true
+#user_id: 6266974846815568641
+#admin_nickname: 博主大大
 
 
 # Facebook SDK Support.

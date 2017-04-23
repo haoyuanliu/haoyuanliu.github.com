@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2016
 
 
 
@@ -32,7 +32,6 @@ menu:
   tags: /tags
   about: /about
   commonweal: /LeetCode
-  footprint: /FootPrint
 
 
 # Enable/Disable menu icons.
@@ -48,8 +47,9 @@ menu_icons:
   categories: th
   tags: tags
   archives: archive
-  commonweal: heartbeat
-  #footprint: map-signs
+  commonweal: code
+      #heartbeat
+
 
 
 
@@ -159,27 +159,30 @@ use_font_lato: true
 # ---------------------------------------------------------------
 
 # MathJax Support
-#mathjax:
+mathjax: true
 
-
+#Local Search
+search:
+  path: search.xml
+  field: post
 # Swiftype Search API Key
-swiftype_key: Yxzqv74uNHrsjFbzvwF7
-swift_search:
-    enable: true
+#swiftype_key: Yxzqv74uNHrsjFbzvwF7
+#swift_search:
+    #enable: false
 
 # Baidu Analytics ID
 baidu_analytics: 2e86699d83dec1e4c38adb84472aa692
 
 # Duoshuo ShortName
-duoshuo_shortname: haoyuanliu
+#duoshuo_shortname: haoyuanliu
 
 # Disqus
-#disqus_shortname: 
+disqus_shortname: haoyuanliu
 
 # Baidu Share
 #Available value: button
 #    button | slide
-baidushare: true 
+baidushare: true
 ## type: button
 
 # Share
@@ -187,7 +190,7 @@ baidushare: true
 add_this_id: ra-56f8cd3aef56f3f1
 
 # Share
-duoshuo_share: true
+#duoshuo_share: true
 #duoshuo_hotartical: true
 
 # Google Webmaster tools verification setting
@@ -206,11 +209,11 @@ google_analytics: UA-75661126-1
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: false
-  user_id: 0
-  admin_nickname: ROOT
+#duoshuo_info:
+#ua_enable: true
+#admin_enable: true
+#user_id: 6266974846815568641
+#admin_nickname: 博主大大
 
 
 # Facebook SDK Support.
@@ -251,7 +254,7 @@ use_motion: true
 fancybox: true
 
 # Static files
-vendors: vendors
+vendors: lib
 css: css
 js: js
 images: images
@@ -259,7 +262,7 @@ images: images
 # Theme version
 version: 0.5.0
 #title, chinese available
-links_title: 友情链接 
+links_title: 友情链接
 ## links
 links:
 	博客园: http://www.cnblogs.com/zuilehongdou/
