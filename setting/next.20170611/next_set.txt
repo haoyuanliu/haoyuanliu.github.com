@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-since: 2016
+#since: 2015
 
 
 
@@ -31,7 +31,7 @@ menu:
   categories: /categories
   tags: /tags
   about: /about
-  commonweal: /LeetCode
+  #commonweal: /404.html
 
 
 # Enable/Disable menu icons.
@@ -47,8 +47,7 @@ menu_icons:
   categories: th
   tags: tags
   archives: archive
-  commonweal: code
-      #heartbeat
+  commonweal: heartbeat
 
 
 
@@ -159,39 +158,36 @@ use_font_lato: true
 # ---------------------------------------------------------------
 
 # MathJax Support
-mathjax: true
+#mathjax:
 
-#Local Search
-search:
-  path: search.xml
-  field: post
+
 # Swiftype Search API Key
-#swiftype_key: Yxzqv74uNHrsjFbzvwF7
-#swift_search:
-    #enable: false
+swiftype_key: Yxzqv74uNHrsjFbzvwF7
+swift_search:
+    enable: true
 
 # Baidu Analytics ID
 baidu_analytics: 2e86699d83dec1e4c38adb84472aa692
 
 # Duoshuo ShortName
-#duoshuo_shortname: haoyuanliu
+duoshuo_shortname: haoyuanliu
 
 # Disqus
-disqus_shortname: haoyuanliu
+#disqus_shortname: 
 
 # Baidu Share
 #Available value: button
 #    button | slide
-baidushare: true
-## type: button
+baidushare: true 
+##  type: button
 
 # Share
 #jiathis: true
 add_this_id: ra-56f8cd3aef56f3f1
 
 # Share
-#duoshuo_share: true
-#duoshuo_hotartical: true
+duoshuo_share: true
+duoshuo_hotartical: true
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
@@ -209,11 +205,11 @@ google_analytics: UA-75661126-1
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-#duoshuo_info:
-#ua_enable: true
-#admin_enable: true
-#user_id: 6266974846815568641
-#admin_nickname: 博主大大
+duoshuo_info:
+  ua_enable: true
+  admin_enable: false
+  user_id: 0
+  admin_nickname: ROOT
 
 
 # Facebook SDK Support.
@@ -254,15 +250,10 @@ use_motion: true
 fancybox: true
 
 # Static files
-vendors: lib
+vendors: vendors
 css: css
 js: js
 images: images
 
 # Theme version
 version: 0.5.0
-#title, chinese available
-links_title: 友情链接
-## links
-links:
-	博客园: http://www.cnblogs.com/zuilehongdou/
