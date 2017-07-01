@@ -1,0 +1,1187 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode,Combination," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="本文包含如下题目：17. Letter Combinations of a Phone Number31. Next Permutation39. Combination Sum40. Combination Sum II46. Permutations47. Permutations II60. Permutation Sequence77. Combinations216. Combinati">
+<meta name="keywords" content="LeetCode,Combination">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Combinations">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含如下题目：17. Letter Combinations of a Phone Number31. Next Permutation39. Combination Sum40. Combination Sum II46. Permutations47. Permutations II60. Permutation Sequence77. Combinations216. Combinati">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Combinations">
+<meta name="twitter:description" content="本文包含如下题目：17. Letter Combinations of a Phone Number31. Next Permutation39. Combination Sum40. Combination Sum II46. Permutations47. Permutations II60. Permutation Sequence77. Combinations216. Combinati">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode Combinations | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode Combinations
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-22T14:58:29+08:00" content="2016-12-22">
+              2016-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/22/LeetCode-Combinations/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/22/LeetCode-Combinations/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2016/12/22/LeetCode-Combinations/" class="leancloud_visitors" data-flag-title="LeetCode Combinations">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含如下题目：<br><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="external">17. Letter Combinations of a Phone Number</a><br><a href="https://leetcode.com/problems/next-permutation/" target="_blank" rel="external">31. Next Permutation</a><br><a href="https://leetcode.com/problems/combination-sum/" target="_blank" rel="external">39. Combination Sum</a><br><a href="https://leetcode.com/problems/combination-sum-ii/" target="_blank" rel="external">40. Combination Sum II</a><br><a href="https://leetcode.com/problems/permutations/" target="_blank" rel="external">46. Permutations</a><br><a href="https://leetcode.com/problems/permutations-ii/" target="_blank" rel="external">47. Permutations II</a><br><a href="https://leetcode.com/problems/permutation-sequence/" target="_blank" rel="external">60. Permutation Sequence</a><br><a href="https://leetcode.com/problems/combinations/" target="_blank" rel="external">77. Combinations</a><br><a href="https://leetcode.com/problems/combination-sum-iii/" target="_blank" rel="external">216. Combination Sum III</a><br><a href="https://leetcode.com/problems/combination-sum-iv/" target="_blank" rel="external">377. Combination Sum IV</a></p>
+<a id="more"></a>
+<h2 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17. Letter Combinations of a Phone Number"></a>17. Letter Combinations of a Phone Number</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>加入现在输入是<code>23</code>，则首先把<code>2</code>对应的字符放到结果res中，结果res为<code>[a, b, c]</code>;</li>
+<li><code>3</code>所包含的字符有<code>d, e, f</code>则首先把res的首项取出来，分别和<code>d, e, f</code>组合之后再次放进res中，此时为<code>[b, c, ad, ae, af]</code>;</li>
+<li>不断地完成如上操作即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; letterCombinations(<span class="built_in">string</span> digits)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">string</span> str[<span class="number">10</span>] = &#123;<span class="string">" "</span>, <span class="string">" "</span>, <span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>, <span class="string">"jkl"</span>, <span class="string">"mno"</span>, <span class="string">"pqrs"</span>, <span class="string">"tuv"</span>, <span class="string">"wxyz"</span>&#125;;</div><div class="line">            <span class="keyword">int</span> len[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">            <span class="keyword">if</span>(digits.size() == <span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> res;</div><div class="line">            res.push_back(<span class="string">""</span>);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; digits.size(); ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> sz = res.size();<span class="comment">//注意这里要保存res的大小，以便下面循环的进行</span></div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; sz; ++j)</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">string</span> temp = res[<span class="number">0</span>];</div><div class="line">                    res.erase(res.begin());</div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; len[digits[i] - <span class="string">'0'</span>]; ++k)</div><div class="line">                    &#123;</div><div class="line">                        res.push_back(temp + str[digits[i] - <span class="string">'0'</span>][k]);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="31-Next-Permutation"><a href="#31-Next-Permutation" class="headerlink" title="31. Next Permutation"></a>31. Next Permutation</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>终极状态是<code>321</code>这种呈递减顺序排布的，也是数字组合的最大值；</li>
+<li>首先找到第一个破坏上述规则的数，其位置记为start；</li>
+<li>将start对应元素与从尾部开始第一个大于它的元素交换；</li>
+<li>对于start后面的元素进行一个逆序处理即可；</li>
+<li>详细分析可以参考<a href="https://leetcode.com/articles/next-permutation/" target="_blank" rel="external">LeetCode的官方Solution</a>；</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="keyword">void</span> nextPermutation(vector&lt;<span class="keyword">int</span>&gt; &amp;nums)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> start = <span class="number">-1</span>;</div><div class="line">            <span class="built_in">for</span>(<span class="keyword">int</span> i = nums.<span class="built_in">size</span>() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">if</span>(nums[i] &lt; nums[i+<span class="number">1</span>])</div><div class="line">                &#123;</div><div class="line">                    start = i;</div><div class="line">                    <span class="built_in">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">if</span>(start == <span class="number">-1</span>)</div><div class="line">            &#123;</div><div class="line">                reverse(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</div><div class="line">                <span class="built_in">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">for</span>(<span class="keyword">int</span> i = nums.<span class="built_in">size</span>()<span class="number">-1</span>; i &gt; start; --i)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">if</span>(nums[start] &lt; nums[i])</div><div class="line">                &#123;</div><div class="line">                    swap(nums[start], nums[i]);</div><div class="line">                    <span class="built_in">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            reverse(nums.<span class="built_in">begin</span>()+start+<span class="number">1</span>, nums.<span class="built_in">end</span>());</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="39-Combination-Sum"><a href="#39-Combination-Sum" class="headerlink" title="39. Combination Sum"></a>39. Combination Sum</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用回溯和递归，不断地去找就好；</li>
+<li>注意给出的数据均为正数，且没有重复的数值；</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combinationSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">            sort(candidates.begin(), candidates.end());</div><div class="line">            solve(res, temp, candidates, <span class="number">0</span>, target, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; candidates, <span class="keyword">int</span> cur, <span class="keyword">int</span> target, <span class="keyword">int</span> sum)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(sum == target)</div><div class="line">            &#123;</div><div class="line">                res.push_back(temp);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; candidates.size(); ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(sum + candidates[i] &lt;= target)</div><div class="line">                &#123;</div><div class="line">                    temp.push_back(candidates[i]);</div><div class="line">                    solve(res, temp, candidates, i, target, sum+candidates[i]);</div><div class="line">                    temp.pop_back();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="40-Combination-Sum-II"><a href="#40-Combination-Sum-II" class="headerlink" title="40. Combination Sum II"></a>40. Combination Sum II</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这一题跟上面39题类似，注意这里给出的数据中包含重复的数值；</li>
+<li>为了避免重复解，对candidates进行排序，重复数值只对第一个进行迭代求解，其余的跳过；</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combinationSum2(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;candidates, <span class="keyword">int</span> target)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">            sort(candidates.begin(), candidates.end());</div><div class="line">            solve(res, temp, candidates, target, <span class="number">0</span>, <span class="number">0</span>, candidates.size());</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; candidates, <span class="keyword">int</span> target, <span class="keyword">int</span> cur, <span class="keyword">int</span> sum, <span class="keyword">int</span> len)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(sum == target)</div><div class="line">            &#123;</div><div class="line">                res.push_back(temp);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; len; ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(sum + candidates[i] &lt;= target)</div><div class="line">                &#123;</div><div class="line">                    temp.push_back(candidates[i]);</div><div class="line">                    solve(res, temp, candidates, target, i+<span class="number">1</span>, sum+candidates[i], len);</div><div class="line">                    temp.pop_back();</div><div class="line">                    <span class="keyword">while</span>(i+<span class="number">1</span> &lt; len &amp;&amp; candidates[i] == candidates[i+<span class="number">1</span>]) <span class="comment">//如果下一个值等于当前值，则跳过，</span></div><div class="line">                        i++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="46-Permutations"><a href="#46-Permutations" class="headerlink" title="46. Permutations"></a>46. Permutations</h2><h3 id="解题思路I"><a href="#解题思路I" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>这一题仍然是排列组合，但是不同的是这一次不看数值的大小，直接按照排列组合的顺序输出；</li>
+</ul>
+</blockquote>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">            <span class="keyword">int</span> size = <span class="number">1</span>;</div><div class="line">            <span class="keyword">int</span> i, j;</div><div class="line"></div><div class="line">            res.push_back(nums);</div><div class="line">            <span class="keyword">int</span> len = nums.size();</div><div class="line">            <span class="keyword">if</span>(len == <span class="number">1</span>)</div><div class="line">                <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">            &#123;</div><div class="line">                size = size * (i+<span class="number">1</span>);</div><div class="line">                temp.push_back(i+<span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">            size = size<span class="number">-1</span>;</div><div class="line">            <span class="keyword">while</span>(size--)</div><div class="line">            &#123;</div><div class="line">                i = j = len - <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span>(temp[i<span class="number">-1</span>] &gt;= temp[i])</div><div class="line">                    i--;</div><div class="line">                <span class="keyword">while</span>(temp[j] &lt;= temp[i<span class="number">-1</span>])</div><div class="line">                    j--;</div><div class="line">                swap(temp[i<span class="number">-1</span>], temp[j]);</div><div class="line">                swap(nums[i<span class="number">-1</span>], nums[j]);</div><div class="line"></div><div class="line">                j = len - <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span>(i &lt; j)</div><div class="line">                &#123;</div><div class="line">                    swap(temp[i], temp[j]);</div><div class="line">                    swap(nums[i++], nums[j--]);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                res.push_back(nums);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II"><a href="#解题思路II" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>也可以使用dfs进行求解，遍历每一种不同的组合方式；</li>
+</ul>
+</blockquote>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            dfs(res, nums, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> cur)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(cur &gt;= nums.size())</div><div class="line">            &#123;</div><div class="line">                res.push_back(nums);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; nums.size(); ++i)</div><div class="line">            &#123;</div><div class="line">                swap(nums[cur], nums[i]);</div><div class="line">                dfs(res, nums, cur+<span class="number">1</span>);</div><div class="line">                swap(nums[cur], nums[i]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="47-Permutations-II"><a href="#47-Permutations-II" class="headerlink" title="47. Permutations II"></a>47. Permutations II</h2><h3 id="解题思路I-1"><a href="#解题思路I-1" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>首先使用<code>sort</code>函数整理数据，然后按照next premutation的算法不断进行求取；</li>
+<li>这里需要注意的是，交换过程中，如果相等则不进行交换，使用<code>&lt;=</code>过滤掉重复的答案；</li>
+</ul>
+</blockquote>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; permuteUnique(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp; nums)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            sort(nums.begin(), nums.end());</div><div class="line">            res.push_back(nums);</div><div class="line">            <span class="keyword">int</span> len = nums.size();</div><div class="line">            <span class="keyword">int</span> i, j;</div><div class="line">            <span class="keyword">if</span>(len == <span class="number">1</span>)</div><div class="line">                <span class="keyword">return</span> res;</div><div class="line">            <span class="keyword">while</span>(<span class="number">1</span>)</div><div class="line">            &#123;</div><div class="line">                i = j = len - <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span>(nums[i] &lt;= nums[i<span class="number">-1</span>] &amp;&amp; i &gt;= <span class="number">0</span>)</div><div class="line">                    i--;</div><div class="line">                <span class="keyword">if</span>(i == <span class="number">-1</span> || i == <span class="number">0</span>)</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">while</span>(nums[j] &lt;= nums[i<span class="number">-1</span>])</div><div class="line">                    j--;</div><div class="line">                swap(nums[i<span class="number">-1</span>], nums[j]);</div><div class="line">                j = len - <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span>(i &lt; j)</div><div class="line">                    swap(nums[i++], nums[j--]);</div><div class="line">                res.push_back(nums);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II-1"><a href="#解题思路II-1" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>这里借鉴了<a href="https://discuss.leetcode.com/topic/8831/a-simple-c-solution-in-only-20-lines/65" target="_blank" rel="external">LeetCode Discuss</a>中的思路，仍然采用的是dfs搜索的方式去遍历每一种可能的结果；</li>
+<li>不同的是，针对本题没有回溯操作，nums作为参数前面并没有加<code>&amp;</code>号；</li>
+<li>这个思路搞了好久没有弄清楚，有大神懂的求告知；</li>
+</ul>
+</blockquote>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; permuteUnique(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp; nums)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            sort(nums.begin(), nums.end());</div><div class="line">            dfs(res, nums, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums, <span class="keyword">int</span> cur)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(cur == nums.size()<span class="number">-1</span>)</div><div class="line">            &#123;</div><div class="line">                res.push_back(nums);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; nums.size(); ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(i != cur &amp;&amp; nums[cur] == nums[i])</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                swap(nums[cur], nums[i]);</div><div class="line">                dfs(res, nums, cur+<span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="60-Permutation-Sequence"><a href="#60-Permutation-Sequence" class="headerlink" title="60. Permutation Sequence"></a>60. Permutation Sequence</h2><h3 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>如果不断调用next permutation算法，则肯定会超时；</li>
+<li>我们一位一位的计算，一共有<code>n!</code>种序列，第一位有<code>n</code>中选择，每种都对应<code>(n-1)!</code>种序列，利用这种关系不断计算每一位的选择即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="built_in">string</span> <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="built_in">string</span> res = <span class="string">""</span>;</div><div class="line">            <span class="keyword">int</span> nums[n];</div><div class="line">            nums[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</div><div class="line">                nums[i] = i * nums[i<span class="number">-1</span>];</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; index;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</div><div class="line">                index.push_back(i);</div><div class="line">            k = k - <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> temp = k / nums[i];</div><div class="line">                res += *(index.begin() + temp) + <span class="string">'0'</span>;</div><div class="line">                index.erase(index.begin() + temp);</div><div class="line">                k = k % nums[i];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="77-Combinations"><a href="#77-Combinations" class="headerlink" title="77. Combinations"></a>77. Combinations</h2><h3 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这个题直接用递归和回溯就解决了； </li>
+</ul>
+</blockquote>
+<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">            pushBack(res, temp, <span class="number">1</span>, k, n, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">pushBack</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> next, <span class="keyword">int</span> k, <span class="keyword">int</span> n, <span class="keyword">int</span> count)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(count == k)</div><div class="line">                res.push_back(temp);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = next; i &lt;= n; ++i)</div><div class="line">            &#123;</div><div class="line">                temp.push_back(i);</div><div class="line">                pushBack(res, temp, i+<span class="number">1</span>, k, n, count+<span class="number">1</span>);</div><div class="line">                temp.erase(temp.end()<span class="number">-1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="216-Combination-Sum-III"><a href="#216-Combination-Sum-III" class="headerlink" title="216. Combination Sum III"></a>216. Combination Sum III</h2><h3 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这道题也是使用递归和回溯就可以解决了；</li>
+</ul>
+</blockquote>
+<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combinationSum3(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">            dfs(res, temp, k, n, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> k, <span class="keyword">int</span> n, <span class="keyword">int</span> cur, <span class="keyword">int</span> count, <span class="keyword">int</span> sum)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(count == k)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(sum == n)</div><div class="line">                &#123;</div><div class="line">                    res.push_back(temp);</div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(cur &gt; <span class="number">9</span>)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line"></div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; <span class="number">10</span>; ++i)</div><div class="line">            &#123;</div><div class="line">                temp.push_back(i);</div><div class="line">                dfs(res, temp, k, n, i+<span class="number">1</span>, count+<span class="number">1</span>, sum+i);</div><div class="line">                temp.erase(temp.end()<span class="number">-1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="377-Combination-Sum-IV"><a href="#377-Combination-Sum-IV" class="headerlink" title="377. Combination Sum IV"></a>377. Combination Sum IV</h2><h3 id="解题思路I-2"><a href="#解题思路I-2" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>使用搜索算法进行迭代，TLE超时！</li>
+</ul>
+</blockquote>
+<h3 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">int</span> combinationSum4(vector&lt;<span class="built_in">int</span>&gt; &amp;nums, <span class="built_in">int</span> <span class="keyword">target</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">int</span> res = <span class="number">0</span>;</div><div class="line">            dfs(res, nums, <span class="keyword">target</span>, <span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        void dfs(<span class="built_in">int</span> &amp;res, vector&lt;<span class="built_in">int</span>&gt; &amp;nums, <span class="built_in">int</span> <span class="keyword">target</span>, <span class="built_in">int</span> <span class="built_in">sum</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">sum</span> == <span class="keyword">target</span>)</div><div class="line">            &#123;</div><div class="line">                res++;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            for(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(<span class="built_in">sum</span> + nums[i] &lt;= <span class="keyword">target</span>)</div><div class="line">                    dfs(res, nums, <span class="keyword">target</span>, <span class="built_in">sum</span>+nums[i]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II-2"><a href="#解题思路II-2" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>如果nums包含<code>1， 2， 3</code>三个数字，<code>Sum(nums, 4) = Sum(nums, 4-1) + Sum(nums, 4-2) + Sum(nums, 4-3)</code>;</li>
+<li>如果根据上述等式进行递归迭代求解的话，超时TLE！</li>
+<li>根据公式的特性，使用DP进行求解，<code>dp[i] = Sum(nums, i)</code>，dp[0]=1初始化即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码I"><a href="#代码I" class="headerlink" title="代码I"></a>代码I</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="keyword">int</span> combinationSum4(vector&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> <span class="keyword">target</span>)</div><div class="line">        &#123;</div><div class="line">            vector&lt;<span class="keyword">int</span>&gt; dp(<span class="keyword">target</span>+<span class="number">1</span>, <span class="number">-1</span>);</div><div class="line">            dp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">            <span class="function"><span class="keyword">return</span> <span class="title">solve</span><span class="params">(dp, nums, <span class="keyword">target</span>)</span></span>;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;dp, vector&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> <span class="keyword">target</span>)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(dp[<span class="keyword">target</span>] != <span class="number">-1</span>)</div><div class="line">                <span class="keyword">return</span> dp[<span class="keyword">target</span>];</div><div class="line">            <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(<span class="keyword">target</span> &gt;= nums[i])</div><div class="line">                    res += solve(dp, nums, <span class="keyword">target</span> - nums[i]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> dp[<span class="keyword">target</span>] = res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码II"><a href="#代码II" class="headerlink" title="代码II"></a>代码II</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> target)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(target+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">            dp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= target; ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.size(); ++j)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(i &gt;= nums[j])</div><div class="line">                        dp[i] += dp[i - nums[j]];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> dp[target];</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+            <a href="/tags/Combination/" rel="tag">#Combination</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/20/LeetCode-Substring-and-Subarray/" rel="next" title="LeetCode Substring and Subarray">
+                <i class="fa fa-chevron-left"></i> LeetCode Substring and Subarray
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/24/LeetCode-Bit-Manipulation-I/" rel="prev" title="LeetCode Bit Manipulation I">
+                LeetCode Bit Manipulation I <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Letter-Combinations-of-a-Phone-Number"><span class="nav-number">1.</span> <span class="nav-text">17. Letter Combinations of a Phone Number</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31-Next-Permutation"><span class="nav-number">2.</span> <span class="nav-text">31. Next Permutation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39-Combination-Sum"><span class="nav-number">3.</span> <span class="nav-text">39. Combination Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#40-Combination-Sum-II"><span class="nav-number">4.</span> <span class="nav-text">40. Combination Sum II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-Permutations"><span class="nav-number">5.</span> <span class="nav-text">46. Permutations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II"><span class="nav-number">5.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">5.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#47-Permutations-II"><span class="nav-number">6.</span> <span class="nav-text">47. Permutations II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I-1"><span class="nav-number">6.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">6.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II-1"><span class="nav-number">6.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">6.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#60-Permutation-Sequence"><span class="nav-number">7.</span> <span class="nav-text">60. Permutation Sequence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-4"><span class="nav-number">7.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-8"><span class="nav-number">7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#77-Combinations"><span class="nav-number">8.</span> <span class="nav-text">77. Combinations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-5"><span class="nav-number">8.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-9"><span class="nav-number">8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#216-Combination-Sum-III"><span class="nav-number">9.</span> <span class="nav-text">216. Combination Sum III</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-6"><span class="nav-number">9.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-10"><span class="nav-number">9.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#377-Combination-Sum-IV"><span class="nav-number">10.</span> <span class="nav-text">377. Combination Sum IV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I-2"><span class="nav-number">10.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-11"><span class="nav-number">10.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II-2"><span class="nav-number">10.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码I"><span class="nav-number">10.4.</span> <span class="nav-text">代码I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码II"><span class="nav-number">10.5.</span> <span class="nav-text">代码II</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2016/12/22/LeetCode-Combinations/';
+      var disqus_title = 'LeetCode Combinations';
+      var disqus_url = 'http://haoyuanliu.github.io/2016/12/22/LeetCode-Combinations/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

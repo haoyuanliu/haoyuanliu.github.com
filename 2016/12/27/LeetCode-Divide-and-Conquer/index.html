@@ -1,0 +1,1152 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode,Divide and Conquer," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="本文包含如下题目： 218. The Skyline Problem241. Different Ways to Add Parentheses282. Expression Add Operators312. Burst Balloons315. Count of Smaller Numbers After Self327. Count of Range Sum">
+<meta name="keywords" content="LeetCode,Divide and Conquer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Divide and Conquer">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含如下题目： 218. The Skyline Problem241. Different Ways to Add Parentheses282. Expression Add Operators312. Burst Balloons315. Count of Smaller Numbers After Self327. Count of Range Sum">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Divide and Conquer">
+<meta name="twitter:description" content="本文包含如下题目： 218. The Skyline Problem241. Different Ways to Add Parentheses282. Expression Add Operators312. Burst Balloons315. Count of Smaller Numbers After Self327. Count of Range Sum">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode Divide and Conquer | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode Divide and Conquer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-27T21:06:45+08:00" content="2016-12-27">
+              2016-12-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/27/LeetCode-Divide-and-Conquer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/27/LeetCode-Divide-and-Conquer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2016/12/27/LeetCode-Divide-and-Conquer/" class="leancloud_visitors" data-flag-title="LeetCode Divide and Conquer">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含如下题目：</p>
+<p><a href="https://leetcode.com/problems/the-skyline-problem/" target="_blank" rel="external">218. The Skyline Problem</a><br><a href="https://leetcode.com/problems/different-ways-to-add-parentheses/" target="_blank" rel="external">241. Different Ways to Add Parentheses</a><br><a href="https://leetcode.com/problems/expression-add-operators/" target="_blank" rel="external">282. Expression Add Operators</a><br><a href="https://leetcode.com/problems/burst-balloons/" target="_blank" rel="external">312. Burst Balloons</a><br><a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/" target="_blank" rel="external">315. Count of Smaller Numbers After Self</a><br><a href="https://leetcode.com/problems/count-of-range-sum/" target="_blank" rel="external">327. Count of Range Sum</a></p>
+<a id="more"></a>
+<h2 id="218-The-Skyline-Problem"><a href="#218-The-Skyline-Problem" class="headerlink" title="218. The Skyline Problem"></a>218. The Skyline Problem</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>强烈推荐看这个分析，<a href="https://briangordon.github.io/2014/08/the-skyline-problem.html" target="_blank" rel="external">文章链接</a>！！！！！！！</li>
+<li>只有矩阵的左右边界会对最后的结果产生影响，使用vector保存全部边界并进行排序；</li>
+<li>使用priority_queue的heap结构维持一个存储高度的堆，如果是左边界，则其高度数据push进去，如果是右边界，则将该高度标记为废弃，在后面访问到的时候删除；</li>
+<li>如果改边界获取的最大高度值与之前一样，则不操作，否则，将边界值和高度信息push进答案中去；</li>
+<li>这里使用了priority_queue的堆结构特性，可以很快的访问到最大值；</li>
+<li>使用unordered_map比map要快很多，因为它不排序；</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; a, <span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a.first != b.first ? a.first &lt; b.first : a.second &lt; b.second;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; getSkyline(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; buildings) </div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; res;</div><div class="line">            <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; heights;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> build : buildings)</div><div class="line">            &#123;</div><div class="line">                heights.push_back(make_pair(build[<span class="number">0</span>], -build[<span class="number">2</span>]));</div><div class="line">                heights.push_back(make_pair(build[<span class="number">1</span>], build[<span class="number">2</span>]));</div><div class="line">            &#125;</div><div class="line">            sort(heights.begin(), heights.end(), cmp);</div><div class="line">            <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; isEnd;</div><div class="line">            priority_queue&lt;<span class="keyword">int</span>&gt; que;</div><div class="line">            <span class="keyword">int</span> pre = <span class="number">0</span>;</div><div class="line">            que.push(<span class="number">0</span>);</div><div class="line">            <span class="keyword">int</span> cur;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> height : heights)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(height.second &lt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    que.push(-height.second);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    ++isEnd[height.second];</div><div class="line">                    <span class="keyword">while</span>(!que.empty() &amp;&amp; isEnd[que.top()] &gt; <span class="number">0</span>)</div><div class="line">                    &#123;</div><div class="line">                        --isEnd[que.top()];</div><div class="line">                        que.pop();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                cur = que.top();</div><div class="line">                <span class="keyword">if</span>(cur != pre)</div><div class="line">                &#123;</div><div class="line">                    pre = cur;</div><div class="line">                    res.push_back(make_pair(height.first, cur));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="241-Different-Ways-to-Add-Parentheses"><a href="#241-Different-Ways-to-Add-Parentheses" class="headerlink" title="241. Different Ways to Add Parentheses"></a>241. Different Ways to Add Parentheses</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>每个运算选项都有可能是最后一个运算，由此展开进行求算；</li>
+<li>使用递归来求解，要注意仔细观察原函数的输入和输出来确定递归的调用方式；</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; diffWaysToCompute(<span class="built_in">string</span> input)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">            <span class="keyword">int</span> len = input.size();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(input[i] == <span class="string">'+'</span> || input[i] == <span class="string">'-'</span> || input[i] == <span class="string">'*'</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; r1 = diffWaysToCompute(input.substr(<span class="number">0</span>, i));</div><div class="line">                    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; r2 = diffWaysToCompute(input.substr(i+<span class="number">1</span>));</div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> a : r1)</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> b : r2)</div><div class="line">                        &#123;</div><div class="line">                            <span class="keyword">if</span>(input[i] == <span class="string">'+'</span>)</div><div class="line">                                res.push_back(a + b);</div><div class="line">                            <span class="keyword">else</span> <span class="keyword">if</span>(input[i] == <span class="string">'-'</span>)</div><div class="line">                                res.push_back(a - b);</div><div class="line">                            <span class="keyword">else</span> <span class="keyword">if</span>(input[i] == <span class="string">'*'</span>)</div><div class="line">                                res.push_back(a * b);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(res.empty())</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> ch : input)</div><div class="line">                &#123;</div><div class="line">                    temp = temp * <span class="number">10</span> + ch - <span class="string">'0'</span>;</div><div class="line">                &#125;</div><div class="line">                res.push_back(temp);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="282-Expression-Add-Operators"><a href="#282-Expression-Add-Operators" class="headerlink" title="282. Expression Add Operators"></a>282. Expression Add Operators</h2><h3 id="结题思路"><a href="#结题思路" class="headerlink" title="结题思路"></a>结题思路</h3><blockquote>
+<ul>
+<li>使用dfs进行深度搜索，用两个参数pre和val保持计算优先级；</li>
+<li>pre表示已经计算的出的结果，val表示先阶段计算得出的结果但是不确定后面的运算符是+还是×，如果是×就需要考虑优先级；</li>
+<li>+： pre = pre + val; val = temp;<br>  -:  pre = pre + val; val = -temp;<br>  <em>:  pre = pre; val = val </em> temp;</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; addOperators(<span class="built_in">string</span> num, <span class="keyword">int</span> target)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">            dfs(res, num.size(), num, target, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">""</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;res, <span class="keyword">int</span> len, <span class="built_in">string</span> num, ll target, <span class="keyword">int</span> cur, ll pre, ll val, <span class="built_in">string</span> path)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(cur == len &amp;&amp; pre + val == target)</div><div class="line">            &#123;</div><div class="line">                res.push_back(path);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            ll temp = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = cur; i &lt; len; ++i)</div><div class="line">            &#123;</div><div class="line">                temp = temp * <span class="number">10</span> + num[i] - <span class="string">'0'</span>;</div><div class="line">                <span class="built_in">string</span> s = to_string(temp);</div><div class="line">                <span class="keyword">if</span>(cur != <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    dfs(res, len, num, target, i+<span class="number">1</span>, pre+val, temp, path + <span class="string">'+'</span> + s);</div><div class="line">                    dfs(res, len, num, target, i+<span class="number">1</span>, pre+val, -temp, path + <span class="string">'-'</span> + s);</div><div class="line">                    dfs(res, len, num, target, i+<span class="number">1</span>, pre, temp * val, path + <span class="string">'*'</span> + s);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dfs(res, len, num, target, i+<span class="number">1</span>, <span class="number">0</span>, temp, s);</div><div class="line">                <span class="keyword">if</span>(num[cur] == <span class="string">'0'</span>)</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="312-Burst-Balloons"><a href="#312-Burst-Balloons" class="headerlink" title="312. Burst Balloons"></a>312. Burst Balloons</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>在nums两端各添加一个1；</li>
+<li>设DP[i][j]表示从i~j的计算结果，则整个计算结果为DP[1][N]，N表示nums添加1之前的长度；</li>
+<li>如果x是i~j中最后一个气球，则其结果为：<code>nums[i-1]*nums[x]*nums[j+1]</code>;</li>
+<li>则使用DP可以得到状态公式：<br><code>dp[i][j] = max(dp[i][j], dp[i][x-1] + nums[i-1]*nums[x]*nums[j+1] + dp[x+1][j])</code>;</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">maxCoins</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> len = nums.size();</div><div class="line">            nums.insert(nums.begin(), <span class="number">1</span>);</div><div class="line">            nums.insert(nums.end(), <span class="number">1</span>);</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(len+<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(len+<span class="number">2</span>, <span class="number">0</span>));</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= len; ++k)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len-k+<span class="number">1</span>; ++i)</div><div class="line">                &#123;</div><div class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; i+k; ++j)</div><div class="line">                        &#123;</div><div class="line">                            dp[i][i+k<span class="number">-1</span>] = max(dp[i][i+k<span class="number">-1</span>], dp[i][j<span class="number">-1</span>] + nums[i<span class="number">-1</span>]*nums[j]*nums[i+k] + dp[j+<span class="number">1</span>][i+k<span class="number">-1</span>]); </div><div class="line">                        &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> dp[<span class="number">1</span>][len];</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="315-Count-of-Smaller-Numbers-After-Self"><a href="#315-Count-of-Smaller-Numbers-After-Self" class="headerlink" title="315. Count of Smaller Numbers After Self"></a>315. Count of Smaller Numbers After Self</h2><h3 id="解题思路I"><a href="#解题思路I" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>使用归并排序，在归并排序的过程中一段一段地去计算结果；</li>
+<li>对于每一阶段归并排序的左右两部分，左半部分每个元素都去右半部分中找<code>Smaller Number</code>，由于是在归并排序之后再去找，所以只需要扫描一遍；</li>
+<li>具体分析可以看<a href="https://discuss.leetcode.com/topic/73300/share-my-c-mergesort-solution" target="_blank" rel="external">这里</a>！</li>
+</ul>
+</blockquote>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countSmaller(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> len = nums.size();</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(len, <span class="number">0</span>);</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; index;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">                index.push_back(i);</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; numUpdate = nums;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; indexUpdate = index;</div><div class="line">            solve(res, nums, index, <span class="number">0</span>, len, numUpdate, indexUpdate);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;index, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;numUpdate, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;indexUpdate)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(end - start &lt;= <span class="number">1</span>)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            <span class="keyword">int</span> mid = (start + end) / <span class="number">2</span>;</div><div class="line">            solve(res, nums, index, mid, end, numUpdate, indexUpdate);</div><div class="line">            solve(res, nums, index, start, mid, numUpdate, indexUpdate);</div><div class="line">            <span class="keyword">int</span> r = mid;</div><div class="line">            <span class="keyword">int</span> t = mid;</div><div class="line">            <span class="keyword">int</span> s = start;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> l = start; l &lt; mid; ++l)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">while</span>(nums[l] &gt; nums[r] &amp;&amp; r &lt; end)</div><div class="line">                    r++;</div><div class="line">                <span class="keyword">while</span>(t &lt; end &amp;&amp; nums[t] &lt;= nums[l])</div><div class="line">                &#123;</div><div class="line">                    numUpdate[s] = nums[t];</div><div class="line">                    indexUpdate[s++] = index[t++];</div><div class="line">                &#125;</div><div class="line">                numUpdate[s] = nums[l];</div><div class="line">                indexUpdate[s++] = index[l];</div><div class="line">                res[index[l]] += r - mid;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; end; ++i)</div><div class="line">            &#123;</div><div class="line">                nums[i] = numUpdate[i];</div><div class="line">                index[i] = indexUpdate[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II"><a href="#解题思路II" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>首先对数据进行拷贝排序，使用map保存其序列号值；</li>
+<li>使用了Fenwick树结构，保存数据的大小个数等信息；</li>
+<li>遍历数组结构，每次获得当前数值的结果后，将当前数值添加进树结构中，并进行树结构更新；</li>
+</ul>
+</blockquote>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">FenwickTree</span></div><div class="line">&#123;</div><div class="line">    vector&lt;<span class="keyword">int</span>&gt; sumArray;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="function">inline <span class="keyword">int</span> <span class="title">lowBit</span>(<span class="params"><span class="keyword">int</span> x</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> x &amp; -x;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    FenwickTree(<span class="keyword">int</span> n) : n(n), sumArray(n+<span class="number">1</span>, <span class="number">0</span>) &#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span>(<span class="params"><span class="keyword">int</span> x, <span class="keyword">int</span> d</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">while</span>(x &lt;= n)</div><div class="line">        &#123;</div><div class="line">            sumArray[x] += d;</div><div class="line">            x += lowBit(x);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span>(<span class="params"><span class="keyword">int</span> x</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(x &gt; <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            res += sumArray[x];</div><div class="line">            x -= lowBit(x);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Solution</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">countSmaller</span>(<span class="params">vector&lt;<span class="keyword">int</span>&gt; &amp;nums</span>)</span></div><div class="line">        &#123;</div><div class="line">            vector&lt;<span class="keyword">int</span>&gt; temp = nums;</div><div class="line">            sort(temp.begin(), temp.end());</div><div class="line">            unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; dic;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; temp.size(); ++i)</div><div class="line">                dic[temp[i]] = i+<span class="number">1</span>;</div><div class="line">            <span class="function">FenwickTree <span class="title">tree</span>(<span class="params">nums.size(</span>))</span>;</div><div class="line">            <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">res</span>(<span class="params">nums.size(</span>), 0)</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">            &#123;</div><div class="line">                res[i] = tree.sum(dic[nums[i]] - <span class="number">1</span>);</div><div class="line">                tree.<span class="keyword">add</span>(dic[nums[i]], <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="327-Count-of-Range-Sum"><a href="#327-Count-of-Range-Sum" class="headerlink" title="327. Count of Range Sum"></a>327. Count of Range Sum</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>详细讲解看<a href="https://discuss.leetcode.com/topic/33738/share-my-solution" target="_blank" rel="external">这里</a>！</li>
+</ul>
+</blockquote>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">publ<span class="symbol">ic:</span></div><div class="line">    <span class="built_in">int</span> countRangeSum(vector&lt;<span class="built_in">int</span>&gt;&amp; nums, <span class="built_in">int</span> <span class="built_in">lower</span>, <span class="built_in">int</span> <span class="built_in">upper</span>) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">int</span> size=nums.size();</div><div class="line">        <span class="built_in">if</span>(size==<span class="number">0</span>)  </div><div class="line">            return <span class="number">0</span>;</div><div class="line">        vector&lt;long&gt; sums(size+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        for(<span class="built_in">int</span> i=<span class="number">0</span>; i&lt;size; i++)  </div><div class="line">            sums[i+<span class="number">1</span>]=sums[i]+nums[i];</div><div class="line">        return solve(sums, <span class="number">0</span>, size+<span class="number">1</span>, <span class="built_in">lower</span>, <span class="built_in">upper</span>);</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">    <span class="built_in">int</span> solve(vector&lt;long&gt;&amp; sums, <span class="built_in">int</span> start, <span class="built_in">int</span> end, <span class="built_in">int</span> <span class="built_in">lower</span>, <span class="built_in">int</span> <span class="built_in">upper</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">if</span>(end-start&lt;=<span class="number">1</span>)  return <span class="number">0</span>;</div><div class="line">        <span class="built_in">int</span> <span class="built_in">mid</span>=(start+end)/<span class="number">2</span>;</div><div class="line">        <span class="built_in">int</span> <span class="built_in">count</span>=solve(sums, start, <span class="built_in">mid</span>, <span class="built_in">lower</span>, <span class="built_in">upper</span>) + solve(sums, <span class="built_in">mid</span>, end, <span class="built_in">lower</span>, <span class="built_in">upper</span>);</div><div class="line">        <span class="built_in">int</span> m=<span class="built_in">mid</span>, <span class="built_in">n</span>=<span class="built_in">mid</span>, <span class="built_in">t</span>=<span class="built_in">mid</span>, <span class="built_in">len</span>=<span class="number">0</span>;</div><div class="line">        vector&lt;long&gt; cache(end-start, <span class="number">0</span>);</div><div class="line">        for(<span class="built_in">int</span> i=start, s=<span class="number">0</span>; i&lt;<span class="built_in">mid</span>; i++, s++)</div><div class="line">        &#123;</div><div class="line">            while(m&lt;end &amp;&amp; sums[m]-sums[i]&lt;<span class="built_in">lower</span>) </div><div class="line">                m++;</div><div class="line">            while(<span class="built_in">n</span>&lt;end &amp;&amp; sums[<span class="built_in">n</span>]-sums[i]&lt;=<span class="built_in">upper</span>) </div><div class="line">                <span class="built_in">n</span>++;</div><div class="line">            <span class="built_in">count</span>+=<span class="built_in">n</span>-m;</div><div class="line">            while(<span class="built_in">t</span>&lt;end &amp;&amp; sums[<span class="built_in">t</span>]&lt;sums[i]) </div><div class="line">                cache[s++]=sums[<span class="built_in">t</span>++];</div><div class="line">            cache[s]=sums[i];</div><div class="line">            <span class="built_in">len</span>=s;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        for(<span class="built_in">int</span> i=<span class="number">0</span>; i&lt;=<span class="built_in">len</span>; i++)  </div><div class="line">            sums[start+i]=cache[i];</div><div class="line">        return <span class="built_in">count</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+            <a href="/tags/Divide-and-Conquer/" rel="tag">#Divide and Conquer</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/25/LeetCode-Bit-Manipulation-II/" rel="next" title="LeetCode Bit Manipulation II">
+                <i class="fa fa-chevron-left"></i> LeetCode Bit Manipulation II
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/28/归并排序的实现与深入应用分析/" rel="prev" title="归并排序的实现与深入应用分析">
+                归并排序的实现与深入应用分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#218-The-Skyline-Problem"><span class="nav-number">1.</span> <span class="nav-text">218. The Skyline Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#241-Different-Ways-to-Add-Parentheses"><span class="nav-number">2.</span> <span class="nav-text">241. Different Ways to Add Parentheses</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#282-Expression-Add-Operators"><span class="nav-number">3.</span> <span class="nav-text">282. Expression Add Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结题思路"><span class="nav-number">3.1.</span> <span class="nav-text">结题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#312-Burst-Balloons"><span class="nav-number">4.</span> <span class="nav-text">312. Burst Balloons</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#315-Count-of-Smaller-Numbers-After-Self"><span class="nav-number">5.</span> <span class="nav-text">315. Count of Smaller Numbers After Self</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II"><span class="nav-number">5.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">5.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#327-Count-of-Range-Sum"><span class="nav-number">6.</span> <span class="nav-text">327. Count of Range Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">6.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">6.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2016/12/27/LeetCode-Divide-and-Conquer/';
+      var disqus_title = 'LeetCode Divide and Conquer';
+      var disqus_url = 'http://haoyuanliu.github.io/2016/12/27/LeetCode-Divide-and-Conquer/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

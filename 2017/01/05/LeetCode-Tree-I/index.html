@@ -1,0 +1,1224 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode,Tree," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="本文包含的题目有： 94. Binary Tree Inorder Traversal95. Unique Binary Search Trees II96. Unique Binary Search Trees98. Validate Binary Search Tree99. Recover Binary Search Tree100. Same Tree101. Symmetric Tree">
+<meta name="keywords" content="LeetCode,Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Tree I">
+<meta property="og:url" content="http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含的题目有： 94. Binary Tree Inorder Traversal95. Unique Binary Search Trees II96. Unique Binary Search Trees98. Validate Binary Search Tree99. Recover Binary Search Tree100. Same Tree101. Symmetric Tree">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Tree I">
+<meta name="twitter:description" content="本文包含的题目有： 94. Binary Tree Inorder Traversal95. Unique Binary Search Trees II96. Unique Binary Search Trees98. Validate Binary Search Tree99. Recover Binary Search Tree100. Same Tree101. Symmetric Tree">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode Tree I | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode Tree I
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-05T19:01:56+08:00" content="2017-01-05">
+              2017-01-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/05/LeetCode-Tree-I/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/05/LeetCode-Tree-I/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2017/01/05/LeetCode-Tree-I/" class="leancloud_visitors" data-flag-title="LeetCode Tree I">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含的题目有：</p>
+<p><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">94. Binary Tree Inorder Traversal</a><br><a href="https://leetcode.com/problems/unique-binary-search-trees-ii/" target="_blank" rel="external">95. Unique Binary Search Trees II</a><br><a href="https://leetcode.com/problems/unique-binary-search-trees/" target="_blank" rel="external">96. Unique Binary Search Trees</a><br><a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" rel="external">98. Validate Binary Search Tree</a><br><a href="https://leetcode.com/problems/recover-binary-search-tree/" target="_blank" rel="external">99. Recover Binary Search Tree</a><br><a href="https://leetcode.com/problems/same-tree/" target="_blank" rel="external">100. Same Tree</a><br><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank" rel="external">101. Symmetric Tree</a><br><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="external">102. Binary Tree Level Order Traversal</a><br><a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/" target="_blank" rel="external">103. Binary Tree Zigzag Level Order Traversal</a><br><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="external">104. Maximum Depth of Binary Tree</a><br><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="external">105. Construct Binary Tree from Preorder and Inorder Traversal</a><br><a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/" target="_blank" rel="external">106. Construct Binary Tree from Inorder and Postorder Traversal</a><br><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/" target="_blank" rel="external">107. Binary Tree Level Order Traversal II</a><br><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/" target="_blank" rel="external">108. Convert Sorted Array to Binary Search Tree</a><br><a href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" rel="external">110. Balanced Binary Tree</a><br><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="external">111. Minimum Depth of Binary Tree</a><br><a href="https://leetcode.com/problems/path-sum/" target="_blank" rel="external">112. Path Sum</a><br><a href="https://leetcode.com/problems/path-sum-ii/" target="_blank" rel="external">113. Path Sum II</a><br><a href="https://leetcode.com/problems/path-sum-iii/" target="_blank" rel="external">437. Path Sum III</a></p>
+<a id="more"></a>
+<h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a>94. Binary Tree Inorder Traversal</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>二叉树的中序遍历；</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        midOrder(res, root);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">midOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;res, TreeNode *root)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root)</div><div class="line">        &#123;</div><div class="line">            midOrder(res, root-&gt;left);</div><div class="line">            res.push_back(root-&gt;val);</div><div class="line">            midOrder(res, root-&gt;right);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="95-Unique-Binary-Search-Trees-II"><a href="#95-Unique-Binary-Search-Trees-II" class="headerlink" title="95. Unique Binary Search Trees II"></a>95. Unique Binary Search Trees II</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用分治的方法解决；</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt; generateTrees(<span class="keyword">int</span> n)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; res;</div><div class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        <span class="keyword">return</span> getTree(<span class="number">1</span>, n);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt; getTree(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; res;</div><div class="line">        <span class="keyword">if</span>(start &gt; end)</div><div class="line">        &#123;</div><div class="line">            res.push_back(<span class="literal">NULL</span>);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(start == end)</div><div class="line">        &#123;</div><div class="line">            res.push_back(<span class="keyword">new</span> TreeNode(start));</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; left = getTree(start, i<span class="number">-1</span>);</div><div class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; right = getTree(i+<span class="number">1</span>, end);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> l : left)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> r : right)</div><div class="line">                &#123;</div><div class="line">                    TreeNode* root = <span class="keyword">new</span> TreeNode(i);</div><div class="line">                    root-&gt;left = l;</div><div class="line">                    root-&gt;right = r;</div><div class="line">                    res.push_back(root);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="96-Unique-Binary-Search-Trees"><a href="#96-Unique-Binary-Search-Trees" class="headerlink" title="96. Unique Binary Search Trees"></a>96. Unique Binary Search Trees</h2><h3 id="解题思路I"><a href="#解题思路I" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>使用DP动态规划，每添加一个新节点，首先保持已有的树结构不变，则新节点只有两个位置可以放置，从而有：<code>res[i] += res[i-1] * 2</code>;</li>
+<li>如果将已有的树结构拆开，则只能拆成两个部分，前一部分的右子节点为新节点，新节点的左子节点为右半部分，从而有：<code>res[i] += res[j] * res[i-j-1]</code>；</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(n+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        res[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">        res[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        res[<span class="number">2</span>] = <span class="number">2</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; ++i)</div><div class="line">        &#123;</div><div class="line">        	res[i] += res[i<span class="number">-1</span>] * <span class="number">2</span>;</div><div class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i<span class="number">-1</span>; ++j)</div><div class="line">        	&#123;</div><div class="line">        		res[i] += res[j] * res[i-j<span class="number">-1</span>];</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res[n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II"><a href="#解题思路II" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>继续延续上述DP的思路，将<code>res[i-1] * 2</code>转变为<code>res[0] * res[i-1]</code> + <code>res[i-1] * res[0]</code>，然后更新原来的代码，更加简洁；</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(n+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        res[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">        res[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j)</div><div class="line">        	&#123;</div><div class="line">        		res[i] += res[j] * res[i-j<span class="number">-1</span>];</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res[n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>仍然是使用中序遍历，维持一个pre变量，确保每一个<code>cur &gt; pre</code>即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    bool isValidBST(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">    	TreeNode* pre = NULL;</div><div class="line">    	<span class="keyword">return</span> midOrder(root, pre);</div><div class="line">    &#125;</div><div class="line">    bool midOrder(TreeNode* root, TreeNode* &amp;pre)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root)</div><div class="line">    	&#123;</div><div class="line">    		<span class="keyword">if</span>(!midOrder(root-&gt;left, pre))</div><div class="line">    			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    		<span class="keyword">if</span>(pre &amp;&amp; root-&gt;<span class="keyword">val</span> &lt;= pre-&gt;<span class="keyword">val</span>) </div><div class="line">    			<span class="keyword">return</span> <span class="literal">false</span>; </div><div class="line">    		pre = root;</div><div class="line">    		<span class="keyword">if</span>(!midOrder(root-&gt;right, pre))</div><div class="line">    			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="99-Recover-Binary-Search-Tree"><a href="#99-Recover-Binary-Search-Tree" class="headerlink" title="99. Recover Binary Search Tree"></a>99. Recover Binary Search Tree</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>仍然是中序遍历，遍历一遍，找出乱序的两个节点即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	TreeNode* <span class="built_in">left</span> = NULL;</div><div class="line">    TreeNode* <span class="built_in">right</span> = NULL;</div><div class="line">    TreeNode* pre = new TreeNode((<span class="number">1</span>&lt;&lt;<span class="number">31</span>));</div><div class="line">    void recoverTree(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">    	</div><div class="line">        midOrder(root);</div><div class="line">        <span class="built_in">swap</span>(<span class="built_in">left</span>-&gt;val, <span class="built_in">right</span>-&gt;val);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    void midOrder(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root)</div><div class="line">    	&#123;</div><div class="line">    		midOrder(root-&gt;<span class="built_in">left</span>);</div><div class="line">    		<span class="keyword">if</span>(!<span class="built_in">left</span> &amp;&amp; pre-&gt;val &gt;= root-&gt;val)</div><div class="line">    			<span class="built_in">left</span> = pre;</div><div class="line">    		<span class="keyword">if</span>(<span class="built_in">left</span> &amp;&amp; pre-&gt;val &gt;= root-&gt;val)</div><div class="line">    			<span class="built_in">right</span> = root;</div><div class="line">    		pre = root;</div><div class="line">    		midOrder(root-&gt;<span class="built_in">right</span>);</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="100-Same-Tree"><a href="#100-Same-Tree" class="headerlink" title="100. Same Tree"></a>100. Same Tree</h2><h3 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这道题就迭代去比较就可以了， 注意两个都是<code>NULL</code>的情况；</li>
+</ul>
+</blockquote>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">bool</span> isSameTree(TreeNode* p, TreeNode* q) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(p == q)</div><div class="line">    		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">if</span>(p &amp;&amp; q &amp;&amp; p-&gt;val == q-&gt;val)</div><div class="line">			<span class="keyword">return</span> isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="101-Symmetric-Tree"><a href="#101-Symmetric-Tree" class="headerlink" title="101. Symmetric Tree"></a>101. Symmetric Tree</h2><h3 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>按照对称的位置去比较；</li>
+</ul>
+</blockquote>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    bool isSymmetric(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span> true;</div><div class="line">        <span class="keyword">return</span> isTheSame(root-&gt;<span class="built_in">left</span>, root-&gt;<span class="built_in">right</span>);</div><div class="line">    &#125;</div><div class="line">	bool isTheSame(TreeNode* <span class="built_in">left</span>, TreeNode* <span class="built_in">right</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="built_in">left</span> == NULL |<span class="type">| right</span> == NULL)</div><div class="line">			<span class="keyword">return</span> <span class="built_in">left</span> == <span class="built_in">right</span>;</div><div class="line">		<span class="keyword">if</span>(<span class="built_in">left</span>-&gt;val != <span class="built_in">right</span>-&gt;val)</div><div class="line">			<span class="keyword">return</span> false;</div><div class="line">		<span class="keyword">return</span> isTheSame(<span class="built_in">left</span>-&gt;<span class="built_in">left</span>, <span class="built_in">right</span>-&gt;<span class="built_in">right</span>) &amp;&amp; isTheSame(<span class="built_in">left</span>-&gt;<span class="built_in">right</span>, <span class="built_in">right</span>-&gt;<span class="built_in">left</span>);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><h3 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用一个<code>queue</code>进行广度优先搜索；</li>
+</ul>
+</blockquote>
+<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</div><div class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</div><div class="line">        	<span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; que;</div><div class="line">        que.push(root);</div><div class="line"></div><div class="line">        <span class="keyword">while</span>(!que.empty())</div><div class="line">        &#123;</div><div class="line">        	temp.clear();</div><div class="line">        	<span class="keyword">int</span> len = que.size();</div><div class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">        	&#123;</div><div class="line">        		temp.push_back(que.front()-&gt;val);</div><div class="line">        		<span class="keyword">if</span>(que.front()-&gt;left)</div><div class="line">        			que.push(que.front()-&gt;left);</div><div class="line">        		<span class="keyword">if</span>(que.front()-&gt;right)</div><div class="line">        			que.push(que.front()-&gt;right);</div><div class="line">        		que.pop();</div><div class="line">        	&#125;</div><div class="line">        	res.push_back(temp);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="103-Binary-Tree-Zigzag-Level-Order-Traversal"><a href="#103-Binary-Tree-Zigzag-Level-Order-Traversal" class="headerlink" title="103. Binary Tree Zigzag Level Order Traversal"></a>103. Binary Tree Zigzag Level Order Traversal</h2><h3 id="解题思路-7"><a href="#解题思路-7" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>仍然按照上述思路进行，使用一个<code>queue</code>保存每一层的数据，这里注意在偶数层进行翻转即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    vector&lt;vector&lt;int&gt;&gt; zigzagLevelOrder(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">		vector&lt;vector&lt;int&gt;&gt; res;</div><div class="line">		vector&lt;int&gt; temp;</div><div class="line">		queue&lt;TreeNode*&gt; que;</div><div class="line">		<span class="keyword">if</span>(root == NULL)</div><div class="line">			<span class="keyword">return</span> res;</div><div class="line">		int count = <span class="number">0</span>;</div><div class="line">		que.push(root);</div><div class="line">		<span class="keyword">while</span>(!que.empty())</div><div class="line">		&#123;</div><div class="line">			temp.clear();</div><div class="line">			int len = que.size();</div><div class="line">			<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span><span class="function"><span class="params">(que.front()-&gt;left)</span></span></div><div class="line">					<span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;left)</span>;</div><div class="line">				<span class="title">if</span><span class="params">(que.front()-&gt;right)</span></div><div class="line">					<span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;right)</span>;</div><div class="line">				<span class="title">temp</span>.<span class="title">push_back</span><span class="params">(que.front()-&gt;val)</span>;</div><div class="line">				<span class="title">que</span>.<span class="title">pop</span><span class="params">()</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="title">if</span><span class="params">((count++)&amp;<span class="number">1</span>)</span></div><div class="line">				<span class="title">reverse</span><span class="params">(temp.begin(), temp.end())</span>;</div><div class="line">			<span class="title">res</span>.<span class="title">push_back</span><span class="params">(temp)</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="title">return</span> <span class="title">res</span>;        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="104-Maximum-Depth-of-Binary-Tree"><a href="#104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="104. Maximum Depth of Binary Tree"></a>104. Maximum Depth of Binary Tree</h2><h3 id="解题思路-8"><a href="#解题思路-8" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用一个递归来解决；</li>
+</ul>
+</blockquote>
+<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    int maxDepth(<span class="type">TreeNode</span>* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root)</div><div class="line">    		<span class="keyword">return</span> <span class="number">1</span> + <span class="built_in">max</span>(maxDepth(root-&gt;<span class="keyword">left</span>), maxDepth(root-&gt;<span class="keyword">right</span>));</div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><a href="#105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" class="headerlink" title="105. Construct Binary Tree from Preorder and Inorder Traversal"></a>105. Construct Binary Tree from Preorder and Inorder Traversal</h2><h3 id="解题思路-9"><a href="#解题思路-9" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>由中序遍历和先序遍历来构建树结构；</li>
+</ul>
+</blockquote>
+<h3 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">     	  TreeNode* root = solve(preorder, inorder, <span class="number">0</span>, preorder.size(), <span class="number">0</span>, preorder.size());</div><div class="line">     	  <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;inorder, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> s, <span class="keyword">int</span> e)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(end == start || end &lt; start)</div><div class="line">    		<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    	<span class="keyword">if</span>(end - start == <span class="number">1</span>)</div><div class="line">    	&#123;</div><div class="line">    		<span class="keyword">return</span> <span class="keyword">new</span> TreeNode(preorder[start]);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">else</span></div><div class="line">    	&#123;</div><div class="line">    		TreeNode* res = <span class="keyword">new</span> TreeNode(preorder[start]);</div><div class="line">    		<span class="keyword">int</span> mid;</div><div class="line">    		<span class="keyword">for</span>(<span class="keyword">int</span> i = s; i &lt; e; ++i)</div><div class="line">    		&#123;</div><div class="line">    			<span class="keyword">if</span>(inorder[i] == preorder[start])</div><div class="line">    			&#123;</div><div class="line">    				mid = i;</div><div class="line">    				<span class="keyword">break</span>;</div><div class="line">    			&#125;</div><div class="line">    		&#125;</div><div class="line">    		res-&gt;left = solve(preorder, inorder, start+<span class="number">1</span>, start+mid-s+<span class="number">1</span>, s, mid);</div><div class="line">    		res-&gt;right = solve(preorder, inorder, start+mid-s+<span class="number">1</span>, end, mid+<span class="number">1</span>, e);</div><div class="line">    		<span class="keyword">return</span> res;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal"><a href="#106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal" class="headerlink" title="106. Construct Binary Tree from Inorder and Postorder Traversal"></a>106. Construct Binary Tree from Inorder and Postorder Traversal</h2><h3 id="解题思路-10"><a href="#解题思路-10" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>中序遍历和后序遍历构建树结构，使用<code>unordered_map</code>进行辅助存储；</li>
+</ul>
+</blockquote>
+<h3 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span> </span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; inorder.size(); ++i)</div><div class="line">        	m[inorder[i]] = i;</div><div class="line">        <span class="keyword">return</span> solve(inorder, postorder, <span class="number">0</span>, inorder.size(), <span class="number">0</span>, inorder.size());</div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode *<span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">int</span> s1, <span class="keyword">int</span> e1, <span class="keyword">int</span> s2, <span class="keyword">int</span> e2)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(e1 == s1 || e1 &lt; s1)</div><div class="line">    		<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    	<span class="keyword">if</span>(e1 - s1 == <span class="number">1</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="keyword">new</span> TreeNode(inorder[s1]);</div><div class="line">    	<span class="keyword">int</span> mid = m[postorder[e2<span class="number">-1</span>]];</div><div class="line">    	TreeNode* root = <span class="keyword">new</span> TreeNode(postorder[e2<span class="number">-1</span>]);</div><div class="line">    	root-&gt;left = solve(inorder, postorder, s1, mid, s2, s2+mid-s1);</div><div class="line">    	root-&gt;right = solve(inorder, postorder, mid+<span class="number">1</span>, e1, s2+mid-s1, e2<span class="number">-1</span>);</div><div class="line">    	<span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="107-Binary-Tree-Level-Order-Traversal-II"><a href="#107-Binary-Tree-Level-Order-Traversal-II" class="headerlink" title="107. Binary Tree Level Order Traversal II"></a>107. Binary Tree Level Order Traversal II</h2><h3 id="解题思路-11"><a href="#解题思路-11" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>跟之前的题目一样，最后进行一下翻转就可以了；</li>
+</ul>
+</blockquote>
+<h3 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        vector&lt;vector&lt;int&gt;&gt; res;</div><div class="line">        vector&lt;int&gt; temp;</div><div class="line">        <span class="keyword">if</span>(root == NULL)</div><div class="line">        	<span class="keyword">return</span> res;</div><div class="line">        queue&lt;TreeNode*&gt; que;</div><div class="line">        que.push(root);</div><div class="line">        <span class="keyword">while</span>(!que.empty())</div><div class="line">        &#123;</div><div class="line">        	temp.clear();</div><div class="line">        	int len = que.size();</div><div class="line">        	<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">        	&#123;</div><div class="line">        		<span class="keyword">if</span><span class="function"><span class="params">(que.front()-&gt;left)</span></span></div><div class="line">        			<span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;left)</span>;</div><div class="line">        		<span class="title">if</span><span class="params">(que.front()-&gt;right)</span></div><div class="line">        			<span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;right)</span>;</div><div class="line">        		<span class="title">temp</span>.<span class="title">push_back</span><span class="params">(que.front()-&gt;val)</span>;</div><div class="line">        		<span class="title">que</span>.<span class="title">pop</span><span class="params">()</span>;</div><div class="line">        	&#125;</div><div class="line">        	<span class="title">res</span>.<span class="title">push_back</span><span class="params">(temp)</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="title">reverse</span><span class="params">(res.begin(), res.end())</span>;</div><div class="line">        <span class="title">return</span> <span class="title">res</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="108-Convert-Sorted-Array-to-Binary-Search-Tree"><a href="#108-Convert-Sorted-Array-to-Binary-Search-Tree" class="headerlink" title="108. Convert Sorted Array to Binary Search Tree"></a>108. Convert Sorted Array to Binary Search Tree</h2><h3 id="解题思路-12"><a href="#解题思路-12" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用分治的思想去构建，每次首先构建中间节点即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    TreeNode* sortedArrayToBST(vector&lt;<span class="built_in">int</span>&gt;&amp; nums) </div><div class="line">    &#123;</div><div class="line">        return solve(nums, <span class="number">0</span>, nums.size());</div><div class="line">    &#125;</div><div class="line">    TreeNode* solve(vector&lt;<span class="built_in">int</span>&gt; &amp;nums, <span class="built_in">int</span> start, <span class="built_in">int</span> <span class="keyword">end</span>)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(start == <span class="keyword">end</span> || start &gt; <span class="keyword">end</span>)</div><div class="line">    		return <span class="literal">NULL</span>;</div><div class="line">    	<span class="keyword">if</span>(<span class="keyword">end</span> - start == <span class="number">1</span>)</div><div class="line">    		return <span class="keyword">new</span> TreeNode(nums[start]);</div><div class="line">    	<span class="built_in">int</span> <span class="built_in">mid</span> = (start + <span class="keyword">end</span>) / <span class="number">2</span>;</div><div class="line">    	TreeNode* root = <span class="keyword">new</span> TreeNode(nums[<span class="built_in">mid</span>]);</div><div class="line">    	root-&gt;<span class="built_in">left</span> = solve(nums, start, <span class="built_in">mid</span>);</div><div class="line">    	root-&gt;<span class="built_in">right</span> = solve(nums, <span class="built_in">mid</span>+<span class="number">1</span>, <span class="keyword">end</span>);</div><div class="line">    	return root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="110-Balanced-Binary-Tree"><a href="#110-Balanced-Binary-Tree" class="headerlink" title="110. Balanced Binary Tree"></a>110. Balanced Binary Tree</h2><h3 id="解题思路I-1"><a href="#解题思路I-1" class="headerlink" title="解题思路I"></a>解题思路I</h3><blockquote>
+<ul>
+<li>遍历每一个节点，检查是否平衡；</li>
+</ul>
+</blockquote>
+<h3 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">bool</span> isBalanced(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">NULL</span>)</div><div class="line">        	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">if</span>(abs(getHeight(root-&gt;left) - getHeight(root-&gt;right)) &gt; <span class="number">1</span>)</div><div class="line">        	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        	<span class="keyword">return</span> isBalanced(root-&gt;left) &amp;&amp;  isBalanced(root-&gt;right);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> getHeight(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="keyword">NULL</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	<span class="keyword">return</span> <span class="number">1</span> + max(getHeight(root-&gt;left), getHeight(root-&gt;right));</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路II-1"><a href="#解题思路II-1" class="headerlink" title="解题思路II"></a>解题思路II</h3><blockquote>
+<ul>
+<li>使用DFS进行深度搜索，每次搜索返回树的高度，如果平衡就返回实际高度值，否则返回<code>-1</code>，最后进行判断即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    bool isBalanced(<span class="type">TreeNode</span>* root) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">return</span> getHeight(root) != -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    int getHeight(<span class="type">TreeNode</span>* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="type">NULL</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	int <span class="keyword">left</span> = getHeight(root-&gt;<span class="keyword">left</span>);</div><div class="line">    	<span class="keyword">if</span>(<span class="keyword">left</span> == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    	int <span class="keyword">right</span> = getHeight(root-&gt;<span class="keyword">right</span>);</div><div class="line">    	<span class="keyword">if</span>(<span class="keyword">right</span> == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line"></div><div class="line">    	<span class="keyword">if</span>(<span class="built_in">abs</span>(<span class="keyword">left</span> - <span class="keyword">right</span>) &gt; <span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line"></div><div class="line">    	<span class="keyword">return</span> <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>) + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="111-Minimum-Depth-of-Binary-Tree"><a href="#111-Minimum-Depth-of-Binary-Tree" class="headerlink" title="111. Minimum Depth of Binary Tree"></a>111. Minimum Depth of Binary Tree</h2><h3 id="解题思路-13"><a href="#解题思路-13" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>简单题，但是有点小麻烦，弄清楚边界问题，只有<code>!root-&gt;left &amp;&amp; !root-&gt;right</code>才可以结束遍历，有一个子节点不为<code>NULL</code>就需要继续计算，两个均不为<code>NULL</code>则取较小的一个；</li>
+</ul>
+</blockquote>
+<h3 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int minDepth(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL)</div><div class="line">    	    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	<span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)</div><div class="line">    	    <span class="keyword">return</span> <span class="number">1</span> + minDepth(root-&gt;<span class="built_in">left</span>);</div><div class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; root-&gt;<span class="built_in">right</span>)</div><div class="line">    	    <span class="keyword">return</span> <span class="number">1</span> + minDepth(root-&gt;<span class="built_in">right</span>);</div><div class="line">    	<span class="keyword">return</span> <span class="number">1</span> + min(minDepth(root-&gt;<span class="built_in">left</span>), minDepth(root-&gt;<span class="built_in">right</span>));</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="112-Path-Sum"><a href="#112-Path-Sum" class="headerlink" title="112. Path Sum"></a>112. Path Sum</h2><h3 id="解题思路-14"><a href="#解题思路-14" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>遍历每一条路径，检查是否有符合要求的结果；</li>
+<li>注意这里需要判断左右子树是不是为<code>NULL</code>，即当前节点是不是叶子节点，然后分情况进行讨论；</li>
+</ul>
+</blockquote>
+<h3 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    bool hasPathSum(TreeNode* root, int <span class="built_in">sum</span>) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span> false;</div><div class="line">    	<span class="keyword">return</span> <span class="built_in">solve</span>(root, <span class="number">0</span>, <span class="built_in">sum</span>);</div><div class="line">    &#125;</div><div class="line">    bool <span class="built_in">solve</span>(TreeNode* root, int <span class="built_in">sum</span>, int target)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="built_in">sum</span>+root-&gt;val == target;</div><div class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="built_in">solve</span>(root-&gt;<span class="built_in">left</span>, <span class="built_in">sum</span>+root-&gt;val, target);</div><div class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; root-&gt;<span class="built_in">right</span>)</div><div class="line">    		<span class="keyword">return</span> <span class="built_in">solve</span>(root-&gt;<span class="built_in">right</span>, <span class="built_in">sum</span>+root-&gt;val, target);</div><div class="line">    	<span class="keyword">return</span> <span class="built_in">solve</span>(root-&gt;<span class="built_in">left</span>, <span class="built_in">sum</span>+root-&gt;val, target) |<span class="type">| solve</span>(root-&gt;<span class="built_in">right</span>, <span class="built_in">sum</span>+root-&gt;val, target);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="113-Path-Sum-II"><a href="#113-Path-Sum-II" class="headerlink" title="113. Path Sum II"></a>113. Path Sum II</h2><h3 id="解题思路-15"><a href="#解题思路-15" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>采用递归和回溯的方式，遍历各个分支，如果符合要求就保存；</li>
+</ul>
+</blockquote>
+<h3 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    vector&lt;vector&lt;int&gt;&gt; pathSum(TreeNode* root, int <span class="built_in">sum</span>) </div><div class="line">    &#123;</div><div class="line">        vector&lt;vector&lt;int&gt;&gt; res;</div><div class="line">        vector&lt;int&gt; temp;</div><div class="line">        <span class="keyword">if</span>(root == NULL)</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">solve</span>(res, temp, root, <span class="built_in">sum</span>);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    void <span class="built_in">solve</span>(vector&lt;vector&lt;int&gt;&gt; &amp;res, vector&lt;int&gt; &amp;temp, TreeNode* root, int <span class="built_in">sum</span>)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)</div><div class="line">    	&#123;</div><div class="line">    		<span class="keyword">if</span>(root-&gt;val == <span class="built_in">sum</span>)</div><div class="line">    		&#123;</div><div class="line">	    		temp.push_back(root-&gt;val);</div><div class="line">	    		res.push_back(temp);</div><div class="line">	    		temp.erase(temp.<span class="keyword">end</span>()<span class="number">-1</span>);</div><div class="line">	    	&#125;</div><div class="line">	    	<span class="keyword">return</span>;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(root-&gt;<span class="built_in">left</span>)</div><div class="line">    	&#123;</div><div class="line">    		temp.push_back(root-&gt;val);</div><div class="line">    		<span class="built_in">solve</span>(res, temp, root-&gt;<span class="built_in">left</span>, <span class="built_in">sum</span>-root-&gt;val);</div><div class="line">    		temp.erase(temp.<span class="keyword">end</span>()<span class="number">-1</span>);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(root-&gt;<span class="built_in">right</span>)</div><div class="line">    	&#123;</div><div class="line">    		temp.push_back(root-&gt;val);</div><div class="line">    		<span class="built_in">solve</span>(res, temp, root-&gt;<span class="built_in">right</span>, <span class="built_in">sum</span>-root-&gt;val);</div><div class="line">    		temp.erase(temp.<span class="keyword">end</span>()<span class="number">-1</span>);</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="437-Path-Sum-III"><a href="#437-Path-Sum-III" class="headerlink" title="437. Path Sum III"></a>437. Path Sum III</h2><h3 id="解题思路-16"><a href="#解题思路-16" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>确定一个起始点，然后检查以该起始点开始有多少个分支符合要求，最后进行累加；</li>
+<li>确定起点之后，只能在后面一直追加，如果已经计算得到了所求的sum值，在其后继续追加节点，如果追加节点的和为0的话也满足要求，此时计数继续加一；</li>
+</ul>
+</blockquote>
+<h3 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int pathSum(TreeNode* root, int <span class="built_in">sum</span>)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">solve</span>(root, <span class="built_in">sum</span>, <span class="number">0</span>) + pathSum(root-&gt;<span class="built_in">left</span>, <span class="built_in">sum</span>) + pathSum(root-&gt;<span class="built_in">right</span>, <span class="built_in">sum</span>);</div><div class="line">    &#125;</div><div class="line">    int <span class="built_in">solve</span>(TreeNode* root, int target, int <span class="built_in">sum</span>)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	<span class="keyword">if</span>(<span class="built_in">sum</span> + root-&gt;val == target)</div><div class="line">    		<span class="keyword">return</span> <span class="number">1</span> + <span class="built_in">solve</span>(root-&gt;<span class="built_in">left</span>, <span class="number">0</span>, <span class="number">0</span>) + <span class="built_in">solve</span>(root-&gt;<span class="built_in">right</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    	<span class="keyword">return</span> <span class="built_in">solve</span>(root-&gt;<span class="built_in">left</span>, target, <span class="built_in">sum</span>+root-&gt;val) + <span class="built_in">solve</span>(root-&gt;<span class="built_in">right</span>, target, <span class="built_in">sum</span>+root-&gt;val);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+            <a href="/tags/Tree/" rel="tag">#Tree</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/04/Ubuntu14-04系统Chromium安装Adobe-Flash插件/" rel="next" title="Ubuntu14.04系统Chromium安装Adobe Flash插件">
+                <i class="fa fa-chevron-left"></i> Ubuntu14.04系统Chromium安装Adobe Flash插件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/12/LeetCode-Tree-II/" rel="prev" title="LeetCode Tree II">
+                LeetCode Tree II <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#94-Binary-Tree-Inorder-Traversal"><span class="nav-number">1.</span> <span class="nav-text">94. Binary Tree Inorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#95-Unique-Binary-Search-Trees-II"><span class="nav-number">2.</span> <span class="nav-text">95. Unique Binary Search Trees II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#96-Unique-Binary-Search-Trees"><span class="nav-number">3.</span> <span class="nav-text">96. Unique Binary Search Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II"><span class="nav-number">3.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">3.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#98-Validate-Binary-Search-Tree"><span class="nav-number">4.</span> <span class="nav-text">98. Validate Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#99-Recover-Binary-Search-Tree"><span class="nav-number">5.</span> <span class="nav-text">99. Recover Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100-Same-Tree"><span class="nav-number">6.</span> <span class="nav-text">100. Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-4"><span class="nav-number">6.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#101-Symmetric-Tree"><span class="nav-number">7.</span> <span class="nav-text">101. Symmetric Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-5"><span class="nav-number">7.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#102-Binary-Tree-Level-Order-Traversal"><span class="nav-number">8.</span> <span class="nav-text">102. Binary Tree Level Order Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-6"><span class="nav-number">8.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-8"><span class="nav-number">8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#103-Binary-Tree-Zigzag-Level-Order-Traversal"><span class="nav-number">9.</span> <span class="nav-text">103. Binary Tree Zigzag Level Order Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-7"><span class="nav-number">9.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-9"><span class="nav-number">9.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#104-Maximum-Depth-of-Binary-Tree"><span class="nav-number">10.</span> <span class="nav-text">104. Maximum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-8"><span class="nav-number">10.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-10"><span class="nav-number">10.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><span class="nav-number">11.</span> <span class="nav-text">105. Construct Binary Tree from Preorder and Inorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-9"><span class="nav-number">11.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-11"><span class="nav-number">11.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal"><span class="nav-number">12.</span> <span class="nav-text">106. Construct Binary Tree from Inorder and Postorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-10"><span class="nav-number">12.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-12"><span class="nav-number">12.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#107-Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">13.</span> <span class="nav-text">107. Binary Tree Level Order Traversal II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-11"><span class="nav-number">13.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-13"><span class="nav-number">13.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#108-Convert-Sorted-Array-to-Binary-Search-Tree"><span class="nav-number">14.</span> <span class="nav-text">108. Convert Sorted Array to Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-12"><span class="nav-number">14.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-14"><span class="nav-number">14.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#110-Balanced-Binary-Tree"><span class="nav-number">15.</span> <span class="nav-text">110. Balanced Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路I-1"><span class="nav-number">15.1.</span> <span class="nav-text">解题思路I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-15"><span class="nav-number">15.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路II-1"><span class="nav-number">15.3.</span> <span class="nav-text">解题思路II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-16"><span class="nav-number">15.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#111-Minimum-Depth-of-Binary-Tree"><span class="nav-number">16.</span> <span class="nav-text">111. Minimum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-13"><span class="nav-number">16.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-17"><span class="nav-number">16.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#112-Path-Sum"><span class="nav-number">17.</span> <span class="nav-text">112. Path Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-14"><span class="nav-number">17.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-18"><span class="nav-number">17.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#113-Path-Sum-II"><span class="nav-number">18.</span> <span class="nav-text">113. Path Sum II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-15"><span class="nav-number">18.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-19"><span class="nav-number">18.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#437-Path-Sum-III"><span class="nav-number">19.</span> <span class="nav-text">437. Path Sum III</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-16"><span class="nav-number">19.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-20"><span class="nav-number">19.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2017/01/05/LeetCode-Tree-I/';
+      var disqus_title = 'LeetCode Tree I';
+      var disqus_url = 'http://haoyuanliu.github.io/2017/01/05/LeetCode-Tree-I/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

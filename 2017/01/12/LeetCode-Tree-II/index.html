@@ -1,0 +1,1219 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode,Tree," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="本文包含如下题目：114. Flatten Binary Tree to Linked List116. Populating Next Right Pointers in Each Node117. Populating Next Right Pointers in Each Node II124. Binary Tree Maximum Path Sum129. Sum Root to Lea">
+<meta name="keywords" content="LeetCode,Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Tree II">
+<meta property="og:url" content="http://haoyuanliu.github.io/2017/01/12/LeetCode-Tree-II/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含如下题目：114. Flatten Binary Tree to Linked List116. Populating Next Right Pointers in Each Node117. Populating Next Right Pointers in Each Node II124. Binary Tree Maximum Path Sum129. Sum Root to Lea">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Tree II">
+<meta name="twitter:description" content="本文包含如下题目：114. Flatten Binary Tree to Linked List116. Populating Next Right Pointers in Each Node117. Populating Next Right Pointers in Each Node II124. Binary Tree Maximum Path Sum129. Sum Root to Lea">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode Tree II | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode Tree II
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-12T11:53:09+08:00" content="2017-01-12">
+              2017-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/12/LeetCode-Tree-II/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/12/LeetCode-Tree-II/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2017/01/12/LeetCode-Tree-II/" class="leancloud_visitors" data-flag-title="LeetCode Tree II">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含如下题目：<br><a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="external">114. Flatten Binary Tree to Linked List</a><br><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="external">116. Populating Next Right Pointers in Each Node</a><br><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/" target="_blank" rel="external">117. Populating Next Right Pointers in Each Node II</a><br><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="external">124. Binary Tree Maximum Path Sum</a><br><a href="https://leetcode.com/problems/sum-root-to-leaf-numbers/" target="_blank" rel="external">129. Sum Root to Leaf Numbers</a><br><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="external">144. Binary Tree Preorder Traversal</a><br><a href="https://leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank" rel="external">145. Binary Tree Postorder Traversal</a><br><a href="https://leetcode.com/problems/binary-search-tree-iterator/" target="_blank" rel="external">173. Binary Search Tree Iterator</a><br><a href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank" rel="external">199. Binary Tree Right Side View</a><br><a href="https://leetcode.com/problems/count-complete-tree-nodes/" target="_blank" rel="external">222. Count Complete Tree Nodes</a><br><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" rel="external">226. Invert Binary Tree</a><br><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/" target="_blank" rel="external">230. Kth Smallest Element in a BST</a><br><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank" rel="external">235. Lowest Common Ancestor of a Binary Search Tree</a><br><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="external">236. Lowest Common Ancestor of a Binary Tree</a><br><a href="https://leetcode.com/problems/binary-tree-paths/" target="_blank" rel="external">257. Binary Tree Paths</a><br><a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="external">297. Serialize and Deserialize Binary Tree</a><br><a href="https://leetcode.com/problems/house-robber-iii/" target="_blank" rel="external">337. House Robber III</a><br><a href="https://leetcode.com/problems/sum-of-left-leaves/" target="_blank" rel="external">404. Sum of Left Leaves</a><br><a href="https://leetcode.com/problems/serialize-and-deserialize-bst/" target="_blank" rel="external">449. Serialize and Deserialize BST</a><br><a href="https://leetcode.com/problems/delete-node-in-a-bst/" target="_blank" rel="external">450. Delete Node in a BST</a></p>
+<a id="more"></a>
+<h2 id="114-Flatten-Binary-Tree-to-Linked-List"><a href="#114-Flatten-Binary-Tree-to-Linked-List" class="headerlink" title="114. Flatten Binary Tree to Linked List"></a>114. Flatten Binary Tree to Linked List</h2><h3 id="解题思路-I"><a href="#解题思路-I" class="headerlink" title="解题思路 I"></a>解题思路 I</h3><blockquote>
+<ul>
+<li>使用一个栈结构存储各个节点，通过出栈入栈操作重新搭建树结构；</li>
+<li>注意这里要先将右子节点入栈，保证先访问的是左子节点；</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void flatten(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL)</div><div class="line">        	<span class="keyword">return</span>;</div><div class="line">        stack&lt;TreeNode*&gt; st;</div><div class="line">        TreeNode* p = root;</div><div class="line">        <span class="keyword">if</span>(p-&gt;<span class="built_in">right</span>) st.push(p-&gt;<span class="built_in">right</span>);</div><div class="line">        <span class="keyword">if</span>(p-&gt;<span class="built_in">left</span>) st.push(p-&gt;<span class="built_in">left</span>);</div><div class="line">        while(!st.empty())</div><div class="line">        &#123;</div><div class="line">        	p-&gt;<span class="built_in">left</span> = NULL;</div><div class="line">        	p-&gt;<span class="built_in">right</span> = st.<span class="built_in">top</span>();</div><div class="line">        	p = p-&gt;<span class="built_in">right</span>;</div><div class="line">        	TreeNode* temp = st.<span class="built_in">top</span>();</div><div class="line">        	st.pop();</div><div class="line">        	<span class="keyword">if</span>(temp-&gt;<span class="built_in">right</span>) st.push(temp-&gt;<span class="built_in">right</span>);</div><div class="line">        	<span class="keyword">if</span>(temp-&gt;<span class="built_in">left</span>) st.push(temp-&gt;<span class="built_in">left</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路-II"><a href="#解题思路-II" class="headerlink" title="解题思路 II"></a>解题思路 II</h3><blockquote>
+<ul>
+<li>使用递归的方法，先对右子树进行转换操作，然后左子树，最后根节点，使用一个<code>pre</code>参数保存每次转换之后的根节点，不断进行递归即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	TreeNode* pre = <span class="keyword">NULL</span>;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    void flatten(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">NULL</span>)</div><div class="line">        	<span class="keyword">return</span>;</div><div class="line">   		flatten(root-&gt;right);</div><div class="line">   		flatten(root-&gt;left);</div><div class="line">   		root-&gt;right = pre;</div><div class="line">   		root-&gt;left = <span class="keyword">NULL</span>;</div><div class="line">   		pre = root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路-III"><a href="#解题思路-III" class="headerlink" title="解题思路 III"></a>解题思路 III</h3><blockquote>
+<ul>
+<li>将根节点右子树置于左子树叶子节点的右子树位置；</li>
+<li>将左子树置于根节点的右子树位置，根节点左子树置为NULL；</li>
+<li>不断循环上述操作；</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void flatten(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        while(root)</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">if</span>(root-&gt;<span class="built_in">left</span> &amp;&amp; root-&gt;<span class="built_in">right</span>)</div><div class="line">        	&#123;</div><div class="line">        		TreeNode* l = root-&gt;<span class="built_in">left</span>;</div><div class="line">        		while(l-&gt;<span class="built_in">right</span>)</div><div class="line">        			l = l-&gt;<span class="built_in">right</span>;</div><div class="line">        		l-&gt;<span class="built_in">right</span> = root-&gt;<span class="built_in">right</span>;</div><div class="line">        	&#125;</div><div class="line">        	<span class="keyword">if</span>(root-&gt;<span class="built_in">left</span>)</div><div class="line">        		root-&gt;<span class="built_in">right</span> = root-&gt;<span class="built_in">left</span>;</div><div class="line">        	root-&gt;<span class="built_in">left</span> = NULL;</div><div class="line">        	root = root-&gt;<span class="built_in">right</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="116-Populating-Next-Right-Pointers-in-Each-Node"><a href="#116-Populating-Next-Right-Pointers-in-Each-Node" class="headerlink" title="116. Populating Next Right Pointers in Each Node"></a>116. Populating Next Right Pointers in Each Node</h2><h3 id="解题思路-I-1"><a href="#解题思路-I-1" class="headerlink" title="解题思路 I"></a>解题思路 I</h3><blockquote>
+<ul>
+<li>使用一个<code>queue</code>进行BFS，然后依次进行连接构建；</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    <span class="literal">void</span> connect(TreeLinkNode *root) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span>;</div><div class="line">    	queue&lt;TreeLinkNode*&gt; que;</div><div class="line">    	que.push(root);</div><div class="line">    	<span class="keyword">while</span>(!que.empty())</div><div class="line">    	&#123;</div><div class="line">    		TreeLinkNode* p = que.front();</div><div class="line">            int len = que.size();</div><div class="line">    		<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">    		&#123;</div><div class="line"></div><div class="line">                <span class="keyword">if</span><span class="function"><span class="params">(que.front()-&gt;left)</span> <span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;left)</span>;</span></div><div class="line">                <span class="title">if</span><span class="params">(que.front()-&gt;right)</span> <span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;right)</span>;</div><div class="line">                <span class="title">que</span>.<span class="title">pop</span><span class="params">()</span>;</div><div class="line">    			<span class="title">if</span><span class="params">(i &lt; len-<span class="number">1</span>)</span></div><div class="line">    			&#123;</div><div class="line">    				<span class="title">p</span>-&gt;next = que.front();</div><div class="line">                    p = p-&gt;next;</div><div class="line">    			&#125;     			</div><div class="line">    		&#125;</div><div class="line">    		p-&gt;next = NULL;</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路-II-1"><a href="#解题思路-II-1" class="headerlink" title="解题思路 II"></a>解题思路 II</h3><blockquote>
+<ul>
+<li>遍历每一层进行连接即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void connect(TreeLinkNode *root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL) return;</div><div class="line">        TreeLinkNode* pre = root;</div><div class="line">        TreeLinkNode* cur = NULL;</div><div class="line">        <span class="function"><span class="title">while</span>(pre-&gt;</span>left)</div><div class="line">        &#123;</div><div class="line">            cur = pre;</div><div class="line">            <span class="keyword">while</span>(cur)</div><div class="line">            &#123;</div><div class="line">                <span class="function"><span class="title">cur</span>-&gt;</span><span class="function"><span class="title">left</span>-&gt;</span><span class="function"><span class="title">next</span> = cur-&gt;</span>right;</div><div class="line">                <span class="function"><span class="title">if</span>(cur-&gt;</span>next)</div><div class="line">                    <span class="function"><span class="title">cur</span>-&gt;</span><span class="function"><span class="title">right</span>-&gt;</span><span class="function"><span class="title">next</span> = cur-&gt;</span><span class="function"><span class="title">next</span>-&gt;</span>left;</div><div class="line">                <span class="function"><span class="title">cur</span> = cur-&gt;</span>next;</div><div class="line">            &#125;</div><div class="line">            <span class="function"><span class="title">pre</span> = pre-&gt;</span>left;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="117-Populating-Next-Right-Pointers-in-Each-Node-II"><a href="#117-Populating-Next-Right-Pointers-in-Each-Node-II" class="headerlink" title="117. Populating Next Right Pointers in Each Node II"></a>117. Populating Next Right Pointers in Each Node II</h2><h3 id="解题思路-I-2"><a href="#解题思路-I-2" class="headerlink" title="解题思路 I"></a>解题思路 I</h3><blockquote>
+<ul>
+<li>如116题，使用<code>queue</code>可以AC；</li>
+</ul>
+</blockquote>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    <span class="literal">void</span> connect(TreeLinkNode *root) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span>;</div><div class="line">    	queue&lt;TreeLinkNode*&gt; que;</div><div class="line">    	que.push(root);</div><div class="line">    	<span class="keyword">while</span>(!que.empty())</div><div class="line">    	&#123;</div><div class="line">    		TreeLinkNode* p = que.front();</div><div class="line">            int len = que.size();</div><div class="line">    		<span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">    		&#123;</div><div class="line"></div><div class="line">                <span class="keyword">if</span><span class="function"><span class="params">(que.front()-&gt;left)</span> <span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;left)</span>;</span></div><div class="line">                <span class="title">if</span><span class="params">(que.front()-&gt;right)</span> <span class="title">que</span>.<span class="title">push</span><span class="params">(que.front()-&gt;right)</span>;</div><div class="line">                <span class="title">que</span>.<span class="title">pop</span><span class="params">()</span>;</div><div class="line">    			<span class="title">if</span><span class="params">(i &lt; len-<span class="number">1</span>)</span></div><div class="line">    			&#123;</div><div class="line">    				<span class="title">p</span>-&gt;next = que.front();</div><div class="line">                    p = p-&gt;next;</div><div class="line">    			&#125;     			</div><div class="line">    		&#125;</div><div class="line">    		p-&gt;next = NULL;</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路-II-2"><a href="#解题思路-II-2" class="headerlink" title="解题思路 II"></a>解题思路 II</h3><blockquote>
+<ul>
+<li>使用指针的方法，遍历每一层进行树结构的构建；</li>
+<li>使用一个指针<code>head</code>保存每一层头节点，使用指针<code>pre</code>保存上一个连接的节点，方便进行连接；</li>
+<li>仍然使用指针<code>cur</code>保存上层节点，实现遍历；</li>
+</ul>
+</blockquote>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void connect(TreeLinkNode *root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL)</div><div class="line">            return;</div><div class="line">        TreeLinkNode* head = NULL;</div><div class="line">        TreeLinkNode* pre = NULL;</div><div class="line">        TreeLinkNode* cur = root;</div><div class="line">        <span class="keyword">while</span>(cur)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">while</span>(cur)</div><div class="line">            &#123;</div><div class="line">                <span class="function"><span class="title">if</span>(cur-&gt;</span>left)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(!head)</div><div class="line">                        <span class="function"><span class="title">head</span> = cur-&gt;</span>left;</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                        <span class="function"><span class="title">pre</span>-&gt;</span><span class="function"><span class="title">next</span> = cur-&gt;</span>left;</div><div class="line">                    <span class="function"><span class="title">pre</span> = cur-&gt;</span>left;</div><div class="line">                &#125;</div><div class="line">                <span class="function"><span class="title">if</span>(cur-&gt;</span>right)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(!head)</div><div class="line">                        <span class="function"><span class="title">head</span> = cur-&gt;</span>right;</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                        <span class="function"><span class="title">pre</span>-&gt;</span><span class="function"><span class="title">next</span> = cur-&gt;</span>right;</div><div class="line">                    <span class="function"><span class="title">pre</span> = cur-&gt;</span>right;</div><div class="line">                &#125;</div><div class="line">                <span class="function"><span class="title">cur</span> = cur-&gt;</span>next;</div><div class="line">            &#125;</div><div class="line">            cur = head;</div><div class="line">            head = pre = NULL;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="124-Binary-Tree-Maximum-Path-Sum"><a href="#124-Binary-Tree-Maximum-Path-Sum" class="headerlink" title="124. Binary Tree Maximum Path Sum"></a>124. Binary Tree Maximum Path Sum</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>首先要维持一个最大值<code>res</code>，将其初始值设置为最小值；<br>使用辅助递归函数遍历所有的节点，返回以该节点为根节点的最大路径和，同时更新<code>res</code>的值；</p>
+</blockquote>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    int maxPathSum(<span class="type">TreeNode</span>* root) </div><div class="line">    &#123;</div><div class="line">    	int res = (<span class="number">1</span>&lt;&lt;<span class="number">31</span>);</div><div class="line">        <span class="keyword">if</span>(root == <span class="type">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        getMax(root, res);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    int getMax(<span class="type">TreeNode</span>* root, int &amp;res)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="type">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	int <span class="keyword">left</span> = <span class="built_in">max</span>(<span class="number">0</span>, getMax(root-&gt;<span class="keyword">left</span>, res));</div><div class="line">    	int <span class="keyword">right</span> = <span class="built_in">max</span>(<span class="number">0</span>, getMax(root-&gt;<span class="keyword">right</span>, res));</div><div class="line">    	res = <span class="built_in">max</span>(res, <span class="keyword">left</span> + <span class="keyword">right</span> + root-&gt;val);</div><div class="line">    	<span class="keyword">return</span> root-&gt;val + <span class="built_in">max</span>(<span class="keyword">left</span>, <span class="keyword">right</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="129-Sum-Root-to-Leaf-Numbers"><a href="#129-Sum-Root-to-Leaf-Numbers" class="headerlink" title="129. Sum Root to Leaf Numbers"></a>129. Sum Root to Leaf Numbers</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>仍然是使用搜索递归，计算每一条支路的加和最后返回到主函数；</p>
+</blockquote>
+<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int sumNumbers(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">solve</span>(root, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    int <span class="built_in">solve</span>(TreeNode* root, int res)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL)</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	<span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">right</span>)    		</div><div class="line">    		<span class="keyword">return</span> res * <span class="number">10</span> + root-&gt;val;</div><div class="line">    	<span class="keyword">return</span> <span class="built_in">solve</span>(root-&gt;<span class="built_in">left</span>, res * <span class="number">10</span> + root-&gt;val) + <span class="built_in">solve</span>(root-&gt;<span class="built_in">right</span>, res * <span class="number">10</span>  + root-&gt;val);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a>144. Binary Tree Preorder Traversal</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>考察树的非递归遍历；</p>
+</blockquote>
+<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line">        TreeNode* p = root;</div><div class="line">        <span class="keyword">while</span>(p || !s.empty())</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">while</span>(p)</div><div class="line">        	&#123;</div><div class="line">        		res.push_back(p-&gt;val);</div><div class="line">        		s.push(p);</div><div class="line">        		p = p-&gt;left;</div><div class="line">        	&#125;</div><div class="line">        	<span class="keyword">if</span>(!s.empty())</div><div class="line">        	&#123;</div><div class="line">        		p = s.top();</div><div class="line">        		s.pop();</div><div class="line">        		p = p-&gt;right;</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="145-Binary-Tree-Postorder-Traversal"><a href="#145-Binary-Tree-Postorder-Traversal" class="headerlink" title="145. Binary Tree Postorder Traversal"></a>145. Binary Tree Postorder Traversal</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>二叉树的后序遍历，使用非递归方法； </p>
+<p><strong>方法一</strong>：设置<code>pre</code>和<code>cur</code>两个指针，通过判断<code>pre</code>和<code>cur</code>两个指针的属性和关系进行遍历；</p>
+<p><strong>方法二</strong>：类似于先序遍历的非递归遍历，将节点按照<code>根节点-&gt;右子节点-&gt;左子节点</code>的顺序放到vector中，最后将vector逆序返回即可；</p>
+</blockquote>
+<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><p><strong>方法一：</strong><br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    vector&lt;int&gt; postorderTraversal(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">    	vector&lt;int&gt; res;</div><div class="line">    	<span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> res;</div><div class="line">        stack&lt;TreeNode*&gt; s;</div><div class="line">        TreeNode *pre = NULL;</div><div class="line">        TreeNode *cur = NULL;</div><div class="line">        s.push(root);</div><div class="line">        while(!s.empty())</div><div class="line">        &#123;</div><div class="line">        	cur = s.<span class="built_in">top</span>();</div><div class="line">        	<span class="keyword">if</span>((!cur-&gt;<span class="built_in">left</span> &amp;&amp; !cur-&gt;<span class="built_in">right</span>) </div><div class="line">        		|<span class="type">| (pre</span> &amp;&amp; (cur-&gt;<span class="built_in">left</span> == pre |<span class="type">| cur</span>-&gt;<span class="built_in">right</span> == pre)))</div><div class="line">        	&#123;</div><div class="line">        		res.push_back(cur-&gt;val);</div><div class="line">        		s.pop();</div><div class="line">        		pre = cur;</div><div class="line">        	&#125;</div><div class="line">        	<span class="keyword">else</span></div><div class="line">        	&#123;</div><div class="line">        	    <span class="keyword">if</span>(cur-&gt;<span class="built_in">right</span>) s.push(cur-&gt;<span class="built_in">right</span>);</div><div class="line">        		<span class="keyword">if</span>(cur-&gt;<span class="built_in">left</span>) s.push(cur-&gt;<span class="built_in">left</span>);</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>方法二：</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line">        TreeNode *cur = <span class="literal">NULL</span>;</div><div class="line">        s.push(root);</div><div class="line">        <span class="keyword">while</span>(!s.empty())</div><div class="line">        &#123;</div><div class="line">            cur = s.top();</div><div class="line">            s.pop();</div><div class="line">            res.push_back(cur-&gt;val);</div><div class="line">            <span class="keyword">if</span>(cur-&gt;left) s.push(cur-&gt;left);</div><div class="line">            <span class="keyword">if</span>(cur-&gt;right) s.push(cur-&gt;right);</div><div class="line">        &#125;</div><div class="line">        reverse(res.begin(), res.end());</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="173-Binary-Search-Tree-Iterator"><a href="#173-Binary-Search-Tree-Iterator" class="headerlink" title="173. Binary Search Tree Iterator"></a>173. Binary Search Tree Iterator</h2><h3 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>就是利用二叉树的中序遍历不断获取数据即可，二叉搜索树的中序遍历即为从小到大的有序遍历；</p>
+</blockquote>
+<h3 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTIterator</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">stack</span>&lt;TreeNode*&gt; s;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    BSTIterator(TreeNode *root) </div><div class="line">    &#123;</div><div class="line">        pushAll(root);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/** @return whether we have a next smallest number */</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> !s.empty();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/** @return the next smallest number */</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span></div><div class="line">    &#123;</div><div class="line">     	TreeNode* temp = s.top();</div><div class="line">     	s.pop();</div><div class="line">     	pushAll(temp-&gt;right);</div><div class="line">     	<span class="keyword">return</span> temp-&gt;val;   </div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pushAll</span><span class="params">(TreeNode* node)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(; node != <span class="literal">NULL</span>; s.push(node), node = node-&gt;left);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="199-Binary-Tree-Right-Side-View"><a href="#199-Binary-Tree-Right-Side-View" class="headerlink" title="199. Binary Tree Right Side View"></a>199. Binary Tree Right Side View</h2><h3 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p><strong>方法一</strong>：使用一个<code>queue</code>去遍历每一层的节点，将最后一个节点保存到结果中；</p>
+<p><strong>方法二</strong>：使用类似于先序遍历的方法，每次都先进行右子节点的操作，从而保证每一层最开始访问的节点必定是该层最右边的节点，且只将该节点保存到结果中；</p>
+</blockquote>
+<h3 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h3><p><strong>方法一</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightSideView(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; que;</div><div class="line">        TreeNode* cur = <span class="literal">NULL</span>;</div><div class="line">        que.push(root);</div><div class="line">        <span class="keyword">while</span>(!que.empty())</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">int</span> len = que.size();</div><div class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">        	&#123;</div><div class="line">        		cur = que.front();</div><div class="line">        		que.pop();</div><div class="line">        		<span class="keyword">if</span>(cur-&gt;left) que.push(cur-&gt;left);</div><div class="line">        		<span class="keyword">if</span>(cur-&gt;right) que.push(cur-&gt;right);</div><div class="line">        	&#125;</div><div class="line">        	res.push_back(cur-&gt;val);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>方法二</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightSideView(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> res;</div><div class="line">        solve(root, res, <span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;res, <span class="keyword">int</span> depth)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</div><div class="line">    	<span class="keyword">if</span>(depth == res.size()) res.push_back(root-&gt;val);</div><div class="line">    	solve(root-&gt;right, res, depth+<span class="number">1</span>);</div><div class="line">    	solve(root-&gt;left, res, depth+<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="222-Count-Complete-Tree-Nodes"><a href="#222-Count-Complete-Tree-Nodes" class="headerlink" title="222. Count Complete Tree Nodes"></a>222. Count Complete Tree Nodes</h2><h3 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>首先获取整个二叉树的高度为<code>h</code>，如果右子树的高度为<code>h-1</code>，则左子树是一个完全二叉树，反之右子树是一个完全二叉树。对于完全二叉树我们很容易计算他的节点数量，然后使用递归解决。</p>
+</blockquote>
+<h3 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> countNodes(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> h = getHeight(root);</div><div class="line">        <span class="keyword">return</span> h &lt; <span class="number">0</span> ? <span class="number">0</span> : getHeight(root-&gt;right) == h<span class="number">-1</span> ? (<span class="number">1</span>&lt;&lt;h) + countNodes(root-&gt;right) : (<span class="number">1</span>&lt;&lt;h<span class="number">-1</span>) + countNodes(root-&gt;left);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> getHeight(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">return</span> root == <span class="keyword">NULL</span> ? <span class="number">-1</span> : <span class="number">1</span> + getHeight(root-&gt;left);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="226-Invert-Binary-Tree"><a href="#226-Invert-Binary-Tree" class="headerlink" title="226. Invert Binary Tree"></a>226. Invert Binary Tree</h2><h3 id="解题思路-7"><a href="#解题思路-7" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p><strong>方法一</strong>：递归，分别计算左右子节点的invert，然后将左右子节点交换完成invert；</p>
+<p><strong>方法二</strong>：使用栈结构，利用栈结构的FIFO性质，实现节点的反转，同时对每个节点都要交换左右子节点；</p>
+</blockquote>
+<h3 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h3><p><strong>方法一</strong><br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    TreeNode* invertTree(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> NULL;</div><div class="line">    	root-&gt;<span class="built_in">left</span> = invertTree(root-&gt;<span class="built_in">left</span>);</div><div class="line">    	root-&gt;<span class="built_in">right</span> = invertTree(root-&gt;<span class="built_in">right</span>);</div><div class="line">    	<span class="built_in">swap</span>(root-&gt;<span class="built_in">left</span>, root-&gt;<span class="built_in">right</span>);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>方法二</strong><br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    TreeNode* invertTree(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">NULL</span>) <span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">    	stack&lt;TreeNode*&gt; s;</div><div class="line">    	s.push(root);</div><div class="line">    	<span class="keyword">while</span>(!s.<span class="keyword">empty</span>())</div><div class="line">    	&#123;</div><div class="line">    		TreeNode* cur = s.top();</div><div class="line">    		s.pop();</div><div class="line">    		<span class="keyword">if</span>(cur)</div><div class="line">    		&#123;</div><div class="line">	    		s.push(cur-&gt;left);</div><div class="line">	    		s.push(cur-&gt;right);</div><div class="line">	    		swap(cur-&gt;left, cur-&gt;right);</div><div class="line">	    	&#125;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="230-Kth-Smallest-Element-in-a-BST"><a href="#230-Kth-Smallest-Element-in-a-BST" class="headerlink" title="230. Kth Smallest Element in a BST"></a>230. Kth Smallest Element in a BST</h2><h3 id="解题思路-8"><a href="#解题思路-8" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>考察树的中序遍历，使用递归遍历和非递归遍历解决；</p>
+</blockquote>
+<h3 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h3><p><strong>递归方法</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> res;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span> </span></div><div class="line">    &#123;</div><div class="line">    	inOrder(root, k);</div><div class="line">    	<span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</div><div class="line">    	inOrder(root-&gt;left, k);</div><div class="line">    	<span class="keyword">if</span>(++count == k)</div><div class="line">    	&#123;</div><div class="line">    		res = root-&gt;val;</div><div class="line">    		<span class="keyword">return</span>;</div><div class="line">    	&#125;</div><div class="line">    	inOrder(root-&gt;right, k);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>非递归</strong><br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> kthSmallest(TreeNode* root, <span class="keyword">int</span> k) </div><div class="line">    &#123;</div><div class="line">    	stack&lt;TreeNode*&gt; s;</div><div class="line">    	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    	TreeNode* p = root;</div><div class="line">    	<span class="keyword">while</span>(!s.<span class="keyword">empty</span>() || p)</div><div class="line">    	&#123;</div><div class="line">    		<span class="keyword">while</span>(p)</div><div class="line">    		&#123;</div><div class="line">    			s.push(p);</div><div class="line">    			p = p-&gt;left;</div><div class="line">    		&#125;</div><div class="line">    		p = s.top();</div><div class="line">    		s.pop();</div><div class="line">    		<span class="keyword">if</span>(++count == k)</div><div class="line">    			<span class="keyword">return</span> p-&gt;val;</div><div class="line">    		p = p-&gt;right;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="235. Lowest Common Ancestor of a Binary Search Tree"></a>235. Lowest Common Ancestor of a Binary Search Tree</h2><h3 id="解题思路-9"><a href="#解题思路-9" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>因为是二叉搜索树，所以需要判断<code>p</code>和<code>q</code>两个节点的值与<code>root</code>节点的关系，如果在<code>root</code>两边或者直接等于<code>root</code>则祖先节点就是<code>root</code>，否则，祖先节点就有可能<code>root-&gt;left</code>和<code>root-&gt;right</code>两个中再次求取；</p>
+</blockquote>
+<h3 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h3><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="type">Solution</span> </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    <span class="type">TreeNode</span>* lowestCommonAncestor(<span class="type">TreeNode</span>* root, <span class="type">TreeNode</span>* p, <span class="type">TreeNode</span>* q) </div><div class="line">    &#123;</div><div class="line">		<span class="keyword">while</span>((root-&gt;<span class="keyword">val</span> - p-&gt;<span class="keyword">val</span>) * (root-&gt;<span class="keyword">val</span> - q-&gt;<span class="keyword">val</span>) &gt; <span class="number">0</span>)</div><div class="line">			root = p-&gt;<span class="keyword">val</span> &lt; root-&gt;<span class="keyword">val</span> ? root-&gt;left : root-&gt;right;</div><div class="line">        return root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="236-Lowest-Common-Ancestor-of-a-Binary-Tree"><a href="#236-Lowest-Common-Ancestor-of-a-Binary-Tree" class="headerlink" title="236. Lowest Common Ancestor of a Binary Tree"></a>236. Lowest Common Ancestor of a Binary Tree</h2><h3 id="解题思路-10"><a href="#解题思路-10" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>有点类似分治的思路，如果<code>root == p || root == q</code>直接返回<code>root</code>；</p>
+<p>分别求取<code>lowestCommonAncestor(root-&gt;left, p, q)</code>和<code>lowestCommonAncestor(root-&gt;right, p, q);</code>，如果结果为<code>NULL</code>则证明<code>p</code>和<code>q</code>都不在该子树中，反之，则至少有一个在该子树中，然后继续讨论即可；</p>
+</blockquote>
+<h3 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(!root |<span class="type">| root</span> == p |<span class="type">| root</span> == q) <span class="keyword">return</span> root;</div><div class="line">    	TreeNode* <span class="built_in">left</span> = lowestCommonAncestor(root-&gt;<span class="built_in">left</span>, p, q);</div><div class="line">    	TreeNode* <span class="built_in">right</span> = lowestCommonAncestor(root-&gt;<span class="built_in">right</span>, p, q);</div><div class="line">    	<span class="keyword">return</span> !<span class="built_in">left</span> ? <span class="built_in">right</span> : !<span class="built_in">right</span> ? <span class="built_in">left</span> : root;   </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="257-Binary-Tree-Paths"><a href="#257-Binary-Tree-Paths" class="headerlink" title="257. Binary Tree Paths"></a>257. Binary Tree Paths</h2><h3 id="解题思路-11"><a href="#解题思路-11" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>使用递归的思路，遍历每一条路径；</p>
+</blockquote>
+<h3 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h3><figure class="highlight sml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class <span class="type">Solution</span> </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(<span class="type">TreeNode</span>* root) </div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">        <span class="keyword">if</span>(root == <span class="type">NULL</span>) return res;</div><div class="line">        dfs(res, root, <span class="string">""</span>);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;res, <span class="type">TreeNode</span>* root, <span class="built_in">string</span> str)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right)</div><div class="line">    	&#123;</div><div class="line">    		res.push_back(str+to_string(root-&gt;<span class="keyword">val</span>));</div><div class="line">    		return;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(root-&gt;left) dfs(res, root-&gt;left, str+to_string(root-&gt;<span class="keyword">val</span>)+<span class="string">"-&gt;"</span>);</div><div class="line">    	<span class="keyword">if</span>(root-&gt;right) dfs(res, root-&gt;right, str+to_string(root-&gt;<span class="keyword">val</span>)+<span class="string">"-&gt;"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="297-Serialize-and-Deserialize-Binary-Tree"><a href="#297-Serialize-and-Deserialize-Binary-Tree" class="headerlink" title="297. Serialize and Deserialize Binary Tree"></a>297. Serialize and Deserialize Binary Tree</h2><h3 id="解题思路-12"><a href="#解题思路-12" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>详细思路请参考此<a href="https://discuss.leetcode.com/category/375/serialize-and-deserialize-binary-tree" target="_blank" rel="external">链接</a>！！</p>
+</blockquote>
+<h3 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="comment">// Encodes a tree to a single string.</span></div><div class="line">    string serialize(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        ostringstream <span class="keyword">out</span>;</div><div class="line">        myserialize(root, <span class="keyword">out</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">out</span>.str();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// Decodes your encoded data to tree.</span></div><div class="line">    TreeNode* deserialize(string <span class="keyword">data</span>) </div><div class="line">    &#123;</div><div class="line">        istringstream <span class="keyword">is</span>(<span class="keyword">data</span>);</div><div class="line">        <span class="keyword">return</span> mydeserialize(<span class="keyword">is</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    void myserialize(TreeNode *root, ostringstream &amp;<span class="keyword">out</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(root)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">out</span> &lt;&lt; root-&gt;<span class="keyword">val</span> &lt;&lt; <span class="string">" "</span>;</div><div class="line">            myserialize(root-&gt;left, <span class="keyword">out</span>);</div><div class="line">            myserialize(root-&gt;right, <span class="keyword">out</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">out</span> &lt;&lt; <span class="string">"# "</span>;</div><div class="line">    &#125;</div><div class="line">    TreeNode* mydeserialize(istringstream &amp;<span class="keyword">data</span>)</div><div class="line">    &#123;</div><div class="line">        string <span class="keyword">val</span>;</div><div class="line">        <span class="keyword">data</span> &gt;&gt; <span class="keyword">val</span>;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">val</span> == <span class="string">"#"</span>) <span class="keyword">return</span> NULL;</div><div class="line">        TreeNode *root = new TreeNode(stoi(<span class="keyword">val</span>));</div><div class="line">        root-&gt;left = mydeserialize(<span class="keyword">data</span>);</div><div class="line">        root-&gt;right = mydeserialize(<span class="keyword">data</span>);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="337-House-Robber-III"><a href="#337-House-Robber-III" class="headerlink" title="337. House Robber III"></a>337. House Robber III</h2><h3 id="解题思路-13"><a href="#解题思路-13" class="headerlink" title="解题思路"></a>解题思路</h3><p>详细解析请看这个<a href="https://discuss.leetcode.com/topic/39834/step-by-step-tackling-of-the-problem/3" target="_blank" rel="external">链接</a>！！</p>
+<h3 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span></div><div class="line">    &#123;</div><div class="line">    	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res = robSub(root);</div><div class="line">    	<span class="keyword">return</span> max(res[<span class="number">0</span>], res[<span class="number">1</span>]);    </div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; robSub(TreeNode* root)</div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">2</span>, <span class="number">0</span>);</div><div class="line">    	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left = robSub(root-&gt;left);</div><div class="line">    	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right = robSub(root-&gt;right);</div><div class="line">    	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(<span class="number">2</span>, <span class="number">0</span>);</div><div class="line">    	res[<span class="number">0</span>] = max(left[<span class="number">0</span>], left[<span class="number">1</span>]) + max(right[<span class="number">0</span>], right[<span class="number">1</span>]);</div><div class="line">    	res[<span class="number">1</span>] = root-&gt;val + left[<span class="number">0</span>] + right[<span class="number">0</span>];</div><div class="line">    	<span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="404-Sum-of-Left-Leaves"><a href="#404-Sum-of-Left-Leaves" class="headerlink" title="404. Sum of Left Leaves"></a>404. Sum of Left Leaves</h2><h3 id="解题思路-14"><a href="#解题思路-14" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p><strong>递归方法</strong>：如果左子节点是左叶子节点，则加和保存，否则迭代计算左子节点的<code>sumOfLeftLeaves</code>，对于右子节点，直接迭代计算<code>sumOfLeftLeaves</code>；</p>
+<p><strong>非递归方法</strong>：使用一个<code>stack</code>对二叉树进行遍历，对于每个节点，判断其左子节点是否是叶子节点，如果是就加和保存，否则入栈，对于右子节点，只要不是叶子节点就统统入栈。</p>
+</blockquote>
+<h3 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h3><p><strong>递归</strong><br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	int res = <span class="number">0</span>;</div><div class="line">    int sumOfLeftLeaves(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    	int res = <span class="number">0</span>;</div><div class="line">    	<span class="keyword">if</span>(root-&gt;<span class="built_in">left</span>)</div><div class="line">    	&#123;</div><div class="line">    		<span class="keyword">if</span>(!root-&gt;<span class="built_in">left</span>-&gt;<span class="built_in">left</span> &amp;&amp; !root-&gt;<span class="built_in">left</span>-&gt;<span class="built_in">right</span>)</div><div class="line">    			res += root-&gt;<span class="built_in">left</span>-&gt;val;</div><div class="line">    		<span class="keyword">else</span></div><div class="line">    			res += sumOfLeftLeaves(root-&gt;<span class="built_in">left</span>);</div><div class="line">    	&#125;</div><div class="line">    	res += sumOfLeftLeaves(root-&gt;<span class="built_in">right</span>);</div><div class="line">    	<span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>非递归</strong><br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int sumOfLeftLeaves(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">    	int res = <span class="number">0</span>;</div><div class="line">    	<span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> res;</div><div class="line">    	stack&lt;TreeNode*&gt; s;</div><div class="line">    	s.push(root);</div><div class="line">    	while(!s.empty())</div><div class="line">    	&#123;</div><div class="line">    		TreeNode* p = s.<span class="built_in">top</span>();</div><div class="line">    		s.pop();</div><div class="line">    		<span class="keyword">if</span>(p-&gt;<span class="built_in">left</span>)</div><div class="line">    		&#123;</div><div class="line">    			<span class="keyword">if</span>(!p-&gt;<span class="built_in">left</span>-&gt;<span class="built_in">left</span> &amp;&amp; !p-&gt;<span class="built_in">left</span>-&gt;<span class="built_in">right</span>)</div><div class="line">    				res += p-&gt;<span class="built_in">left</span>-&gt;val;</div><div class="line">    			<span class="keyword">else</span></div><div class="line">    				s.push(p-&gt;<span class="built_in">left</span>);</div><div class="line">    		&#125;</div><div class="line">    		<span class="keyword">if</span>(p-&gt;<span class="built_in">right</span>)</div><div class="line">    		&#123;</div><div class="line">    			<span class="keyword">if</span>(p-&gt;<span class="built_in">right</span>-&gt;<span class="built_in">left</span> |<span class="type">| p</span>-&gt;<span class="built_in">right</span>-&gt;<span class="built_in">right</span>)</div><div class="line">    				s.push(p-&gt;<span class="built_in">right</span>);</div><div class="line">    		&#125;</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="449-Serialize-and-Deserialize-BST"><a href="#449-Serialize-and-Deserialize-BST" class="headerlink" title="449. Serialize and Deserialize BST"></a>449. Serialize and Deserialize BST</h2><h3 id="解题思路-15"><a href="#解题思路-15" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>因为是一个二叉搜索树，所以通过获取其前序遍历的数值组合就可以唯一的重新构建出原来的树结构，这里使用了<code>iostringstream</code>，方便进行序列化和反序列化。</p>
+</blockquote>
+<h3 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line"></div><div class="line">    <span class="comment">// Encodes a tree to a single string.</span></div><div class="line">    string serialize(TreeNode* root) </div><div class="line">    &#123;</div><div class="line">        ostringstream <span class="keyword">out</span>;</div><div class="line">        mySerialize(root, <span class="keyword">out</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">out</span>.str();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Decodes your encoded data to tree.</span></div><div class="line">    TreeNode* deserialize(string <span class="keyword">data</span>) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">data</span> == <span class="string">""</span>) <span class="keyword">return</span> NULL;</div><div class="line">        istringstream <span class="keyword">in</span>(<span class="keyword">data</span>);</div><div class="line">        <span class="keyword">return</span> myDeserialize(<span class="keyword">in</span>);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	void mySerialize(TreeNode* root, ostringstream &amp;<span class="keyword">out</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(root == NULL) <span class="keyword">return</span>;</div><div class="line">		<span class="keyword">out</span> &lt;&lt; root-&gt;<span class="keyword">val</span> &lt;&lt; <span class="string">" "</span>;</div><div class="line">		mySerialize(root-&gt;left, <span class="keyword">out</span>);</div><div class="line">		mySerialize(root-&gt;right, <span class="keyword">out</span>);</div><div class="line">	&#125;</div><div class="line">	TreeNode* myDeserialize(istringstream &amp;<span class="keyword">in</span>)</div><div class="line">	&#123;</div><div class="line">		string <span class="keyword">val</span>;</div><div class="line">		<span class="keyword">in</span> &gt;&gt; <span class="keyword">val</span>;</div><div class="line">		TreeNode *root = new TreeNode(stoi(<span class="keyword">val</span>));</div><div class="line">		<span class="keyword">while</span>(<span class="keyword">in</span> &gt;&gt; <span class="keyword">val</span>)</div><div class="line">			buildTree(root, stoi(<span class="keyword">val</span>));</div><div class="line">		<span class="keyword">return</span> root;</div><div class="line">	&#125;</div><div class="line">	void buildTree(TreeNode* root, int n)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(root-&gt;<span class="keyword">val</span> &gt; n)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(root-&gt;left == NULL)</div><div class="line">				root-&gt;left = new TreeNode(n);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				buildTree(root-&gt;left, n);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(root-&gt;right == NULL)</div><div class="line">				root-&gt;right = new TreeNode(n);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				buildTree(root-&gt;right, n);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="450-Delete-Node-in-a-BST"><a href="#450-Delete-Node-in-a-BST" class="headerlink" title="450. Delete Node in a BST"></a>450. Delete Node in a BST</h2><h3 id="解题思路-16"><a href="#解题思路-16" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>只有当<code>root-&gt;val == key</code>的时候才执行删除操作，否则根据<code>key</code>的大小在左右子树中执行删除操作。</p>
+<p>删除过程中，如果是叶子节点则直接返回<code>NULL</code>，否则取其左右子节点中不为<code>NULL</code>的作为新的根节点返回。</p>
+</blockquote>
+<h3 id="代码-23"><a href="#代码-23" class="headerlink" title="代码"></a>代码</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    TreeNode* deleteNode(TreeNode* root, int key) </div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">if</span>(root == NULL) <span class="keyword">return</span> NULL;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(root-&gt;val == key)</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">if</span>(root-&gt;<span class="built_in">right</span>)</div><div class="line">        	&#123;</div><div class="line">        		TreeNode* p = root-&gt;<span class="built_in">right</span>;</div><div class="line">        		while(p-&gt;<span class="built_in">left</span>) p = p-&gt;<span class="built_in">left</span>;</div><div class="line">        		p-&gt;<span class="built_in">left</span> = root-&gt;<span class="built_in">left</span>;</div><div class="line">        		<span class="keyword">return</span> root-&gt;<span class="built_in">right</span>;</div><div class="line">        	&#125;</div><div class="line">        	<span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;<span class="built_in">left</span>)</div><div class="line">        		<span class="keyword">return</span> root-&gt;<span class="built_in">left</span>;</div><div class="line">        	<span class="keyword">else</span> <span class="keyword">return</span> NULL;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(root-&gt;val &gt; key)</div><div class="line">        	root-&gt;<span class="built_in">left</span> = deleteNode(root-&gt;<span class="built_in">left</span>, key);</div><div class="line">        <span class="keyword">if</span>(root-&gt;val &lt; key)</div><div class="line">        	root-&gt;<span class="built_in">right</span> = deleteNode(root-&gt;<span class="built_in">right</span>, key);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+            <a href="/tags/Tree/" rel="tag">#Tree</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/05/LeetCode-Tree-I/" rel="next" title="LeetCode Tree I">
+                <i class="fa fa-chevron-left"></i> LeetCode Tree I
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/15/地址转换函数inet-addr-inet-aton-inet-ntoa-和inet-ntop-inet-pton/" rel="prev" title="地址转换函数inet_addr(), inet_aton(), inet_ntoa()和inet_ntop(), inet_pton()">
+                地址转换函数inet_addr(), inet_aton(), inet_ntoa()和inet_ntop(), inet_pton() <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#114-Flatten-Binary-Tree-to-Linked-List"><span class="nav-number">1.</span> <span class="nav-text">114. Flatten Binary Tree to Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-I"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路 I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-II"><span class="nav-number">1.3.</span> <span class="nav-text">解题思路 II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">1.4.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-III"><span class="nav-number">1.5.</span> <span class="nav-text">解题思路 III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">1.6.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#116-Populating-Next-Right-Pointers-in-Each-Node"><span class="nav-number">2.</span> <span class="nav-text">116. Populating Next Right Pointers in Each Node</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-I-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路 I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-II-1"><span class="nav-number">2.3.</span> <span class="nav-text">解题思路 II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">2.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#117-Populating-Next-Right-Pointers-in-Each-Node-II"><span class="nav-number">3.</span> <span class="nav-text">117. Populating Next Right Pointers in Each Node II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-I-2"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路 I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-II-2"><span class="nav-number">3.3.</span> <span class="nav-text">解题思路 II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">3.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#124-Binary-Tree-Maximum-Path-Sum"><span class="nav-number">4.</span> <span class="nav-text">124. Binary Tree Maximum Path Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#129-Sum-Root-to-Leaf-Numbers"><span class="nav-number">5.</span> <span class="nav-text">129. Sum Root to Leaf Numbers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-8"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#144-Binary-Tree-Preorder-Traversal"><span class="nav-number">6.</span> <span class="nav-text">144. Binary Tree Preorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">6.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-9"><span class="nav-number">6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#145-Binary-Tree-Postorder-Traversal"><span class="nav-number">7.</span> <span class="nav-text">145. Binary Tree Postorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">7.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-10"><span class="nav-number">7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#173-Binary-Search-Tree-Iterator"><span class="nav-number">8.</span> <span class="nav-text">173. Binary Search Tree Iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-4"><span class="nav-number">8.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-11"><span class="nav-number">8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#199-Binary-Tree-Right-Side-View"><span class="nav-number">9.</span> <span class="nav-text">199. Binary Tree Right Side View</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-5"><span class="nav-number">9.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-12"><span class="nav-number">9.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#222-Count-Complete-Tree-Nodes"><span class="nav-number">10.</span> <span class="nav-text">222. Count Complete Tree Nodes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-6"><span class="nav-number">10.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-13"><span class="nav-number">10.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#226-Invert-Binary-Tree"><span class="nav-number">11.</span> <span class="nav-text">226. Invert Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-7"><span class="nav-number">11.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-14"><span class="nav-number">11.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#230-Kth-Smallest-Element-in-a-BST"><span class="nav-number">12.</span> <span class="nav-text">230. Kth Smallest Element in a BST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-8"><span class="nav-number">12.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-15"><span class="nav-number">12.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">13.</span> <span class="nav-text">235. Lowest Common Ancestor of a Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-9"><span class="nav-number">13.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-16"><span class="nav-number">13.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#236-Lowest-Common-Ancestor-of-a-Binary-Tree"><span class="nav-number">14.</span> <span class="nav-text">236. Lowest Common Ancestor of a Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-10"><span class="nav-number">14.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-17"><span class="nav-number">14.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#257-Binary-Tree-Paths"><span class="nav-number">15.</span> <span class="nav-text">257. Binary Tree Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-11"><span class="nav-number">15.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-18"><span class="nav-number">15.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#297-Serialize-and-Deserialize-Binary-Tree"><span class="nav-number">16.</span> <span class="nav-text">297. Serialize and Deserialize Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-12"><span class="nav-number">16.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-19"><span class="nav-number">16.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#337-House-Robber-III"><span class="nav-number">17.</span> <span class="nav-text">337. House Robber III</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-13"><span class="nav-number">17.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-20"><span class="nav-number">17.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#404-Sum-of-Left-Leaves"><span class="nav-number">18.</span> <span class="nav-text">404. Sum of Left Leaves</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-14"><span class="nav-number">18.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-21"><span class="nav-number">18.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#449-Serialize-and-Deserialize-BST"><span class="nav-number">19.</span> <span class="nav-text">449. Serialize and Deserialize BST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-15"><span class="nav-number">19.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-22"><span class="nav-number">19.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#450-Delete-Node-in-a-BST"><span class="nav-number">20.</span> <span class="nav-text">450. Delete Node in a BST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-16"><span class="nav-number">20.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-23"><span class="nav-number">20.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2017/01/12/LeetCode-Tree-II/';
+      var disqus_title = 'LeetCode Tree II';
+      var disqus_url = 'http://haoyuanliu.github.io/2017/01/12/LeetCode-Tree-II/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

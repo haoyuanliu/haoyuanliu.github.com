@@ -1,0 +1,1185 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,APUE,APUE 5-15,UNIX," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="最近一直在拜读APUE(Advanced Programming in the UNIX Environment)，在读到标准I/O库的时候，对于图 5-15的代码和内存流的写入方式发现冲洗内存流和null字节的追加策略书上没有说明白，到底是如何追加‘null字节的，调用fclose为什么没有追加null`字节等等，对于这一系列问题通过代码测试终于搞清楚整体的写入追加策略，特此记录一下。解决问题的">
+<meta name="keywords" content="Linux,APUE,APUE 5-15,UNIX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UNIX编程之冲洗内存流与null追加策略（APUE F5-15）">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="最近一直在拜读APUE(Advanced Programming in the UNIX Environment)，在读到标准I/O库的时候，对于图 5-15的代码和内存流的写入方式发现冲洗内存流和null字节的追加策略书上没有说明白，到底是如何追加‘null字节的，调用fclose为什么没有追加null`字节等等，对于这一系列问题通过代码测试终于搞清楚整体的写入追加策略，特此记录一下。解决问题的">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UNIX编程之冲洗内存流与null追加策略（APUE F5-15）">
+<meta name="twitter:description" content="最近一直在拜读APUE(Advanced Programming in the UNIX Environment)，在读到标准I/O库的时候，对于图 5-15的代码和内存流的写入方式发现冲洗内存流和null字节的追加策略书上没有说明白，到底是如何追加‘null字节的，调用fclose为什么没有追加null`字节等等，对于这一系列问题通过代码测试终于搞清楚整体的写入追加策略，特此记录一下。解决问题的">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> UNIX编程之冲洗内存流与null追加策略（APUE F5-15） | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                UNIX编程之冲洗内存流与null追加策略（APUE F5-15）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-17T22:51:06+08:00" content="2016-11-17">
+              2016-11-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/UNIX-Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX/Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/" class="leancloud_visitors" data-flag-title="UNIX编程之冲洗内存流与null追加策略（APUE F5-15）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近一直在拜读APUE(Advanced Programming in the UNIX Environment)，在读到标准I/O库的时候，对于<strong>图 5-15</strong>的代码和内存流的写入方式发现冲洗内存流和<code>null</code>字节的追加策略书上没有说明白，到底是如何追加‘null<code>字节的，调用</code>fclose<code>为什么没有追加</code>null`字节等等，对于这一系列问题通过代码测试终于搞清楚整体的写入追加策略，特此记录一下。<br>解决问题的关键在于书上这一句话：</p>
+<blockquote>
+<ul>
+<li>任何时候需要增加流缓冲区中的数据量以及调用fclose、fflush、fseek、fseeko以及fsetpos时都会在当前位置写入一个<code>null</code>字节！</li>
+</ul>
+</blockquote>
+<p>看似是一旦调用<code>fclose</code>就要追加<code>null</code>，可以书上给的例子可不是这样哦，下面随着文章我们来一步一步地分析。</p>
+<a id="more"></a>
+<h2 id="内存流写入代码"><a href="#内存流写入代码" class="headerlink" title="内存流写入代码"></a>内存流写入代码</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include "apue.h"</span></div><div class="line"></div><div class="line"><span class="comment">#define BSZ 48</span></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	FILE *<span class="built_in">fp</span><span class="comment">;</span></div><div class="line">	char <span class="keyword">buf[BSZ];</span></div><div class="line"></div><div class="line">	memset(<span class="keyword">buf, </span><span class="string">'a'</span>, <span class="keyword">BSZ-2);</span></div><div class="line">	<span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line">	<span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">	if ((<span class="built_in">fp</span> = fmemopen(<span class="keyword">buf, </span><span class="keyword">BSZ, </span><span class="string">"w+"</span>)) == NULL)</div><div class="line">		err_sys(<span class="string">"fmemopen failed"</span>)<span class="comment">;</span></div><div class="line">	printf(<span class="string">"Initial buffer contents: %s\n"</span>, <span class="keyword">buf);</span></div><div class="line">	fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">; //写进缓存</span></div><div class="line">	printf(<span class="string">"Before flush: %s\n\n"</span>, <span class="keyword">buf);</span></div><div class="line">	fflush(<span class="built_in">fp</span>)<span class="comment">; //调用fflush、fclose、、fseek、fseeko、fsetpos会在当前位置添加null</span></div><div class="line">	printf(<span class="string">"After fflush: %s\n"</span>, <span class="keyword">buf);</span></div><div class="line">	printf(<span class="string">"Len of string in buf = %ld\n\n"</span>, (long)strlen(<span class="keyword">buf));</span></div><div class="line"></div><div class="line">	memset(<span class="keyword">buf, </span><span class="string">'b'</span>, <span class="keyword">BSZ-2);</span></div><div class="line">	<span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line">	<span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">	fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">;</span></div><div class="line">	fseek(<span class="built_in">fp</span>, <span class="number">0</span>, SEEK_CUR)<span class="comment">; //保持偏移值冲洗之后的位置</span></div><div class="line">	printf(<span class="string">"After  fseek: %s\n"</span>, <span class="keyword">buf);</span></div><div class="line">	printf(<span class="string">"Len of string in buf = %ld\n\n"</span>, (long)strlen(<span class="keyword">buf));</span></div><div class="line"></div><div class="line">	memset(<span class="keyword">buf, </span><span class="string">'c'</span>, <span class="keyword">BSZ-2);</span></div><div class="line">	<span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line">	<span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">	fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">; //继续写进去</span></div><div class="line">	fseek(<span class="built_in">fp</span>, <span class="number">0</span>, SEEK_SET)<span class="comment">; //偏移值设为缓冲区开始位置</span></div><div class="line">	printf(<span class="string">"After fseek: %s\n"</span>, <span class="keyword">buf);</span></div><div class="line">	printf(<span class="string">"Len of string in buf = %ld\n\n"</span>, (long)strlen(<span class="keyword">buf));</span></div><div class="line"></div><div class="line">	memset(<span class="keyword">buf, </span><span class="string">'d'</span>, <span class="keyword">BSZ-2);</span></div><div class="line">	<span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line">	<span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">	fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">; //继续写进去</span></div><div class="line">	fclose(<span class="built_in">fp</span>)<span class="comment">; //然后fclose在当前位置也就是数据尾端添加一个null</span></div><div class="line">	printf(<span class="string">"After close: %s\n"</span>, <span class="keyword">buf);</span></div><div class="line">	printf(<span class="string">"Len of string in buf = %ld\n"</span>, (long)strlen(<span class="keyword">buf));</span></div><div class="line"></div><div class="line">	return(<span class="number">0</span>)<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序执行的结果为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Initial buffer contents:</div><div class="line">Before <span class="keyword">flush</span>:</div><div class="line"></div><div class="line"><span class="keyword">After</span> fflush: hello, world</div><div class="line"><span class="keyword">Len</span> <span class="keyword">of</span> <span class="keyword">string</span> <span class="keyword">in</span> buf = <span class="number">12</span></div><div class="line"></div><div class="line"><span class="keyword">After</span>  fseek: bbbbbbbbbbbbhello, world</div><div class="line"><span class="keyword">Len</span> <span class="keyword">of</span> <span class="keyword">string</span> <span class="keyword">in</span> buf = <span class="number">24</span></div><div class="line"></div><div class="line"><span class="keyword">After</span> fseek: cccccccccccccccccccccccchello, world</div><div class="line"><span class="keyword">Len</span> <span class="keyword">of</span> <span class="keyword">string</span> <span class="keyword">in</span> buf = <span class="number">36</span></div><div class="line"></div><div class="line"><span class="keyword">After</span> <span class="keyword">close</span>: hello, worlddddddddddddddddddddddddddddddddddd</div><div class="line"><span class="keyword">Len</span> <span class="keyword">of</span> <span class="keyword">string</span> <span class="keyword">in</span> buf = <span class="number">46</span></div></pre></td></tr></table></figure></p>
+<h2 id="写入操作分析"><a href="#写入操作分析" class="headerlink" title="写入操作分析"></a>写入操作分析</h2><p>首先是使用a字符修改缓冲区：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">memset(<span class="keyword">buf, </span><span class="string">'a'</span>, <span class="keyword">BSZ-2);</span></div><div class="line"><span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line"><span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>此时得到的<code>buf</code>应该是：</p>
+<blockquote>
+<ul>
+<li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0X<br>为了识别方便，这里每隔5个字符使用一个<code>+</code>隔开显示，如下所示：</li>
+<li>aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + a0X</li>
+<li>此时偏移值指向数据末尾，即offset = 47</li>
+</ul>
+</blockquote>
+<p>然后执行：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if ((<span class="name">fp</span> = fmemopen(<span class="name">buf</span>, BSZ, <span class="string">"w+"</span>)) == NULL)</div><div class="line">		err_sys(<span class="string">"fmemopen failed"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>流控制参数为<code>w+</code>，<code>fmemopen</code>函数在缓冲区开始处放置了<code>null</code>字节，此时的<code>buf</code>应该是：</p>
+<blockquote>
+<ul>
+<li><code>null</code>+ aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + 0X</li>
+<li>因为首字符即为<code>null</code>，此时打印结果为空；</li>
+<li>此时偏移值指向缓冲区开始<code>null</code>字节处，即offset = 0</li>
+</ul>
+</blockquote>
+<p>然后通过<code>fprintf</code>函数写入数据，并使用<code>fflush</code>函数冲洗缓冲区：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">fprintf</span>(fp, <span class="string">"hello, world"</span>); <span class="comment">//写进缓存</span></div><div class="line"><span class="selector-tag">fflush</span>(fp); <span class="comment">//调用fflush、fclose、、fseek、fseeko、fsetpos会在当前位置添加null</span></div></pre></td></tr></table></figure></p>
+<p>利用<code>fflush</code>函数引起缓冲区冲洗，并在当前位置设置<code>null</code>，此时的<code>buf</code>为：</p>
+<blockquote>
+<ul>
+<li>hello, world + <code>null</code> + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaaaa + aaa0X</li>
+<li>此时的打印结果为： “hello, world”</li>
+<li>此时的偏移值指向<code>null</code>，即offset = 12</li>
+</ul>
+</blockquote>
+<p>然后继续执行：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">memset(<span class="keyword">buf, </span><span class="string">'b'</span>, <span class="keyword">BSZ-2);</span></div><div class="line"><span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line"><span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>用<code>b</code>字符改写缓冲区，此时的<code>buf</code>为：</p>
+<blockquote>
+<ul>
+<li>bbbbb + bbbbb + bbbbb + bbbbb + bbbbb + bbbbb + bbbbb + bbbbb + bbbbb + b0X</li>
+<li>此时的偏移值仍旧指向原来的位置，即为offset = 12</li>
+</ul>
+</blockquote>
+<p>然后继续想缓冲中写入数据：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">fprintf</span>(fp, <span class="string">"hello, world"</span>); <span class="comment">//继续写进</span></div><div class="line"><span class="selector-tag">fseek</span>(fp, <span class="number">0</span>, SEEK_CUR); <span class="comment">//保持偏移值在冲洗之后位置</span></div></pre></td></tr></table></figure></p>
+<p>利用<code>fseek</code>函数引起缓冲区冲洗，并在当前位置设置<code>null</code>，此时<code>buf</code>为：</p>
+<blockquote>
+<ul>
+<li>bbbbb + bbbbb + bb + hello, world + <code>null</code> + bbbbb + bbbbb + bbbbb + bbbbb + b0X</li>
+<li>打印结果为： bbbbbbbbbbbbhello, world</li>
+<li>偏移值位于<code>null</code>，即offset = 24</li>
+</ul>
+</blockquote>
+<p>然后经过继续写入之后：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">memset(<span class="keyword">buf, </span><span class="string">'c'</span>, <span class="keyword">BSZ-2);</span></div><div class="line"><span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line"><span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">; //继续写进去</span></div><div class="line">fseek(<span class="built_in">fp</span>, <span class="number">0</span>, SEEK_SET)<span class="comment">; //偏移值设为缓冲区开始位置</span></div></pre></td></tr></table></figure></p>
+<p>利用<code>fseek</code>函数引起缓冲区冲洗，并在当前位置设置<code>null</code>，此时的<code>buf</code>为：</p>
+<blockquote>
+<ul>
+<li>cccccccccccc + cccccccccccc + hello, world + <code>null</code> + ccccc + cccc0X</li>
+<li>打印结果为：cccccccccccccccccccccccchello, world</li>
+<li>此时由于<code>fseek</code>函数，偏移值设为了缓冲区的开始位置，即offset = 0</li>
+</ul>
+</blockquote>
+<p>最后执行写入，注意此时的偏移值位于缓冲区开始：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">memset(<span class="keyword">buf, </span><span class="string">'d'</span>, <span class="keyword">BSZ-2);</span></div><div class="line"><span class="keyword">buf[BSZ-2] </span>= <span class="string">'\0'</span><span class="comment">;</span></div><div class="line"><span class="keyword">buf[BSZ-1] </span>= <span class="string">'X'</span><span class="comment">;</span></div><div class="line">fprintf(<span class="built_in">fp</span>, <span class="string">"hello, world"</span>)<span class="comment">; //继续写进去</span></div><div class="line">fclose(<span class="built_in">fp</span>)<span class="comment">; //然后fclose在当前位置也就是数据尾端添加一个null</span></div></pre></td></tr></table></figure></p>
+<p>直接使用<code>fclose</code>函数关闭流，没有追加<code>null</code>，此时的<code>buf</code>为：</p>
+<blockquote>
+<ul>
+<li>hello, world + null + ddddd + ddddd + ddddd + ddddd + ddddd + ddddd + ddd0X</li>
+<li>打印结果为 hello, worlddddddddddddddddddddddddddddddddddd</li>
+</ul>
+</blockquote>
+<p><strong>但是前面不是说了一旦调用<code>fclose</code>等函数，就会自动在当前位置写一个<code>null</code>字节嘛， 为什么这里没有追加呢？请看下面三个测试方案</strong></p>
+<h2 id="null追加策略分析"><a href="#null追加策略分析" class="headerlink" title="null追加策略分析"></a><code>null</code>追加策略分析</h2><h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BSZ 48</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	FILE *fp1, *fp2, *fp3;</div><div class="line">	<span class="keyword">char</span> buf1[BSZ], buf2[BSZ], buf3[BSZ];</div><div class="line"></div><div class="line">	<span class="comment">//方案一</span></div><div class="line">	<span class="built_in">memset</span>(buf1, <span class="string">'a'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf1[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf1[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="keyword">if</span> ((fp1 = fmemopen(buf1, BSZ, <span class="string">"w+"</span>)) == <span class="literal">NULL</span>)</div><div class="line">		err_sys(<span class="string">"fmemopen failed"</span>);</div><div class="line">	<span class="built_in">fprintf</span>(fp1, <span class="string">"hello, world"</span>);</div><div class="line">	<span class="comment">//调用fflush函数引起缓冲区冲洗</span></div><div class="line">	fflush(fp1);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"1.After fflush: %s\n"</span>, buf1);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"1.Len of string in buf = %ld\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf1));</div><div class="line">	<span class="built_in">memset</span>(buf1, <span class="string">'b'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf1[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf1[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="comment">//二次输入数据为"nihao"，长度较短</span></div><div class="line">	<span class="built_in">fprintf</span>(fp1, <span class="string">"nihao"</span>);</div><div class="line">	fclose(fp1);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"1.After close: %s\n"</span>, buf1);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"1.Len of string in buf = %ld\n\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf1));</div><div class="line"></div><div class="line">	<span class="comment">//方案二</span></div><div class="line">	<span class="built_in">memset</span>(buf2, <span class="string">'a'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf2[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf2[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="keyword">if</span> ((fp2 = fmemopen(buf2, BSZ, <span class="string">"w+"</span>)) == <span class="literal">NULL</span>)</div><div class="line">		err_sys(<span class="string">"fmemopen failed"</span>);</div><div class="line">	<span class="built_in">fprintf</span>(fp2, <span class="string">"hello, world"</span>);</div><div class="line">	<span class="comment">//调用fseek函数引起缓冲区冲洗，偏移值设为首部</span></div><div class="line">	fseek(fp2, <span class="number">0</span>, SEEK_SET);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"2.After fseek: %s\n"</span>, buf2);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"2.Len of string in buf = %ld\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf2));</div><div class="line">	<span class="built_in">memset</span>(buf2, <span class="string">'b'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf2[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf2[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="comment">//二次输入数据为"nihao"，长度较短</span></div><div class="line">	<span class="built_in">fprintf</span>(fp2, <span class="string">"nihao"</span>);</div><div class="line">	fclose(fp2);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"2.After close: %s\n"</span>, buf2);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"2.Len of string in buf = %ld\n\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf2));</div><div class="line"></div><div class="line">	<span class="comment">//方案三</span></div><div class="line">	<span class="built_in">memset</span>(buf3, <span class="string">'a'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf3[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf3[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="keyword">if</span> ((fp3 = fmemopen(buf3, BSZ, <span class="string">"w+"</span>)) == <span class="literal">NULL</span>)</div><div class="line">		err_sys(<span class="string">"fmemopen failed"</span>);</div><div class="line">	<span class="built_in">fprintf</span>(fp3, <span class="string">"hello, world"</span>);</div><div class="line">	<span class="comment">//调用fseek函数引起缓冲区冲洗，偏移值设为首部</span></div><div class="line">	fseek(fp3, <span class="number">0</span>, SEEK_SET);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"3.After fseek: %s\n"</span>, buf3);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"3.Len of string in buf = %ld\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf3));</div><div class="line">	<span class="built_in">memset</span>(buf2, <span class="string">'b'</span>, BSZ<span class="number">-2</span>);</div><div class="line">	buf2[BSZ<span class="number">-2</span>] = <span class="string">'\0'</span>;</div><div class="line">	buf2[BSZ<span class="number">-1</span>] = <span class="string">'X'</span>;</div><div class="line">	<span class="comment">//二次输入数据为"hello, world! How are you?"，长度较长</span></div><div class="line">	<span class="built_in">fprintf</span>(fp3, <span class="string">"hello, world! How are you?"</span>);</div><div class="line">	fclose(fp3);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"3.After close: %s\n"</span>, buf3);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"3.Len of string in buf = %ld\n\n"</span>, (<span class="keyword">long</span>)<span class="built_in">strlen</span>(buf3));</div><div class="line"></div><div class="line">	<span class="keyword">return</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后的输出结果为：<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.<span class="keyword">After</span> fflush: hello, world</div><div class="line"><span class="number">1</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">12</span></div><div class="line"><span class="number">1</span>.<span class="keyword">After</span> close: bbbbbbbbbbbbnihao</div><div class="line"><span class="number">1</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">17</span></div><div class="line"></div><div class="line"><span class="number">2</span>.<span class="keyword">After</span> fseek: hello, world</div><div class="line"><span class="number">2</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">12</span></div><div class="line"><span class="number">2</span>.<span class="keyword">After</span> close: nihaobbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</div><div class="line"><span class="number">2</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">46</span></div><div class="line"></div><div class="line"><span class="number">3</span>.<span class="keyword">After</span> fseek: hello, world</div><div class="line"><span class="number">3</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">12</span></div><div class="line"><span class="number">3</span>.<span class="keyword">After</span> close: hello, world! How are you?</div><div class="line"><span class="number">3</span>.Len <span class="keyword">of</span> <span class="built_in">string</span> <span class="keyword">in</span> buf = <span class="number">26</span></div></pre></td></tr></table></figure></p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><blockquote>
+<ul>
+<li>方案一：<code>fclose</code>函数冲洗内存流导致需要增加流缓冲区中数据量，在当前偏移值后面继续写入数据，由12增加到17，并且调用了<code>fclose</code>函数，所以追加<code>null</code>；</li>
+<li>方案二：<code>fclose</code>函数冲洗内存流时，偏移值在流缓冲区首部，此时”nihao”的长度小于原本流缓冲区中”hello, world”的长度，只会覆盖流缓冲区的前一部分，流缓冲区数据量并没有增加，仍未12，所以不追加<code>null</code>；</li>
+<li>方案三：同方案二，只是再次输入的数据”hello, world! How are you?”大于原本流缓冲区中的”hello, world”的长度，所以需要增加流缓冲区中数据量，调用了<code>fclose</code>函数，所以追加’null`；</li>
+</ul>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由上述测试可以发现，追加<code>null</code>的策略机制是必须同时满足以下两个条件：</p>
+<blockquote>
+<ul>
+<li>需要增加流缓冲区中的数据量</li>
+<li>调用fclose、fflush、fseek、fseeko以及fsetpos时</li>
+</ul>
+</blockquote>
+<p>书上的图5-15就是因为输入数据太短没有增加流缓冲区所以才没有追加<code>null</code>的，看到这里应该可以明白了吧。这一部分书上也没有讲得很清楚，我看到这里困惑了好久，终于通过自己的测试一点一点搞明白了。<br>文章粗浅，有什么疏漏之处欢迎各位批评指正！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/APUE/" rel="tag">#APUE</a>
+          
+            <a href="/tags/APUE-5-15/" rel="tag">#APUE 5-15</a>
+          
+            <a href="/tags/UNIX/" rel="tag">#UNIX</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/31/Ubuntu-14-04系统下配置shadowsocks/" rel="next" title="Ubuntu 14.04系统下配置shadowsocks">
+                <i class="fa fa-chevron-left"></i> Ubuntu 14.04系统下配置shadowsocks
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/21/Hexo博客多台电脑的同步与迁移/" rel="prev" title="Hexo博客多台电脑的同步与迁移">
+                Hexo博客多台电脑的同步与迁移 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存流写入代码"><span class="nav-number">1.</span> <span class="nav-text">内存流写入代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写入操作分析"><span class="nav-number">2.</span> <span class="nav-text">写入操作分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null追加策略分析"><span class="nav-number">3.</span> <span class="nav-text">null追加策略分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试代码"><span class="nav-number">3.1.</span> <span class="nav-text">测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果分析"><span class="nav-number">3.2.</span> <span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/';
+      var disqus_title = 'UNIX编程之冲洗内存流与null追加策略（APUE F5-15）';
+      var disqus_url = 'http://haoyuanliu.github.io/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

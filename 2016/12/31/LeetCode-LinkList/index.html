@@ -1,0 +1,1236 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LinkList,LeetCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="本文包含如下题目：2. Add Two Numbers19. Remove Nth Node From End of List21. Merge Two Sorted Lists23. Merge k Sorted Lists24. Swap Nodes in Pairs25. Reverse Nodes in k-Group61. Rotate List82. Remove Duplicates">
+<meta name="keywords" content="LinkList,LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode LinkList">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含如下题目：2. Add Two Numbers19. Remove Nth Node From End of List21. Merge Two Sorted Lists23. Merge k Sorted Lists24. Swap Nodes in Pairs25. Reverse Nodes in k-Group61. Rotate List82. Remove Duplicates">
+<meta property="og:updated_time" content="2017-07-01T08:19:25.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode LinkList">
+<meta name="twitter:description" content="本文包含如下题目：2. Add Two Numbers19. Remove Nth Node From End of List21. Merge Two Sorted Lists23. Merge k Sorted Lists24. Swap Nodes in Pairs25. Reverse Nodes in k-Group61. Rotate List82. Remove Duplicates">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode LinkList | 贫贫贫贫僧 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2e86699d83dec1e4c38adb84472aa692";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">贫贫贫贫僧</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">面向工资编程</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/LeetCode" rel="section">
+            
+              <i class="menu-item-icon fa fa-code fa-fw"></i> <br />
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode LinkList
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-31T19:43:29+08:00" content="2016-12-31">
+              2016-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/31/LeetCode-LinkList/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/31/LeetCode-LinkList/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2016/12/31/LeetCode-LinkList/" class="leancloud_visitors" data-flag-title="LeetCode LinkList">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含如下题目：<br><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">2. Add Two Numbers</a><br><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" rel="external">19. Remove Nth Node From End of List</a><br><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">21. Merge Two Sorted Lists</a><br><a href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank" rel="external">23. Merge k Sorted Lists</a><br><a href="https://leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="external">24. Swap Nodes in Pairs</a><br><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/" target="_blank" rel="external">25. Reverse Nodes in k-Group</a><br><a href="https://leetcode.com/problems/rotate-list/" target="_blank" rel="external">61. Rotate List</a><br><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/" target="_blank" rel="external">82. Remove Duplicates from Sorted List II</a><br><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="external">83. Remove Duplicates from Sorted List</a><br><a href="https://leetcode.com/problems/partition-list/" target="_blank" rel="external">86. Partition List</a><br><a href="https://leetcode.com/problems/reverse-linked-list-ii/" target="_blank" rel="external">92. Reverse Linked List II</a><br><a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/" target="_blank" rel="external">109. Convert Sorted List to Binary Search Tree</a><br><a href="https://leetcode.com/problems/copy-list-with-random-pointer/" target="_blank" rel="external">138. Copy List with Random Pointer</a><br><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" rel="external">141. Linked List Cycle</a><br><a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="external">142. Linked List Cycle II</a><br><a href="https://leetcode.com/problems/reorder-list/" target="_blank" rel="external">143. Reorder List</a><br><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="external">160. Intersection of Two Linked Lists</a><br><a href="https://leetcode.com/problems/remove-linked-list-elements/" target="_blank" rel="external">203. Remove Linked List Elements</a><br><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="external">206. Reverse Linked List</a><br><a href="https://leetcode.com/problems/palindrome-linked-list/" target="_blank" rel="external">234. Palindrome Linked List</a><br><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="external">237. Delete Node in a Linked List</a><br><a href="https://leetcode.com/problems/odd-even-linked-list/" target="_blank" rel="external">328. Odd Even Linked List</a><br><a href="https://leetcode.com/problems/add-two-numbers-ii/" target="_blank" rel="external">445. Add Two Numbers II</a></p>
+<a id="more"></a>
+<h2 id="2-Add-Two-Numbers"><a href="#2-Add-Two-Numbers" class="headerlink" title="2. Add Two Numbers"></a>2. Add Two Numbers</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>直接新建一个链表，然后进行加法运算即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)</div><div class="line">    &#123;</div><div class="line">        ListNode *head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</div><div class="line">        ListNode *p = head;</div><div class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> a, b, c;</div><div class="line">        <span class="keyword">while</span>(l1 || l2)</div><div class="line">        &#123;</div><div class="line">            a = b = c = <span class="number">0</span>;</div><div class="line">            <span class="keyword">if</span>(l1)</div><div class="line">            &#123;</div><div class="line">                a = l1-&gt;val;</div><div class="line">                l1 = l1-&gt;next;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(l2)</div><div class="line">            &#123;</div><div class="line">                b = l2-&gt;val;</div><div class="line">                l2 = l2-&gt;next;</div><div class="line">            &#125;</div><div class="line">            c = a + b + carry;</div><div class="line">            p-&gt;next = <span class="keyword">new</span> ListNode(c % <span class="number">10</span>);</div><div class="line">            carry = c / <span class="number">10</span>;</div><div class="line">            p = p-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(carry == <span class="number">1</span>)</div><div class="line">        &#123;</div><div class="line">            p-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head-&gt;next;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19. Remove Nth Node From End of List"></a>19. Remove Nth Node From End of List</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用两个指针a, b，a先定位到从左边开始第n个，然后b在链表头部和a同时进行遍历，a到尾部的时候b也就正好取到了所求结果；</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    <span class="symbol">public:</span></div><div class="line">        ListNode* removeNthFromEnd(ListNode* head, int n)</div><div class="line">        &#123;</div><div class="line">            ListNode *root = new ListNode(<span class="number">0</span>);</div><div class="line">            root-&gt;<span class="keyword">next</span> = head;</div><div class="line">            ListNode *p, *c;</div><div class="line">            p = c = root;</div><div class="line">            <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n+<span class="number">1</span>; ++i)</div><div class="line">                c = c-&gt;<span class="keyword">next</span>;</div><div class="line">            <span class="keyword">while</span>(c)</div><div class="line">            &#123;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>;</div><div class="line">                c = c-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            p-&gt;<span class="keyword">next</span> = p-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21. Merge Two Sorted Lists"></a>21. Merge Two Sorted Lists</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>归并排序的merge算法；</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    public:</div><div class="line">        ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)</div><div class="line">        &#123;</div><div class="line">            ListNode* head = new ListNode(<span class="number">0</span>);</div><div class="line">            ListNode* p = head;</div><div class="line">            <span class="keyword">while</span>(l1 &amp;&amp; l2)</div><div class="line">            &#123;</div><div class="line">                <span class="function"><span class="title">if</span>(l1-&gt;</span><span class="function"><span class="title">val</span> &gt; l2-&gt;</span>val)</div><div class="line">                &#123;</div><div class="line">                    <span class="function"><span class="title">p</span>-&gt;</span><span class="function"><span class="title">next</span> = new ListNode(l2-&gt;</span>val);</div><div class="line">                    <span class="function"><span class="title">p</span> = p-&gt;</span>next;</div><div class="line">                    <span class="function"><span class="title">l2</span> = l2-&gt;</span>next;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    <span class="function"><span class="title">p</span>-&gt;</span><span class="function"><span class="title">next</span> = new ListNode(l1-&gt;</span>val);</div><div class="line">                    <span class="function"><span class="title">p</span> = p-&gt;</span>next;</div><div class="line">                    <span class="function"><span class="title">l1</span> = l1-&gt;</span>next;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(l1)</div><div class="line">                <span class="function"><span class="title">p</span>-&gt;</span>next = l1;</div><div class="line">            <span class="keyword">if</span>(l2)</div><div class="line">                <span class="function"><span class="title">p</span>-&gt;</span>next = l2;</div><div class="line"></div><div class="line">            <span class="function"><span class="title">return</span> head-&gt;</span>next;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="23-Merge-k-Sorted-Lists"><a href="#23-Merge-k-Sorted-Lists" class="headerlink" title="23. Merge k Sorted Lists"></a>23. Merge k Sorted Lists</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>二分法进行排序；</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        ListNode* mergeKLists(vector&lt;ListNode*&gt;&amp; lists)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">int</span> <span class="built_in">len</span> = lists.size();</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">len</span> == <span class="number">0</span>)</div><div class="line">                return <span class="literal">NULL</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">len</span> == <span class="number">1</span>)</div><div class="line">                return lists[<span class="number">0</span>];</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">len</span> == <span class="number">2</span>)</div><div class="line">                return mergeTwoLists(lists[<span class="number">0</span>], lists[<span class="number">1</span>]);</div><div class="line">            vector&lt;ListNode*&gt; <span class="built_in">left</span>(lists.begin(), lists.begin() + <span class="built_in">len</span>/<span class="number">2</span>);</div><div class="line">            vector&lt;ListNode*&gt; <span class="built_in">right</span>(lists.begin()+<span class="built_in">len</span>/<span class="number">2</span>, lists.<span class="keyword">end</span>());</div><div class="line">            return mergeTwoLists(mergeKLists(<span class="built_in">left</span>), mergeKLists(<span class="built_in">right</span>));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)</div><div class="line">        &#123;</div><div class="line">            ListNode* head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">            ListNode* p = head;</div><div class="line">            <span class="keyword">while</span>(l1 &amp;&amp; l2)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(l1-&gt;val &gt; l2-&gt;val)</div><div class="line">                &#123;</div><div class="line">                    p-&gt;<span class="keyword">next</span> = <span class="keyword">new</span> ListNode(l2-&gt;val);</div><div class="line">                    p = p-&gt;<span class="keyword">next</span>;</div><div class="line">                    l2 = l2-&gt;<span class="keyword">next</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    p-&gt;<span class="keyword">next</span> = <span class="keyword">new</span> ListNode(l1-&gt;val);</div><div class="line">                    p = p-&gt;<span class="keyword">next</span>;</div><div class="line">                    l1 = l1-&gt;<span class="keyword">next</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(l1)</div><div class="line">                p-&gt;<span class="keyword">next</span> = l1;</div><div class="line">            <span class="keyword">if</span>(l2)</div><div class="line">                p-&gt;<span class="keyword">next</span> = l2;</div><div class="line"></div><div class="line">            return head-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="24-Swap-Nodes-in-Pairs"><a href="#24-Swap-Nodes-in-Pairs" class="headerlink" title="24. Swap Nodes in Pairs"></a>24. Swap Nodes in Pairs</h2><h3 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这个考的链表的基本操作吧；</li>
+</ul>
+</blockquote>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    <span class="symbol">public:</span></div><div class="line">        ListNode* swapPairs(ListNode* head)</div><div class="line">        &#123;</div><div class="line">            if(!head &amp;&amp; !head-&gt;<span class="keyword">next</span>)</div><div class="line">                <span class="keyword">return</span> head;</div><div class="line">            ListNode* root = new ListNode(<span class="number">0</span>);</div><div class="line">            root-&gt;<span class="keyword">next</span> = head;</div><div class="line">            ListNode *p, *c;</div><div class="line">            p = root;</div><div class="line">            c = root-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            <span class="keyword">while</span>(c)</div><div class="line">            &#123;</div><div class="line">                p-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span> = c-&gt;<span class="keyword">next</span>;</div><div class="line">                c-&gt;<span class="keyword">next</span> = p-&gt;<span class="keyword">next</span>;</div><div class="line">                p-&gt;<span class="keyword">next</span> = c;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">                if(p-&gt;<span class="keyword">next</span>)</div><div class="line">                    c = p-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">                else</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="25-Reverse-Nodes-in-k-Group"><a href="#25-Reverse-Nodes-in-k-Group" class="headerlink" title="25. Reverse Nodes in k-Group"></a>25. Reverse Nodes in k-Group</h2><h3 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>首先维持一个len数值，通过len与k的比较判断是否需要reverse；</li>
+<li>reverse就和上一题一样了，基本操作；</li>
+</ul>
+</blockquote>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        ListNode* reverseKGroup(ListNode* head, <span class="keyword">int</span> k)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> len = getLen(head);</div><div class="line">            <span class="keyword">if</span>(len &lt; k || k == <span class="number">1</span>)</div><div class="line">                <span class="keyword">return</span> head;</div><div class="line">            ListNode *root = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</div><div class="line">            ListNode *p = root;</div><div class="line">            ListNode *p1 = head;</div><div class="line">            ListNode *p2 = head;</div><div class="line">            <span class="keyword">while</span>(len &gt;= k)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)</div><div class="line">                &#123;</div><div class="line">                    p2 = p1-&gt;<span class="keyword">next</span>;</div><div class="line">                    p1-&gt;<span class="keyword">next</span> = p-&gt;<span class="keyword">next</span>;</div><div class="line">                    p-&gt;<span class="keyword">next</span> = p1;</div><div class="line">                    p1 = p2;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">while</span>(p-&gt;<span class="keyword">next</span>)</div><div class="line">                    p = p-&gt;<span class="keyword">next</span>;</div><div class="line">                len -= k;</div><div class="line">                <span class="keyword">if</span>(len &lt; k)</div><div class="line">                &#123;</div><div class="line">                    p-&gt;<span class="keyword">next</span> = p1;</div><div class="line">                    <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> getLen(ListNode *head)</div><div class="line">        &#123;</div><div class="line">            ListNode *p = head;</div><div class="line">            <span class="keyword">int</span> <span class="keyword">count</span> = <span class="number">0</span>;</div><div class="line">            <span class="keyword">while</span>(p)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">count</span>++;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">count</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="61-Rotate-List"><a href="#61-Rotate-List" class="headerlink" title="61. Rotate List"></a>61. Rotate List</h2><h3 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>构建循环链表，然后rotate再断开，这里注意使用%求余进行计算；</li>
+</ul>
+</blockquote>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        ListNode* rotateRight(ListNode *head, <span class="built_in">int</span> k)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(head == <span class="literal">NULL</span>)</div><div class="line">                return <span class="literal">NULL</span>;</div><div class="line">            ListNode *res;</div><div class="line">            ListNode *p = head;</div><div class="line">            <span class="built_in">int</span> <span class="built_in">len</span> = <span class="number">1</span>;</div><div class="line">            <span class="keyword">while</span>(p-&gt;<span class="keyword">next</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">len</span>++;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            k %= <span class="built_in">len</span>;</div><div class="line">            <span class="keyword">if</span>(k == <span class="number">0</span>)</div><div class="line">                return head;</div><div class="line">            </div><div class="line">            p-&gt;<span class="keyword">next</span> = head;</div><div class="line">            <span class="keyword">while</span>(p)</div><div class="line">            &#123;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>;</div><div class="line">                <span class="built_in">len</span>--;</div><div class="line">                <span class="keyword">if</span>(<span class="built_in">len</span> == k)</div><div class="line">                &#123;</div><div class="line">                    res = p-&gt;<span class="keyword">next</span>;</div><div class="line">                    p-&gt;<span class="keyword">next</span> = <span class="literal">NULL</span>;</div><div class="line">                    break;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="82-Remove-Duplicates-from-Sorted-List-II"><a href="#82-Remove-Duplicates-from-Sorted-List-II" class="headerlink" title="82. Remove Duplicates from Sorted List II"></a>82. Remove Duplicates from Sorted List II</h2><h3 id="解题思路-7"><a href="#解题思路-7" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>第一次检测得到的节点<code>cur</code>可以保证其与前置节点不重复，此时将其设为待选节点置为<code>pre-&gt;next = cur</code>，再次循环，如果位置仍不改变<code>pre-&gt;next == cur</code>，则其后也没有重复节点，执行<code>pre = pre-&gt;next</code>即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    <span class="symbol">public:</span></div><div class="line">        ListNode *deleteDuplicates(ListNode* head)</div><div class="line">        &#123;</div><div class="line">            if(head == NULL)</div><div class="line">                <span class="keyword">return</span> head;</div><div class="line">            ListNode *root = new ListNode((<span class="number">1</span>&lt;&lt;<span class="number">31</span>));</div><div class="line">            root-&gt;<span class="keyword">next</span> = head;</div><div class="line">            ListNode *cur = head;</div><div class="line">            ListNode *pre = root;</div><div class="line">            <span class="keyword">while</span>(cur)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">while</span>(cur-&gt;<span class="keyword">next</span> &amp;&amp; cur-&gt;val == cur-&gt;<span class="keyword">next</span>-&gt;val)</div><div class="line">                    cur = cur-&gt;<span class="keyword">next</span>;</div><div class="line">                if(pre-&gt;<span class="keyword">next</span> == cur)</div><div class="line">                    pre = pre-&gt;<span class="keyword">next</span>;</div><div class="line">                else</div><div class="line">                    pre-&gt;<span class="keyword">next</span> = cur-&gt;<span class="keyword">next</span>;</div><div class="line">                cur = cur-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="83-Remove-Duplicates-from-Sorted-List"><a href="#83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="83. Remove Duplicates from Sorted List"></a>83. Remove Duplicates from Sorted List</h2><h3 id="解题思路-8"><a href="#解题思路-8" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>简单题</li>
+</ul>
+</blockquote>
+<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">    <span class="symbol">public:</span></div><div class="line">        ListNode *deleteDuplicates(ListNode *head)</div><div class="line">        &#123;</div><div class="line">            if(head == NULL)</div><div class="line">                <span class="keyword">return</span> head;</div><div class="line">            ListNode * root = new ListNode(<span class="number">0</span>);</div><div class="line">            root-&gt;<span class="keyword">next</span> = head;</div><div class="line">            ListNode *pre = root;</div><div class="line">            ListNode *cur = head;</div><div class="line">            <span class="keyword">while</span>(cur)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">while</span>(cur-&gt;<span class="keyword">next</span> &amp;&amp; cur-&gt;<span class="keyword">next</span>-&gt;val == cur-&gt;val)</div><div class="line">                    cur = cur-&gt;<span class="keyword">next</span>;</div><div class="line">                pre-&gt;<span class="keyword">next</span> = cur;</div><div class="line">                pre = pre-&gt;<span class="keyword">next</span>;</div><div class="line">                cur = cur-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="86-Partition-List"><a href="#86-Partition-List" class="headerlink" title="86. Partition List"></a>86. Partition List</h2><h3 id="解题思路-9"><a href="#解题思路-9" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>建立左右两个链表，将小于x的数全部放入到左链表中，其他的都放到右链表中，最后连接起来就好；</li>
+</ul>
+</blockquote>
+<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        ListNode* partition(ListNode* head, <span class="built_in">int</span> x)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;<span class="keyword">next</span> == <span class="literal">NULL</span>)</div><div class="line">                return head;</div><div class="line">            ListNode *<span class="built_in">left</span> = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">            ListNode *<span class="built_in">right</span> = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">            ListNode *l = <span class="built_in">left</span>;</div><div class="line">            ListNode *r = <span class="built_in">right</span>;</div><div class="line">            ListNode *p = head;</div><div class="line">            <span class="keyword">while</span>(p)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(p-&gt;val &lt; x)</div><div class="line">                &#123;</div><div class="line">                    l-&gt;<span class="keyword">next</span> = p;</div><div class="line">                    l = l-&gt;<span class="keyword">next</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    r-&gt;<span class="keyword">next</span> = p;</div><div class="line">                    r = r-&gt;<span class="keyword">next</span>;</div><div class="line">                &#125;</div><div class="line">                p = p-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            r-&gt;<span class="keyword">next</span> = <span class="literal">NULL</span>;</div><div class="line">            l-&gt;<span class="keyword">next</span> = <span class="built_in">right</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            return <span class="built_in">left</span>-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="92-Reverse-Linked-List-II"><a href="#92-Reverse-Linked-List-II" class="headerlink" title="92. Reverse Linked List II"></a>92. Reverse Linked List II</h2><h3 id="解题思路-10"><a href="#解题思路-10" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这里其实是应用了链表的逆序算法；</li>
+</ul>
+</blockquote>
+<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        ListNode* reverseBetween(ListNode* head, <span class="built_in">int</span> m, <span class="built_in">int</span> n)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(head == <span class="literal">NULL</span> || m == n)</div><div class="line">                return head;</div><div class="line">            ListNode *root = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">            root-&gt;<span class="keyword">next</span> = head;</div><div class="line">            ListNode *pre, *cur, *<span class="built_in">left</span>;</div><div class="line">            <span class="built_in">left</span> = root;</div><div class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; m; ++i)</div><div class="line">                <span class="built_in">left</span> = <span class="built_in">left</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            pre = <span class="built_in">left</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            cur = pre-&gt;<span class="keyword">next</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n - m; ++i)</div><div class="line">            &#123;</div><div class="line">                pre-&gt;<span class="keyword">next</span> = cur-&gt;<span class="keyword">next</span>;</div><div class="line">                cur-&gt;<span class="keyword">next</span> = <span class="built_in">left</span>-&gt;<span class="keyword">next</span>;</div><div class="line">                <span class="built_in">left</span>-&gt;<span class="keyword">next</span> = cur;</div><div class="line">                cur = pre-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            return root-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="109-Convert-Sorted-List-to-Binary-Search-Tree"><a href="#109-Convert-Sorted-List-to-Binary-Search-Tree" class="headerlink" title="109. Convert Sorted List to Binary Search Tree"></a>109. Convert Sorted List to Binary Search Tree</h2><h3 id="解题思路-11"><a href="#解题思路-11" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>由于链表是有序的，需要先从中间开始插入，从而来保证树结构的平衡；</li>
+<li>这里用到了slow和fast两个指针来快速求取链表中点；</li>
+</ul>
+</blockquote>
+<h3 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        TreeNode *sortedListToBST(ListNode *head)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(head == <span class="keyword">NULL</span>)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">            <span class="keyword">return</span> toTree(head, <span class="keyword">NULL</span>);</div><div class="line">        &#125;</div><div class="line">        TreeNode *toTree(ListNode *head, ListNode *tail)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(head == tail)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">            ListNode *slow = head;</div><div class="line">            ListNode *fast = head;</div><div class="line">            <span class="keyword">while</span>(fast != tail &amp;&amp; fast-&gt;next != tail)</div><div class="line">            &#123;</div><div class="line">                slow = slow-&gt;next;</div><div class="line">                fast = fast-&gt;next-&gt;next;</div><div class="line">            &#125;</div><div class="line">            TreeNode *res = <span class="keyword">new</span> TreeNode(slow-&gt;val);</div><div class="line">            res-&gt;left = toTree(head, slow);</div><div class="line">            res-&gt;right = toTree(slow-&gt;next, tail);</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="138-Copy-List-with-Random-Pointer"><a href="#138-Copy-List-with-Random-Pointer" class="headerlink" title="138. Copy List with Random Pointer"></a>138. Copy List with Random Pointer</h2><h3 id="解题思路-12"><a href="#解题思路-12" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>首先在每个链表节点后面复制一个该节点，加入到链表中；</li>
+<li>此时复制节点的random取值就变成：<code>cp-&gt;random = p-&gt;random-&gt;next</code>；</li>
+<li>然后再将两个链表区分开来就可以了；</li>
+</ul>
+</blockquote>
+<h3 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    RandomListNode *copyRandomList(RandomListNode *head) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(head == NULL)</div><div class="line">            return NULL;</div><div class="line">        RandomListNode *p = head;</div><div class="line">        RandomListNode *cp;</div><div class="line">        RandomListNode *res;</div><div class="line">        <span class="keyword">while</span>(p)</div><div class="line">        &#123;</div><div class="line">            <span class="function"><span class="title">cp</span> = new RandomListNode(p-&gt;</span>label);</div><div class="line">            <span class="function"><span class="title">cp</span>-&gt;</span><span class="function"><span class="title">next</span> = p-&gt;</span>next;</div><div class="line">            <span class="function"><span class="title">p</span>-&gt;</span>next = cp;</div><div class="line">            <span class="function"><span class="title">p</span> = cp-&gt;</span>next;</div><div class="line">        &#125;</div><div class="line">        p = head;</div><div class="line">        <span class="keyword">while</span>(p)</div><div class="line">        &#123;</div><div class="line">            <span class="function"><span class="title">cp</span> = p-&gt;</span>next;</div><div class="line">            <span class="function"><span class="title">if</span>(p-&gt;</span>random)</div><div class="line">                <span class="function"><span class="title">cp</span>-&gt;</span><span class="function"><span class="title">random</span> = p-&gt;</span><span class="function"><span class="title">random</span>-&gt;</span>next;</div><div class="line">            <span class="function"><span class="title">p</span> = cp-&gt;</span>next;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="title">res</span> = head-&gt;</span>next;</div><div class="line">        p = head;</div><div class="line">        <span class="keyword">while</span>(p)</div><div class="line">        &#123;</div><div class="line">            <span class="function"><span class="title">cp</span> = p-&gt;</span>next;</div><div class="line">            <span class="function"><span class="title">p</span>-&gt;</span><span class="function"><span class="title">next</span> = cp-&gt;</span>next;</div><div class="line">            <span class="function"><span class="title">p</span> = p-&gt;</span>next;</div><div class="line">            <span class="keyword">if</span>(p)</div><div class="line">                <span class="function"><span class="title">cp</span>-&gt;</span><span class="function"><span class="title">next</span> = p-&gt;</span>next;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141. Linked List Cycle"></a>141. Linked List Cycle</h2><h3 id="解题思路-13"><a href="#解题思路-13" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>简单题，使用快慢指针解决，如果有循环则快慢指针会相遇；</li>
+</ul>
+</blockquote>
+<h3 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="keyword">bool</span> hasCycle(ListNode *head)</div><div class="line">        &#123;</div><div class="line">            ListNode *slow = head;</div><div class="line">            ListNode *fast = head;</div><div class="line">            <span class="keyword">while</span>(slow &amp;&amp; fast)</div><div class="line">            &#123;</div><div class="line">                slow = slow-&gt;next;</div><div class="line">                <span class="keyword">if</span>(fast-&gt;next)</div><div class="line">                    fast = fast-&gt;next-&gt;next;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                <span class="keyword">if</span>(slow == fast)</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="142-Linked-List-Cycle-II"><a href="#142-Linked-List-Cycle-II" class="headerlink" title="142. Linked List Cycle II"></a>142. Linked List Cycle II</h2><h3 id="解题思路-14"><a href="#解题思路-14" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用快慢指针，第一次相遇时结束；快指针比慢指针多走了一倍的距离；</li>
+<li>快指针多走了一个循环，通过画图分析，从相遇节点到<code>cycle begin</code>的距离正好等于从起始节点到<code>cycle begin</code>的距离；</li>
+</ul>
+</blockquote>
+<h3 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    ListNode *detectCycle(ListNode *head) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(head == <span class="keyword">NULL</span> || head-&gt;next == <span class="keyword">NULL</span>)</div><div class="line">        	<span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">        ListNode *slow = head;</div><div class="line">        ListNode *fast = head;</div><div class="line">        <span class="keyword">bool</span> isCycle = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">while</span>(slow &amp;&amp; fast)</div><div class="line">        &#123;</div><div class="line">        	slow = slow-&gt;next;</div><div class="line">        	<span class="keyword">if</span>(fast-&gt;next == <span class="keyword">NULL</span>)</div><div class="line">        		<span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">        	fast = fast-&gt;next-&gt;next;</div><div class="line">        	<span class="keyword">if</span>(slow == fast)</div><div class="line">        	&#123;</div><div class="line">        		isCycle = <span class="keyword">true</span>;</div><div class="line">        		<span class="keyword">break</span>;</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(!isCycle)</div><div class="line">        	<span class="keyword">return</span> <span class="keyword">NULL</span>;</div><div class="line">        slow = head;</div><div class="line">        <span class="keyword">while</span>(slow != fast)</div><div class="line">        &#123;</div><div class="line">        	slow = slow-&gt;next;</div><div class="line">        	fast = fast-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> slow;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="143-Reorder-List"><a href="#143-Reorder-List" class="headerlink" title="143. Reorder List"></a>143. Reorder List</h2><h3 id="解题思路-15"><a href="#解题思路-15" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用快慢指针将链表从中间分成两部分，将后半部分进行逆序处理最后merge合并即可；</li>
+</ul>
+</blockquote>
+<h3 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">    void reorderList(ListNode* head) </div><div class="line">    &#123;</div><div class="line">    	if(head == NULL || head-&gt;<span class="keyword">next</span> == NULL)</div><div class="line">    		<span class="keyword">return</span>;</div><div class="line">    	ListNode *p1 = head;</div><div class="line">    	ListNode *p2 = head-&gt;<span class="keyword">next</span>;</div><div class="line">    	<span class="keyword">while</span>(p2 &amp;&amp; p2-&gt;<span class="keyword">next</span>)</div><div class="line">    	&#123;</div><div class="line">    		p1 = p1-&gt;<span class="keyword">next</span>;</div><div class="line">    		p2 = p2-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">    	&#125;</div><div class="line"></div><div class="line">    	ListNode *head2 = p1-&gt;<span class="keyword">next</span>;</div><div class="line">    	p1-&gt;<span class="keyword">next</span> = NULL;</div><div class="line"></div><div class="line">    	p2 = head2-&gt;<span class="keyword">next</span>;</div><div class="line">    	head2-&gt;<span class="keyword">next</span> = NULL;</div><div class="line">    	<span class="keyword">while</span>(p2)</div><div class="line">    	&#123;</div><div class="line">    		p1 = p2-&gt;<span class="keyword">next</span>;</div><div class="line">    		p2-&gt;<span class="keyword">next</span> = head2;</div><div class="line">    		head2 = p2;</div><div class="line">    		p2 = p1;</div><div class="line">    	&#125;</div><div class="line"></div><div class="line">    	<span class="keyword">for</span>(p1 = head, p2 = head2; p1; )</div><div class="line">    	&#123;</div><div class="line">    		auto temp = p1-&gt;<span class="keyword">next</span>;</div><div class="line">    		p1 = p1-&gt;<span class="keyword">next</span> = p2;</div><div class="line">    		p2 = temp;</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="160-Intersection-of-Two-Linked-Lists"><a href="#160-Intersection-of-Two-Linked-Lists" class="headerlink" title="160. Intersection of Two Linked Lists"></a>160. Intersection of Two Linked Lists</h2><h3 id="解题思路-16"><a href="#解题思路-16" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>如果两个链表有重复的部分，则<code>A+B</code>和<code>B+A</code>对齐就可以直接找到重复的部分；</li>
+</ul>
+</blockquote>
+<h3 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h3><figure class="highlight monkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) </div><div class="line">    &#123;</div><div class="line">        ListNode *p = headA;</div><div class="line">        ListNode *q = headB;</div><div class="line">        <span class="keyword">if</span>(p == <span class="literal">NULL</span> || p == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(p &amp;&amp; q &amp;&amp; p != q)</div><div class="line">        &#123;</div><div class="line">        	p = p-&gt;<span class="keyword">next</span>;</div><div class="line">        	q = q-&gt;<span class="keyword">next</span>;</div><div class="line">            <span class="keyword">if</span>(p == q)</div><div class="line">                <span class="keyword">return</span> p;  </div><div class="line">            <span class="keyword">if</span>(p == <span class="literal">NULL</span>)</div><div class="line">                p = headB;</div><div class="line">            <span class="keyword">if</span>(q == <span class="literal">NULL</span>)</div><div class="line">                q = headA;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="203-Remove-Linked-List-Elements"><a href="#203-Remove-Linked-List-Elements" class="headerlink" title="203. Remove Linked List Elements"></a>203. Remove Linked List Elements</h2><h3 id="解题思路-17"><a href="#解题思路-17" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>*　简单题，不多说了；</p>
+</blockquote>
+<h3 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">    ListNode* removeElements(ListNode* head, int val) </div><div class="line">    &#123;</div><div class="line">        ListNode *root = new ListNode(<span class="number">0</span>);</div><div class="line">        root-&gt;<span class="keyword">next</span> = head;</div><div class="line">        ListNode *cur = root;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;<span class="keyword">next</span>)</div><div class="line">        &#123;</div><div class="line">        	if(cur-&gt;<span class="keyword">next</span>-&gt;val == val)</div><div class="line">            &#123;</div><div class="line">                cur-&gt;<span class="keyword">next</span> = cur-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">                cur = cur-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> root-&gt;<span class="keyword">next</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a>206. Reverse Linked List</h2><h3 id="解题思路-18"><a href="#解题思路-18" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>链表的逆序处理；</li>
+</ul>
+</blockquote>
+<h3 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">    ListNode* reverseList(ListNode* head) </div><div class="line">    &#123;</div><div class="line">        if(head == NULL || head-&gt;<span class="keyword">next</span> == NULL)</div><div class="line">        	<span class="keyword">return</span> head;</div><div class="line">        ListNode *pre = head;</div><div class="line">        ListNode *cur = head-&gt;<span class="keyword">next</span>;</div><div class="line">        ListNode *temp;</div><div class="line">        pre-&gt;<span class="keyword">next</span> = NULL;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;<span class="keyword">next</span>)</div><div class="line">        &#123;</div><div class="line">        	temp = cur-&gt;<span class="keyword">next</span>;</div><div class="line">        	cur-&gt;<span class="keyword">next</span> = pre;</div><div class="line">        	pre = cur;</div><div class="line">        	cur = temp;</div><div class="line">        &#125;</div><div class="line">        cur-&gt;<span class="keyword">next</span> = pre;</div><div class="line">        <span class="keyword">return</span> cur;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234. Palindrome Linked List"></a>234. Palindrome Linked List</h2><h3 id="解题思路-19"><a href="#解题思路-19" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>使用快慢指针将链表分成两个部分，将后半部分进行逆序处理然后进行比较是否为回文；    </li>
+</ul>
+</blockquote>
+<h3 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">    bool isPalindrome(ListNode* head) </div><div class="line">    &#123;</div><div class="line">        if(head == NULL || head-&gt;<span class="keyword">next</span> == NULL)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        ListNode *slow = head;</div><div class="line">        ListNode *fast = head;</div><div class="line">        <span class="keyword">while</span>(fast-&gt;<span class="keyword">next</span> &amp;&amp; fast-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>)</div><div class="line">        &#123;</div><div class="line">            slow = slow-&gt;<span class="keyword">next</span>;</div><div class="line">            fast = fast-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ListNode *pre = slow-&gt;<span class="keyword">next</span>;</div><div class="line">        ListNode *cur = pre-&gt;<span class="keyword">next</span>;</div><div class="line">        slow-&gt;<span class="keyword">next</span> = NULL;</div><div class="line">        pre-&gt;<span class="keyword">next</span> = NULL;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(cur)</div><div class="line">        &#123;</div><div class="line">            ListNode *temp = cur-&gt;<span class="keyword">next</span>;</div><div class="line">            cur-&gt;<span class="keyword">next</span> = pre;</div><div class="line">            pre = cur;</div><div class="line">            cur = temp;</div><div class="line">        &#125;</div><div class="line">        ListNode *p = head;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(pre &amp;&amp; p)</div><div class="line">        &#123;</div><div class="line">            if(pre-&gt;val != p-&gt;val)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            pre = pre-&gt;<span class="keyword">next</span>;</div><div class="line">            p = p-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="237-Delete-Node-in-a-Linked-List"><a href="#237-Delete-Node-in-a-Linked-List" class="headerlink" title="237. Delete Node in a Linked List"></a>237. Delete Node in a Linked List</h2><h3 id="解题思路-20"><a href="#解题思路-20" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>这个题，搞明白题意就可以，将要删除的节点数据替换成下一节点的数据；</li>
+</ul>
+</blockquote>
+<h3 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void deleteNode(ListNode* <span class="keyword">node</span><span class="title">) </span></div><div class="line">    &#123;</div><div class="line">        *node = *<span class="keyword">node</span><span class="title">-&gt;next</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="328-Odd-Even-Linked-List"><a href="#328-Odd-Even-Linked-List" class="headerlink" title="328. Odd Even Linked List"></a>328. Odd Even Linked List</h2><h3 id="解题思路-21"><a href="#解题思路-21" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>两个两个向后扫描即可，得到奇偶两条链表链接到一块；</li>
+</ul>
+</blockquote>
+<h3 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution </div><div class="line">&#123;</div><div class="line"><span class="symbol">public:</span></div><div class="line">    ListNode* oddEvenList(ListNode* head) </div><div class="line">    &#123;</div><div class="line">        if(head == NULL || head-&gt;<span class="keyword">next</span> == NULL)</div><div class="line">        	<span class="keyword">return</span> head;</div><div class="line">        ListNode *odd =  head;</div><div class="line">        ListNode *even = head-&gt;<span class="keyword">next</span>;</div><div class="line">        ListNode *evenStart = even;</div><div class="line">        <span class="keyword">while</span>(even &amp;&amp; even-&gt;<span class="keyword">next</span>)</div><div class="line">        &#123;</div><div class="line">        	odd-&gt;<span class="keyword">next</span> = odd-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">        	even-&gt;<span class="keyword">next</span> = even-&gt;<span class="keyword">next</span>-&gt;<span class="keyword">next</span>;</div><div class="line">        	odd = odd-&gt;<span class="keyword">next</span>;</div><div class="line">        	even = even-&gt;<span class="keyword">next</span>;</div><div class="line">        &#125;</div><div class="line">        odd-&gt;<span class="keyword">next</span> = evenStart;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="445-Add-Two-Numbers-II"><a href="#445-Add-Two-Numbers-II" class="headerlink" title="445. Add Two Numbers II"></a>445. Add Two Numbers II</h2><h3 id="解题思路-22"><a href="#解题思路-22" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>利用<code>l1+l2</code>和<code>l2+l1</code>实现对齐，利用两个bool标记何时数值有效；</li>
+<li>将结果保存到一个<code>vector</code>中，最后求取进位后构建链表；</li>
+</ul>
+</blockquote>
+<h3 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) </div><div class="line">    &#123;</div><div class="line">    	bool f1 = <span class="keyword">false</span>;</div><div class="line">    	bool f2 = <span class="keyword">false</span>;</div><div class="line">    	vector&lt;<span class="keyword">int</span>&gt; <span class="keyword">sum</span>;</div><div class="line">        ListNode *res = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">        ListNode *p = l1;</div><div class="line">        ListNode *q = l2;</div><div class="line">        <span class="keyword">while</span>(p &amp;&amp; q)</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">if</span>(f1 || f2)</div><div class="line">        	&#123;</div><div class="line">        		<span class="keyword">int</span> temp = (f1 ? p-&gt;val : <span class="number">0</span>) + (f2 ? q-&gt;val : <span class="number">0</span>);</div><div class="line">        		<span class="keyword">sum</span>.push_back(temp);</div><div class="line">        	&#125;</div><div class="line">        	p = p-&gt;next;</div><div class="line">        	q = q-&gt;next;</div><div class="line">        	<span class="keyword">if</span>(f1 &amp;&amp; f2 &amp;&amp; p == q)</div><div class="line">        		<span class="keyword">break</span>;</div><div class="line">        	<span class="keyword">if</span>(p == NULL)&#123; p = l2; f1 = <span class="keyword">true</span>; &#125;</div><div class="line">        	<span class="keyword">if</span>(q == NULL)&#123; q = l1; f2 = <span class="keyword">true</span>; &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="keyword">sum</span>.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">sum</span>[i] = <span class="keyword">sum</span>[i] + carry;</div><div class="line">        	carry = <span class="keyword">sum</span>[i] / <span class="number">10</span>;</div><div class="line">        	<span class="keyword">sum</span>[i] %= <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(carry)</div><div class="line">        	<span class="keyword">sum</span>.insert(<span class="keyword">sum</span>.begin(), carry);</div><div class="line"></div><div class="line">        ListNode *cur = res;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sum</span>.size(); ++i)</div><div class="line">        &#123;</div><div class="line">        	cur-&gt;next = <span class="keyword">new</span> ListNode(<span class="keyword">sum</span>[i]);</div><div class="line">        	cur = cur-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res-&gt;next;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LinkList/" rel="tag">#LinkList</a>
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/28/归并排序的实现与深入应用分析/" rel="next" title="归并排序的实现与深入应用分析">
+                <i class="fa fa-chevron-left"></i> 归并排序的实现与深入应用分析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/04/Ubuntu14-04系统Chromium安装Adobe-Flash插件/" rel="prev" title="Ubuntu14.04系统Chromium安装Adobe Flash插件">
+                Ubuntu14.04系统Chromium安装Adobe Flash插件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/images.jpg"
+               alt="刘浩远" />
+          <p class="site-author-name" itemprop="name">刘浩远</p>
+          <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/haoyuanliu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuilehongdou/" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Add-Two-Numbers"><span class="nav-number">1.</span> <span class="nav-text">2. Add Two Numbers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="nav-number">2.</span> <span class="nav-text">19. Remove Nth Node From End of List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-Merge-Two-Sorted-Lists"><span class="nav-number">3.</span> <span class="nav-text">21. Merge Two Sorted Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-Merge-k-Sorted-Lists"><span class="nav-number">4.</span> <span class="nav-text">23. Merge k Sorted Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-Swap-Nodes-in-Pairs"><span class="nav-number">5.</span> <span class="nav-text">24. Swap Nodes in Pairs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-4"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-Reverse-Nodes-in-k-Group"><span class="nav-number">6.</span> <span class="nav-text">25. Reverse Nodes in k-Group</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-5"><span class="nav-number">6.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#61-Rotate-List"><span class="nav-number">7.</span> <span class="nav-text">61. Rotate List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-6"><span class="nav-number">7.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#82-Remove-Duplicates-from-Sorted-List-II"><span class="nav-number">8.</span> <span class="nav-text">82. Remove Duplicates from Sorted List II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-7"><span class="nav-number">8.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#83-Remove-Duplicates-from-Sorted-List"><span class="nav-number">9.</span> <span class="nav-text">83. Remove Duplicates from Sorted List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-8"><span class="nav-number">9.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-8"><span class="nav-number">9.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#86-Partition-List"><span class="nav-number">10.</span> <span class="nav-text">86. Partition List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-9"><span class="nav-number">10.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-9"><span class="nav-number">10.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#92-Reverse-Linked-List-II"><span class="nav-number">11.</span> <span class="nav-text">92. Reverse Linked List II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-10"><span class="nav-number">11.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-10"><span class="nav-number">11.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#109-Convert-Sorted-List-to-Binary-Search-Tree"><span class="nav-number">12.</span> <span class="nav-text">109. Convert Sorted List to Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-11"><span class="nav-number">12.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-11"><span class="nav-number">12.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#138-Copy-List-with-Random-Pointer"><span class="nav-number">13.</span> <span class="nav-text">138. Copy List with Random Pointer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-12"><span class="nav-number">13.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-12"><span class="nav-number">13.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#141-Linked-List-Cycle"><span class="nav-number">14.</span> <span class="nav-text">141. Linked List Cycle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-13"><span class="nav-number">14.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-13"><span class="nav-number">14.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#142-Linked-List-Cycle-II"><span class="nav-number">15.</span> <span class="nav-text">142. Linked List Cycle II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-14"><span class="nav-number">15.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-14"><span class="nav-number">15.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#143-Reorder-List"><span class="nav-number">16.</span> <span class="nav-text">143. Reorder List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-15"><span class="nav-number">16.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-15"><span class="nav-number">16.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#160-Intersection-of-Two-Linked-Lists"><span class="nav-number">17.</span> <span class="nav-text">160. Intersection of Two Linked Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-16"><span class="nav-number">17.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-16"><span class="nav-number">17.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#203-Remove-Linked-List-Elements"><span class="nav-number">18.</span> <span class="nav-text">203. Remove Linked List Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-17"><span class="nav-number">18.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-17"><span class="nav-number">18.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#206-Reverse-Linked-List"><span class="nav-number">19.</span> <span class="nav-text">206. Reverse Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-18"><span class="nav-number">19.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-18"><span class="nav-number">19.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#234-Palindrome-Linked-List"><span class="nav-number">20.</span> <span class="nav-text">234. Palindrome Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-19"><span class="nav-number">20.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-19"><span class="nav-number">20.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#237-Delete-Node-in-a-Linked-List"><span class="nav-number">21.</span> <span class="nav-text">237. Delete Node in a Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-20"><span class="nav-number">21.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-20"><span class="nav-number">21.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#328-Odd-Even-Linked-List"><span class="nav-number">22.</span> <span class="nav-text">328. Odd Even Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-21"><span class="nav-number">22.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-21"><span class="nav-number">22.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#445-Add-Two-Numbers-II"><span class="nav-number">23.</span> <span class="nav-text">445. Add Two Numbers II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-22"><span class="nav-number">23.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-22"><span class="nav-number">23.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'haoyuanliu';
+      var disqus_identifier = '2016/12/31/LeetCode-LinkList/';
+      var disqus_title = 'LeetCode LinkList';
+      var disqus_url = 'http://haoyuanliu.github.io/2016/12/31/LeetCode-LinkList/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
