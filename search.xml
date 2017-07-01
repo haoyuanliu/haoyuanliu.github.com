@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[C语言（？：）运算符踩坑记录]]></title>
     <url>%2F2017%2F07%2F02%2FC%E8%AF%AD%E8%A8%80%EF%BC%88%EF%BC%9F%EF%BC%9A%EF%BC%89%E8%BF%90%E7%AE%97%E7%AC%A6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[C语言中的（?:）运算符是C语言中的唯一一个三目运算符，其表达式一般为：表达式1?表达式2:表达式3，具体使用无需赘述。实际的使用过程中，（?:）运算符真的非常方便，在很多地方可以以非常优雅的方式实现一些判断逻辑，下面就举一个我犯下的错误来明确说明一下(?:)的具体作用方式。 废话不多说，先上代码：123456789101112#include &lt;iostream&gt;using namespace std;int main() &#123; int num = 19; int res = num / 5 + (res % 5) ? 1 : 0; cout &lt;&lt; "First: " &lt;&lt; res &lt;&lt; endl; res = num / 5 + ((res % 5) ? 1 : 0); cout &lt;&lt; "Second: " &lt;&lt; res &lt;&lt; endl; return 0;&#125; 代码的最终的输出为：12First: 1Second: 4 由上述代码可以看出，(?:)运算符的判断逻辑是整个表达式集合中?符号前面的所有表达式，我就犯了这个错误，特此记录一下！]]></content>
+    <content type="text"><![CDATA[C语言中的（?:）运算符是C语言中的唯一一个三目运算符，其表达式一般为：表达式1?表达式2:表达式3，具体使用无需赘述。实际的使用过程中，（?:）运算符真的非常方便，在很多地方可以以非常优雅的方式实现一些判断逻辑，下面就举一个我犯下的错误来明确说明一下(?:)的具体作用方式。 废话不多说，先上代码：12345678910#include &lt;stdio.h&gt;int main() &#123; int num = 19; int res = 19 / 5 + (19 % 5) ? 1 : 0; printf("First: %d\n", res); res = 19 / 5 + ((19 % 5) ? 1 : 0); printf("Second: %d\n", res); return 0;&#125; 代码的最终的输出为：12First: 1Second: 4 由上述代码可以看出，(?:)运算符的判断逻辑是整个表达式集合中?符号前面的所有表达式，我就犯了这个错误，特此记录一下！]]></content>
       <categories>
         <category>C语言</category>
       </categories>
