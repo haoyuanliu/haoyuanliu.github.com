@@ -280,133 +280,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/" itemprop="url">
-                  二叉树系列之——二叉树的递归遍历与非递归遍历
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T10:27:39+08:00" content="2016-07-12">
-              2016-07-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-          
-             <span id="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/" class="leancloud_visitors" data-flag-title="二叉树系列之——二叉树的递归遍历与非递归遍历">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>二叉树是一种非常重要的数据结构，由二叉树演变而来的树堆、红黑树、平衡树、SPlay伸展树等数据结构都在其各自适应领域有着广泛的应用。通过总结这一段时间对二叉树知识的学习，接下来将通过一系列二叉树专题的文章来进行归纳总结。<br>首先让我们来了解一下二叉树的遍历，二叉树有着先序、中序和后序三种遍历顺序，其中中序遍历更是可以直接将二叉树中元素以有序序列输出。因为二叉树本身就是一个递归的结构实现，所以我们可以使用递归很轻松地实现二叉树的三种遍历，同时也可以利用数据栈实现非递归的二叉树三种遍历。</p>
-<h2 id="建立二叉树"><a href="#建立二叉树" class="headerlink" title="建立二叉树"></a>建立二叉树</h2><h3 id="二叉树结构"><a href="#二叉树结构" class="headerlink" title="二叉树结构"></a>二叉树结构</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> data;</div><div class="line">    node *left, *right, *father;</div><div class="line">    node(<span class="keyword">int</span> data_) : data(data_)</div><div class="line">    &#123;</div><div class="line">        left = <span class="literal">NULL</span>;</div><div class="line">        right = <span class="literal">NULL</span>;</div><div class="line">        father = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;*Node;</div></pre></td></tr></table></figure>
-<p>这里定义了一个<code>node</code>结构表示二叉树中的一个结点，<code>Node</code>表示指向一个<code>node</code>结点的指针。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/06/16/1000-Contributions/" itemprop="url">
                   1000 Contributions
                 </a>
@@ -1035,6 +908,132 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/21/birthday/" itemprop="url">
+                  My Birthday!
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T00:11:35+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/心迹/" itemprop="url" rel="index">
+                    <span itemprop="name">心迹</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/birthday/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/21/birthday/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+             <span id="/2016/04/21/birthday/" class="leancloud_visitors" data-flag-title="My Birthday!">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天过生日，也是23岁老大不小了，希望在接下来的日子里，继续沿着心中既定的目标，在码农的道路上撒丫子颠儿着跑！<br>附上今天的Github Contributions：<br><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-04-21/%E7%94%9F%E6%97%A5.png" alt="Github Contributions"></p>
+<p>附上最近最喜欢的一首歌，为自己小小庆生一下：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/21/birthday/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1080,7 +1079,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1097,7 +1096,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
