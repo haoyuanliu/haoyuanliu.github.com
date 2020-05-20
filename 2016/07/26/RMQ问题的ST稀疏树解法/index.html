@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="RMQ,ST,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="RMQ问题(Random Minimum/Maximum Query, 即区间最值问题)，指的是给定一个长度为n的数列A，对于A数列进行若干次询问，询问在闭区间[l, r]之中的最小/最大值是多少。RMQ问题有很多种解法，包括朴素算法、线段树、ST算法等，本文主要介绍使用ST稀疏表算法。 ST算法思想ST(Sparse Table, 稀疏表)可以以O(nlogn)的时间效率对RMQ问题进行预处理，">
+<meta name="keywords" content="RMQ,ST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RMQ问题的ST稀疏表解法">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/07/26/RMQ问题的ST稀疏树解法/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="RMQ问题(Random Minimum/Maximum Query, 即区间最值问题)，指的是给定一个长度为n的数列A，对于A数列进行若干次询问，询问在闭区间[l, r]之中的最小/最大值是多少。RMQ问题有很多种解法，包括朴素算法、线段树、ST算法等，本文主要介绍使用ST稀疏表算法。 ST算法思想ST(Sparse Table, 稀疏表)可以以O(nlogn)的时间效率对RMQ问题进行预处理，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RMQ问题的ST稀疏表解法">
+<meta name="twitter:description" content="RMQ问题(Random Minimum/Maximum Query, 即区间最值问题)，指的是给定一个长度为n的数列A，对于A数列进行若干次询问，询问在闭区间[l, r]之中的最小/最大值是多少。RMQ问题有很多种解法，包括朴素算法、线段树、ST算法等，本文主要介绍使用ST稀疏表算法。 ST算法思想ST(Sparse Table, 稀疏表)可以以O(nlogn)的时间效率对RMQ问题进行预处理，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2016/07/26/RMQ问题的ST稀疏树解法/">
+
+
+
+
+
+  <title>RMQ问题的ST稀疏表解法 | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/26/RMQ问题的ST稀疏树解法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RMQ问题的ST稀疏表解法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-26T17:59:21+08:00">
+                2016-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>RMQ问题(Random Minimum/Maximum Query, 即区间最值问题)，指的是给定一个长度为n的数列A，对于A数列进行若干次询问，询问在闭区间[l, r]之中的最小/最大值是多少。RMQ问题有很多种解法，包括朴素算法、线段树、ST算法等，本文主要介绍使用ST稀疏表算法。</p>
+<h2 id="ST算法思想"><a href="#ST算法思想" class="headerlink" title="ST算法思想"></a>ST算法思想</h2><p>ST(Sparse Table, 稀疏表)可以以O(nlogn)的时间效率对RMQ问题进行预处理，然后以O(1)的时间效率回答每个问题。<br>ST算法的实质是一种动态规划算法，我们定义了状态数组<code>dp[i][j]</code>表示从数组下标i开始包含$2^j$个数组元素在内的子数组中最小/大值。则此时，假设我们令$dp[1][0] = 2$, $dp[2][0] = 3$,则$dp[1][1] = min(dp[1][0], dp[2][0])$。即当我们需要求$dp[i][j+1]$的时候，我们可以将这一段子数组分成两段，分别求取两段的最值$dp[i][j]$和$dp[i+2^j][j]$，最后取这两个的最值的比较结果就可以得到结果。所以预处理的状态转移方程为$$dp[i][j+1] = min(dp[i][j], dp[i+2^j][j])$$<br>只要初始化当$j==0$的时候，最值是本身就可以很轻松的完成预处理。<br>针对题目要求，求取对任意给定的闭区间<code>[l,r]</code>中的最值，我只要找到小于这个区间长度的最大的2的非负整数次幂——T，分别求取前一段$dp[l][T]$和后一段$dp[r - s^T + 1][T]$最后进行比较就可以得出整个区间的结果，所以$$RMQ(l, r) = min(dp[l][T], dp[r - 2^T + 1][T])$$<br>其中$T = log_2(r-l+1)$。</p>
+<a id="more"></a>
+<h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>【输入】<br>每个测试点（输入文件）有且仅有一组测试数据。<br>每组测试数据的第1行为一个整数N，意义如前文所述。<br>每组测试数据的第2行为N个整数，分别描述每种商品的重量，其中第i个整数表示标号为i的商品的重量weight_i。<br>每组测试数据的第3行为一个整数Q，表示小Hi总共询问的次数。<br>每组测试数据的第N+4~N+Q+3行，每行分别描述一个询问，其中第N+i+3行为两个整数Li, Ri，表示小Hi询问的一个区间[Li, Ri]。<br>对于100%的数据，满足N&lt;=10^6，Q&lt;=10^6, 1&lt;=Li&lt;=Ri&lt;=N，0&lt;weight_i&lt;=10^4。<br>【输出】<br>对于每组测试数据，对于每个小Hi的询问，按照在输入中出现的顺序，各输出一行，表示查询的结果：标号在区间[Li, Ri]中的所有商品中重量最轻的商品的重量。<br>【样例输入】</p>
+<pre><code>10
+7334
+1556
+8286
+1640
+2699
+4807
+8068
+981
+4120
+2179
+5
+3 4
+2 8
+2 4
+6 8
+7 10
+</code></pre><p>【样例输出】</p>
+<pre><code>1640
+981
+1556
+981
+981
+</code></pre><h2 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[N][<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, next;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; dp[i][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = log2(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= k; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i+(<span class="number">1</span>&lt;&lt;j)<span class="number">-1</span> &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            next = i + (<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>));</span><br><span class="line">            dp[i][j] = <span class="built_in">min</span>(dp[i][j<span class="number">-1</span>], dp[next][j<span class="number">-1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; l &gt;&gt; r;</span><br><span class="line">        l--;</span><br><span class="line">        r--;</span><br><span class="line">        k = log2(r - l + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">min</span>(dp[l][k], dp[r - (<span class="number">1</span>&lt;&lt;k) + <span class="number">1</span>][k]) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<ul>
+<li>位运算在算法中使用得当会有非常神奇的效果！！</li>
+<li>使用<code>using namespace std</code>之后可以直接调用<code>min()</code>,<code>max()</code>功能函数，同时也不可以再以“max”或者“min”为变量名或函数名声明新的变量、函数。</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RMQ/" rel="tag"># RMQ</a>
+          
+            <a href="/tags/ST/" rel="tag"># ST</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/24/最近公共祖先问题/" rel="next" title="最近公共祖先问题">
+                <i class="fa fa-chevron-left"></i> 最近公共祖先问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/27/使用RMQ-ST算法解决最近公共祖先问题/" rel="prev" title="使用RMQ-ST算法解决最近公共祖先问题">
+                使用RMQ-ST算法解决最近公共祖先问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ST算法思想"><span class="nav-number">1.</span> <span class="nav-text">ST算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目要求"><span class="nav-number">2.</span> <span class="nav-text">题目要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终代码"><span class="nav-number">3.</span> <span class="nav-text">最终代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

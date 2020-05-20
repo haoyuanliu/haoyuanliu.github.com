@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="UNIX/Linux,网络编程,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="地址查询函数的功能也就是通过主机名或者域名返回详细的主机信息，其中我们最常用的功能就是通过主机名获得主机的IP地址等信息。gethostbyname()和其可重入版本gethostbyname_r()是我们之前较多使用的函数，由于SUSv4已经删除了它们并认为它们已经是过时的了，现在我们更推荐使用getaddrinfo()来完成相应的功能。">
+<meta name="keywords" content="UNIX&#x2F;Linux,网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地址查询函数gethostbyname()和getaddrinfo()">
+<meta property="og:url" content="http://haoyuanliu.github.io/2017/01/16/地址查询函数gethostbyname-和getaddrinfo/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="地址查询函数的功能也就是通过主机名或者域名返回详细的主机信息，其中我们最常用的功能就是通过主机名获得主机的IP地址等信息。gethostbyname()和其可重入版本gethostbyname_r()是我们之前较多使用的函数，由于SUSv4已经删除了它们并认为它们已经是过时的了，现在我们更推荐使用getaddrinfo()来完成相应的功能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="地址查询函数gethostbyname()和getaddrinfo()">
+<meta name="twitter:description" content="地址查询函数的功能也就是通过主机名或者域名返回详细的主机信息，其中我们最常用的功能就是通过主机名获得主机的IP地址等信息。gethostbyname()和其可重入版本gethostbyname_r()是我们之前较多使用的函数，由于SUSv4已经删除了它们并认为它们已经是过时的了，现在我们更推荐使用getaddrinfo()来完成相应的功能。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2017/01/16/地址查询函数gethostbyname-和getaddrinfo/">
+
+
+
+
+
+  <title>地址查询函数gethostbyname()和getaddrinfo() | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2017/01/16/地址查询函数gethostbyname-和getaddrinfo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">地址查询函数gethostbyname()和getaddrinfo()</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-16T11:08:20+08:00">
+                2017-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>地址查询函数的功能也就是通过主机名或者域名返回详细的主机信息，其中我们最常用的功能就是通过主机名获得主机的IP地址等信息。gethostbyname()和其可重入版本gethostbyname_r()是我们之前较多使用的函数，由于SUSv4已经删除了它们并认为它们已经是过时的了，现在我们更推荐使用getaddrinfo()来完成相应的功能。</p>
+<a id="more"></a>
+<h2 id="gethostbyname-函数"><a href="#gethostbyname-函数" class="headerlink" title="gethostbyname()函数"></a>gethostbyname()函数</h2><h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hostent</span></span> *gethostbyname(<span class="keyword">const</span> <span class="built_in">char</span> *name);</span><br></pre></td></tr></table></figure>
+<p><strong>功能</strong>：用域名或主机名获取IP地址<br><strong>头文件</strong>：<code>&lt;netdb.h&gt;</code>, <code>&lt;sys/socket.h&gt;</code></p>
+<h3 id="hostent结构体"><a href="#hostent结构体" class="headerlink" title="hostent结构体"></a>hostent结构体</h3><p>hostent的结构如下所示：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hostent</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span>    *h_name;<span class="comment">//主机的规范名               </span></span><br><span class="line">    <span class="keyword">char</span>    **h_aliases;<span class="comment">//主机的别名</span></span><br><span class="line">    <span class="keyword">int</span>     h_addrtype;<span class="comment">//主机ip地址的类型</span></span><br><span class="line">    <span class="keyword">int</span>     h_length;<span class="comment">//主机ip地址的长度</span></span><br><span class="line">    <span class="keyword">char</span>    **h_addr_list;<span class="comment">//主机的ip地址</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> h_addr h_addr_list[0];</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h3><p>代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: usage %s\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *ptr, **pptr;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> *<span class="title">hent</span>;</span></span><br><span class="line">    <span class="keyword">if</span>((hent = gethostbyname(argv[<span class="number">1</span>])) == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: gethostbyname error for hostname: %s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Official hostname: %s\n"</span>, hent-&gt;h_name);</span><br><span class="line">    <span class="keyword">for</span>(pptr = hent-&gt;h_aliases; *pptr != <span class="literal">NULL</span>; pptr++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Alias hostname: %s\n"</span>, *pptr);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Host Address Type: %d(AF_INET: %d)\n"</span>, hent-&gt;h_addrtype, (<span class="keyword">int</span>)AF_INET);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(pptr = hent-&gt;h_addr_list; *pptr != <span class="literal">NULL</span>; pptr++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"IP Address: %s\n"</span>, inet_ntop(hent-&gt;h_addrtype, *pptr, buf, <span class="keyword">sizeof</span> buf));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行结果：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./a.out www.baidu.com</span><br><span class="line"></span><br><span class="line">Official hostname: www.a.shifen.com</span><br><span class="line">Alias hostname: www.baidu.com</span><br><span class="line">Host<span class="built_in"> Address </span>Type: 2(AF_INET: 2)</span><br><span class="line">IP Address: 61.135.169.125</span><br><span class="line">IP Address: 61.135.169.121</span><br></pre></td></tr></table></figure></p>
+<h2 id="gethostbyname-r-函数"><a href="#gethostbyname-r-函数" class="headerlink" title="gethostbyname_r()函数"></a>gethostbyname_r()函数</h2><p>gethostbyname_r()函数是gethostbyname()函数的可重入版本，两个函数的功能是一样的。</p>
+<h3 id="gethostbyname-r-函数原型"><a href="#gethostbyname-r-函数原型" class="headerlink" title="gethostbyname_r()函数原型"></a>gethostbyname_r()函数原型</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gethostbyname_r</span>(<span class="params"><span class="keyword">const</span> <span class="keyword">char</span> *name,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">struct</span> hostent *ret, <span class="keyword">char</span> *buf, size_t buflen,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">struct</span> hostent **result, <span class="keyword">int</span> *h_errnop</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>功能</strong>：用域名或主机名获取IP地址<br><strong>头文件</strong>：<code>&lt;netdb.h&gt;</code>, <code>&lt;sys/socket.h&gt;</code></p>
+<h3 id="代码实例-1"><a href="#代码实例-1" class="headerlink" title="代码实例"></a>代码实例</h3><p>代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: usage %s\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> *ptr, **pptr;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> <span class="title">hent</span>, *<span class="title">hptr</span>;</span></span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(gethostbyname_r(argv[<span class="number">1</span>], &amp;hent, buf, <span class="keyword">sizeof</span>(buf), &amp;hptr, &amp;ret))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: gethostbyname_r(%s) ret: %d\n"</span>, argv[<span class="number">1</span>], ret);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Get host by name(%s) success!\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Official hostname: %s\n"</span>, hptr-&gt;h_name);</span><br><span class="line">    <span class="keyword">for</span>(pptr = hptr-&gt;h_aliases; *pptr != <span class="literal">NULL</span>; pptr++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Alias hostname: %s\n"</span>, *pptr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Host Address Type: %d(AF_INET: %d)\n"</span>, hptr-&gt;h_addrtype, (<span class="keyword">int</span>)AF_INET);</span><br><span class="line">    <span class="keyword">for</span>(pptr = hptr-&gt;h_addr_list; *pptr != <span class="literal">NULL</span>; pptr++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"IP Address: %s\n"</span>, inet_ntop(hptr-&gt;h_addrtype, *pptr, buf, <span class="keyword">sizeof</span> buf));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行结果<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">./a.out www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">Get</span> host by name(www.baidu.com) success!</span><br><span class="line">Official hostname: www.a.shifen.com</span><br><span class="line">Alias hostname: www.baidu.com</span><br><span class="line">Host<span class="built_in"> Address </span>Type: 2(AF_INET: 2)</span><br><span class="line">IP Address: 61.135.169.125</span><br><span class="line">IP Address: 61.135.169.121</span><br></pre></td></tr></table></figure></p>
+<h2 id="getaddrinfo-函数"><a href="#getaddrinfo-函数" class="headerlink" title="getaddrinfo()函数"></a>getaddrinfo()函数</h2><p>getaddrinfo()函数是现在用来替代gethostbyname()功能的函数，他具有更加强大的功能。</p>
+<h3 id="getaddrinfo-函数原型"><a href="#getaddrinfo-函数原型" class="headerlink" title="getaddrinfo()函数原型"></a>getaddrinfo()函数原型</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getaddrinfo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> host, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> service,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> struct addrinfo *<span class="keyword">restrict</span> hint,</span></span></span><br><span class="line"><span class="function"><span class="params">                struct addrinfo **<span class="keyword">restrict</span> res)</span></span>;</span><br><span class="line">                        返回值：若成功，返回<span class="number">0</span>；若出错，返回非<span class="number">0</span>错误码</span><br></pre></td></tr></table></figure>
+<p><strong>功能</strong>：用主机名或服务名获取IP地址<br><strong>头文件</strong>：<code>&lt;netdb.h&gt;</code>, <code>&lt;sys/socket.h&gt;</code></p>
+<h3 id="代码实例-2"><a href="#代码实例-2" class="headerlink" title="代码实例"></a>代码实例</h3><p>代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_family</span><span class="params">(struct addrinfo *aip)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Family:"</span>);</span><br><span class="line">    <span class="keyword">switch</span> (aip-&gt;ai_family) &#123;</span><br><span class="line">    <span class="keyword">case</span> AF_INET:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"inet"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> AF_INET6:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"inet6"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> AF_UNIX:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"unix"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> AF_UNSPEC:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"unspecified"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"unknown"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_type</span><span class="params">(struct addrinfo *aip)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">" Type:"</span>);</span><br><span class="line">    <span class="keyword">switch</span> (aip-&gt;ai_socktype) &#123;</span><br><span class="line">    <span class="keyword">case</span> SOCK_STREAM:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"stream"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SOCK_DGRAM:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"datagram"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SOCK_SEQPACKET:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"seqpacket"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SOCK_RAW:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"raw"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"unknown (%d)"</span>, aip-&gt;ai_socktype);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_protocol</span><span class="params">(struct addrinfo *aip)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">" Protocol:"</span>);</span><br><span class="line">    <span class="keyword">switch</span> (aip-&gt;ai_protocol) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"default"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> IPPROTO_TCP:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"TCP"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> IPPROTO_UDP:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"UDP"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> IPPROTO_RAW:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"raw"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"unknown (%d)"</span>, aip-&gt;ai_protocol);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_flags</span><span class="params">(struct addrinfo *aip)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">" Flags:"</span>);</span><br><span class="line">    <span class="keyword">if</span> (aip-&gt;ai_flags == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">" 0"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_PASSIVE)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" passive"</span>);</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_CANONNAME)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" canon"</span>);</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_NUMERICHOST)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" numhost"</span>);</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_NUMERICSERV)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" numserv"</span>);</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_V4MAPPED)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" v4mapped"</span>);</span><br><span class="line">        <span class="keyword">if</span> (aip-&gt;ai_flags &amp; AI_ALL)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" all"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: usage %s\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">addrinfo</span> *<span class="title">ai</span>, *<span class="title">aip</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">addrinfo</span> <span class="title">hint</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> *<span class="title">sinp</span>;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *addr;</span><br><span class="line">    <span class="keyword">int</span> err;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">    hint.ai_flags = AI_CANONNAME;</span><br><span class="line">    hint.ai_family = <span class="number">0</span>;</span><br><span class="line">    hint.ai_socktype = <span class="number">0</span>;</span><br><span class="line">    hint.ai_protocol = <span class="number">0</span>;</span><br><span class="line">    hint.ai_addrlen = <span class="number">0</span>;</span><br><span class="line">    hint.ai_canonname = <span class="literal">NULL</span>;</span><br><span class="line">    hint.ai_addr = <span class="literal">NULL</span>;</span><br><span class="line">    hint.ai_next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>((err = getaddrinfo(argv[<span class="number">1</span>], <span class="literal">NULL</span>, &amp;hint, &amp;ai)) != <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR: getaddrinfo error: %s\n"</span>, gai_strerror(err));</span><br><span class="line">    <span class="keyword">for</span>(aip = ai; aip != <span class="literal">NULL</span>; aip = aip-&gt;ai_next)</span><br><span class="line">    &#123;</span><br><span class="line">        print_family(aip);</span><br><span class="line">        print_type(aip);</span><br><span class="line">        print_protocol(aip);</span><br><span class="line">        print_flags(aip);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Canonical Name: %s\n"</span>, aip-&gt;ai_canonname);</span><br><span class="line">        <span class="keyword">if</span>(aip-&gt;ai_family == AF_INET)</span><br><span class="line">        &#123;</span><br><span class="line">            sinp = (struct sockaddr_in *)aip-&gt;ai_addr;</span><br><span class="line">            addr = inet_ntop(AF_INET, &amp;sinp-&gt;sin_addr, buf, <span class="keyword">sizeof</span> buf);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"IP Address: %s "</span>, addr);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Port: %d\n"</span>, ntohs(sinp-&gt;sin_port));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行结果：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">./a.out www.baidu.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Family:inet Type:stream Protocol:TCP Flags: canon</span><br><span class="line">Canonical Name: www.a.shifen.com</span><br><span class="line">IP Address: 61.135.169.125 Port: 0</span><br><span class="line"></span><br><span class="line">Family:inet Type:datagram Protocol:UDP Flags: canon</span><br><span class="line">Canonical Name: (<span class="literal">null</span>)</span><br><span class="line">IP Address: 61.135.169.125 Port: 0</span><br><span class="line"></span><br><span class="line">Family:inet Type:raw Protocol:default Flags: canon</span><br><span class="line">Canonical Name: (<span class="literal">null</span>)</span><br><span class="line">IP Address: 61.135.169.125 Port: 0</span><br><span class="line"></span><br><span class="line">Family:inet Type:stream Protocol:TCP Flags: canon</span><br><span class="line">Canonical Name: (<span class="literal">null</span>)</span><br><span class="line">IP Address: 61.135.169.121 Port: 0</span><br><span class="line"></span><br><span class="line">Family:inet Type:datagram Protocol:UDP Flags: canon</span><br><span class="line">Canonical Name: (<span class="literal">null</span>)</span><br><span class="line">IP Address: 61.135.169.121 Port: 0</span><br><span class="line"></span><br><span class="line">Family:inet Type:raw Protocol:default Flags: canon</span><br><span class="line">Canonical Name: (<span class="literal">null</span>)</span><br><span class="line">IP Address: 61.135.169.121 Port: 0</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/UNIX-Linux/" rel="tag"># UNIX/Linux</a>
+          
+            <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/15/地址转换函数inet-addr-inet-aton-inet-ntoa-和inet-ntop-inet-pton/" rel="next" title="地址转换函数inet_addr(), inet_aton(), inet_ntoa()和inet_ntop(), inet_pton()">
+                <i class="fa fa-chevron-left"></i> 地址转换函数inet_addr(), inet_aton(), inet_ntoa()和inet_ntop(), inet_pton()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/08/LeetCode-Heap/" rel="prev" title="LeetCode Heap">
+                LeetCode Heap <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gethostbyname-函数"><span class="nav-number">1.</span> <span class="nav-text">gethostbyname()函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数原型"><span class="nav-number">1.1.</span> <span class="nav-text">函数原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hostent结构体"><span class="nav-number">1.2.</span> <span class="nav-text">hostent结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实例"><span class="nav-number">1.3.</span> <span class="nav-text">代码实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gethostbyname-r-函数"><span class="nav-number">2.</span> <span class="nav-text">gethostbyname_r()函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gethostbyname-r-函数原型"><span class="nav-number">2.1.</span> <span class="nav-text">gethostbyname_r()函数原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实例-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getaddrinfo-函数"><span class="nav-number">3.</span> <span class="nav-text">getaddrinfo()函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getaddrinfo-函数原型"><span class="nav-number">3.1.</span> <span class="nav-text">getaddrinfo()函数原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实例-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

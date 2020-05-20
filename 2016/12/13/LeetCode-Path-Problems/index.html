@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LeetCode,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="本文包含如下题目：62. Unique Paths63. Unique Paths II64. Minimum Path Sum174. Dungeon Game">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Path Problems">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文包含如下题目：62. Unique Paths63. Unique Paths II64. Minimum Path Sum174. Dungeon Game">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Path Problems">
+<meta name="twitter:description" content="本文包含如下题目：62. Unique Paths63. Unique Paths II64. Minimum Path Sum174. Dungeon Game">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/">
+
+
+
+
+
+  <title>LeetCode Path Problems | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/12/13/LeetCode-Path-Problems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LeetCode Path Problems</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-13T11:28:50+08:00">
+                2016-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文包含如下题目：<br><a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths</a><br><a href="https://leetcode.com/problems/unique-paths-iie.com/problems/unique-paths/" target="_blank" rel="noopener">63. Unique Paths II</a><br><a href="https://leetcode.com/problems/minimum-path-sume.com/problems/unique-paths/" target="_blank" rel="noopener">64. Minimum Path Sum</a><br><a href="https://leetcode.com/problems/dungeon-game/" target="_blank" rel="noopener">174. Dungeon Game</a></p>
+<a id="more"></a>
+<h2 id="62-Unique-Paths"><a href="#62-Unique-Paths" class="headerlink" title="62. Unique Paths"></a>62. Unique Paths</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>设m×n的表格有res[m][n]条路径；</li>
+<li>所有的res[m][26] = res[1][n] = 1;</li>
+<li>针对任意i×j有res[i][j] = res[i-1][j] + res[i][j-1];</li>
+<li>由状态公式可知，可以进行空间优化，使用两行数组即可DP完成。</li>
+</ul>
+</blockquote>
+<p>如上，用DP就可以很快做出来。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        int uniquePaths(int m, int n)</span><br><span class="line">        &#123;</span><br><span class="line">            int res[<span class="number">101</span>][<span class="number">101</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt;= m; ++<span class="built_in">i</span>)</span><br><span class="line">                res[<span class="built_in">i</span>][<span class="number">27</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">j</span> = <span class="number">1</span>; <span class="built_in">j</span> &lt;= n; ++<span class="built_in">j</span>)</span><br><span class="line">                res[<span class="number">1</span>][<span class="built_in">j</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = <span class="number">2</span>; <span class="built_in">i</span> &lt;= m; ++<span class="built_in">i</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(int <span class="built_in">j</span> = <span class="number">2</span>; <span class="built_in">j</span> &lt;= n; ++<span class="built_in">j</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    res[<span class="built_in">i</span>][<span class="built_in">j</span>] = res[<span class="built_in">i</span><span class="number">-1</span>][<span class="built_in">j</span>] + res[<span class="built_in">i</span>][<span class="built_in">j</span><span class="number">-1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> res[m][n];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>进行空间优化之后的代码为：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        int uniquePaths(int m, int n)</span><br><span class="line">        &#123;</span><br><span class="line">            int res<span class="comment">[2]</span><span class="comment">[101]</span> = &#123;0&#125;;</span><br><span class="line">            for(int i = 1; i &lt;= n; ++i)</span><br><span class="line">                res<span class="comment">[0]</span><span class="comment">[i]</span> = res<span class="comment">[1]</span><span class="comment">[i]</span> = 1;</span><br><span class="line">            for(int i = 2; i &lt;= m; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j = 1; j &lt;= n; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                        res<span class="comment">[1]</span><span class="comment">[j]</span> = res<span class="comment">[0]</span><span class="comment">[j]</span> + res<span class="comment">[1]</span><span class="comment">[j-1]</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                for(int k = 0; k &lt;= n; ++k)</span><br><span class="line">                    res<span class="comment">[0]</span><span class="comment">[k]</span> = res<span class="comment">[1]</span><span class="comment">[k]</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return res<span class="comment">[0]</span><span class="comment">[n]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="63-Unique-Paths-II"><a href="#63-Unique-Paths-II" class="headerlink" title="63. Unique Paths II"></a>63. Unique Paths II</h2><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>设m×n的表格有res[m][n]条路径；</li>
+<li>所有的res[m][28] = res[1][n] = 1;</li>
+<li>如果(x, j)位置为1，则此时res[i][j] = 0;</li>
+<li>此外，任意i×j有res[i][j] = res[i-1][j] + res[i][j-1];</li>
+<li>根据上述公式，进行空间优化，使用两行数组进行DP即可。</li>
+</ul>
+</blockquote>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt; &gt; &amp;obstacleGrid)</span><br><span class="line">        &#123;</span><br><span class="line">            int m = obstacleGrid.size();</span><br><span class="line">            int n = obstacleGrid<span class="comment">[0]</span>.size();</span><br><span class="line">            if(obstacleGrid<span class="comment">[0]</span><span class="comment">[0]</span> == 1 || obstacleGrid<span class="comment">[m-1]</span><span class="comment">[n-1]</span> == 1)</span><br><span class="line">                return 0;</span><br><span class="line">            int res<span class="comment">[2]</span><span class="comment">[101]</span> = &#123;0&#125;;</span><br><span class="line">            for(int i = 1; i &lt;= n; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                if(obstacleGrid<span class="comment">[0]</span><span class="comment">[i-1]</span>)</span><br><span class="line">                    break;</span><br><span class="line">                res<span class="comment">[0]</span><span class="comment">[i]</span> = res<span class="comment">[1]</span><span class="comment">[i]</span> = 1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for(int i = 2; i &lt;= m; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j = 1; j &lt;= n; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    if(obstacleGrid<span class="comment">[i-1]</span><span class="comment">[j-1]</span> == 0)</span><br><span class="line">                        res<span class="comment">[1]</span><span class="comment">[j]</span> = res<span class="comment">[0]</span><span class="comment">[j]</span> + res<span class="comment">[1]</span><span class="comment">[j-1]</span>;</span><br><span class="line">                    else</span><br><span class="line">                        res<span class="comment">[1]</span><span class="comment">[j]</span> = 0;</span><br><span class="line">                &#125;</span><br><span class="line">                for(int k = 0; k &lt;= n; ++k)</span><br><span class="line">                    res<span class="comment">[0]</span><span class="comment">[k]</span> = res<span class="comment">[1]</span><span class="comment">[k]</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return res<span class="comment">[0]</span><span class="comment">[n]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="64-Minimum-Path-Sum"><a href="#64-Minimum-Path-Sum" class="headerlink" title="64. Minimum Path Sum"></a>64. Minimum Path Sum</h2><h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>grid[i][j]表示到(i, j)位置的最小距离；</li>
+<li>grid[i][j] = min(grid[i][j-1] + grid[i][j], grid[i-1][j] + grid[i][j])；</li>
+</ul>
+</blockquote>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        int minPathSum(vector&lt;vector&lt;int&gt; &gt; &amp;grid)</span><br><span class="line">        &#123;</span><br><span class="line">            int m = grid.<span class="built_in">size</span>();</span><br><span class="line">            int n = grid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt; m; ++<span class="built_in">i</span>)</span><br><span class="line">                grid[<span class="built_in">i</span>][<span class="number">0</span>] = grid[<span class="built_in">i</span><span class="number">-1</span>][<span class="number">0</span>] + grid[<span class="built_in">i</span>][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">j</span> = <span class="number">1</span>; <span class="built_in">j</span> &lt; n; ++<span class="built_in">j</span>)</span><br><span class="line">                grid[<span class="number">0</span>][<span class="built_in">j</span>] = grid[<span class="number">0</span>][<span class="built_in">j</span><span class="number">-1</span>] + grid[<span class="number">0</span>][<span class="built_in">j</span>];</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt; m; ++<span class="built_in">i</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(int <span class="built_in">j</span> = <span class="number">1</span>; <span class="built_in">j</span> &lt; n; ++<span class="built_in">j</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    grid[<span class="built_in">i</span>][<span class="built_in">j</span>] = <span class="built_in">min</span>(grid[<span class="built_in">i</span>][<span class="built_in">j</span><span class="number">-1</span>] + grid[<span class="built_in">i</span>][<span class="built_in">j</span>], grid[<span class="built_in">i</span><span class="number">-1</span>][<span class="built_in">j</span>] + grid[<span class="built_in">i</span>][<span class="built_in">j</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> grid[m<span class="number">-1</span>][n<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="174-Dungeon-Game"><a href="#174-Dungeon-Game" class="headerlink" title="174. Dungeon Game"></a>174. Dungeon Game</h2><h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>设dp[i][j]表示到达(i, j)时的最小生命值；</li>
+<li>dp[i][j] = max(1, min(dp[i+1][j], dp[i][j+1]) - dp[i][j])；</li>
+<li>减去dp[i][j]，如果为正，表示最小生命值可以少一点，但最小为1，为负，表示需要更多的生命值；</li>
+<li>从右下角开始进行计算，右下角的最小生命值为1，然后从右下到左上进行计算；</li>
+<li>如果从左上开始向右下计算，遇到一个很大的正数的时候就很难处理，会覆盖之前的信息；</li>
+<li>DP的问题，如果正序计算不好解决，试一试逆序DP。</li>
+</ul>
+</blockquote>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution</span><br><span class="line">&#123;</span><br><span class="line">    public:</span><br><span class="line">        int calculateMinimumHP(vector&lt;vector&lt;int&gt; &gt; &amp;dumgeon)</span><br><span class="line">        &#123;</span><br><span class="line">            int m = dumgeon.<span class="built_in">size</span>();</span><br><span class="line">            int n = dumgeon[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">            dumgeon[m<span class="number">-1</span>][n<span class="number">-1</span>] = <span class="built_in">max</span>(<span class="number">1</span>, <span class="number">1</span> - dumgeon[m<span class="number">-1</span>][n<span class="number">-1</span>]);</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">j</span> = n<span class="number">-2</span>; <span class="built_in">j</span> &gt;= <span class="number">0</span>; --<span class="built_in">j</span>)</span><br><span class="line">                dumgeon[m<span class="number">-1</span>][<span class="built_in">j</span>] = <span class="built_in">max</span>(<span class="number">1</span>, dumgeon[m<span class="number">-1</span>][<span class="built_in">j</span>+<span class="number">1</span>] - dumgeon[m<span class="number">-1</span>][<span class="built_in">j</span>]);</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = m<span class="number">-2</span>; <span class="built_in">i</span> &gt;= <span class="number">0</span>; --<span class="built_in">i</span>)</span><br><span class="line">                dumgeon[<span class="built_in">i</span>][n<span class="number">-1</span>] = <span class="built_in">max</span>(<span class="number">1</span>, dumgeon[<span class="built_in">i</span>+<span class="number">1</span>][n<span class="number">-1</span>] - dumgeon[<span class="built_in">i</span>][n<span class="number">-1</span>]);</span><br><span class="line">            <span class="keyword">for</span>(int <span class="built_in">i</span> = m<span class="number">-2</span>; <span class="built_in">i</span> &gt;= <span class="number">0</span>; --<span class="built_in">i</span>)</span><br><span class="line">                <span class="keyword">for</span>(int <span class="built_in">j</span> = n<span class="number">-2</span>; <span class="built_in">j</span> &gt;= <span class="number">0</span>; --<span class="built_in">j</span>)</span><br><span class="line">                    dumgeon[<span class="built_in">i</span>][<span class="built_in">j</span>] = <span class="built_in">max</span>(<span class="number">1</span>, <span class="built_in">min</span>(dumgeon[<span class="built_in">i</span>+<span class="number">1</span>][<span class="built_in">j</span>], dumgeon[<span class="built_in">i</span>][<span class="built_in">j</span>+<span class="number">1</span>]) - dumgeon[<span class="built_in">i</span>][<span class="built_in">j</span>]);</span><br><span class="line">            <span class="keyword">return</span> dumgeon[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/LeetCode-Rotate/" rel="next" title="LeetCode Rotate">
+                <i class="fa fa-chevron-left"></i> LeetCode Rotate
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/13/LeetCode-String-and-Integer/" rel="prev" title="LeetCode String and Integer">
+                LeetCode String and Integer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#62-Unique-Paths"><span class="nav-number">1.</span> <span class="nav-text">62. Unique Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#63-Unique-Paths-II"><span class="nav-number">2.</span> <span class="nav-text">63. Unique Paths II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-Minimum-Path-Sum"><span class="nav-number">3.</span> <span class="nav-text">64. Minimum Path Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-2"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#174-Dungeon-Game"><span class="nav-number">4.</span> <span class="nav-text">174. Dungeon Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-3"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

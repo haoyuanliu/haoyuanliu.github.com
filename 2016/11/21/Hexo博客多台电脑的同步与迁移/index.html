@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo,Blog,Github Page,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="使用Github Page + Hexo可以搭建出非常简洁和个性化的博客系统，本博客就是使用的Hexo的Next主题挂载在Github Page上的。现在的问题是，如果我想要在多台设备中进行博文的更新和推送，或者我重新安装系统，我原来的博客配置全部没有了如何进行数据和配置的恢复，今天我们就这介绍这么一种方法，我也刚刚成功的在一个新系统中配置好了博客环境。其核心就是在博客挂载的Github仓库中新建">
+<meta name="keywords" content="Hexo,Blog,Github Page">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客多台电脑的同步与迁移">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/11/21/Hexo博客多台电脑的同步与迁移/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="使用Github Page + Hexo可以搭建出非常简洁和个性化的博客系统，本博客就是使用的Hexo的Next主题挂载在Github Page上的。现在的问题是，如果我想要在多台设备中进行博文的更新和推送，或者我重新安装系统，我原来的博客配置全部没有了如何进行数据和配置的恢复，今天我们就这介绍这么一种方法，我也刚刚成功的在一个新系统中配置好了博客环境。其核心就是在博客挂载的Github仓库中新建">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo博客多台电脑的同步与迁移">
+<meta name="twitter:description" content="使用Github Page + Hexo可以搭建出非常简洁和个性化的博客系统，本博客就是使用的Hexo的Next主题挂载在Github Page上的。现在的问题是，如果我想要在多台设备中进行博文的更新和推送，或者我重新安装系统，我原来的博客配置全部没有了如何进行数据和配置的恢复，今天我们就这介绍这么一种方法，我也刚刚成功的在一个新系统中配置好了博客环境。其核心就是在博客挂载的Github仓库中新建">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2016/11/21/Hexo博客多台电脑的同步与迁移/">
+
+
+
+
+
+  <title>Hexo博客多台电脑的同步与迁移 | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/11/21/Hexo博客多台电脑的同步与迁移/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo博客多台电脑的同步与迁移</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-21T00:23:34+08:00">
+                2016-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GitHub-Page/" itemprop="url" rel="index">
+                    <span itemprop="name">GitHub Page</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用Github Page + Hexo可以搭建出非常简洁和个性化的博客系统，本博客就是使用的Hexo的Next主题挂载在Github Page上的。现在的问题是，如果我想要在多台设备中进行博文的更新和推送，或者我重新安装系统，我原来的博客配置全部没有了如何进行数据和配置的恢复，今天我们就这介绍这么一种方法，我也刚刚成功的在一个新系统中配置好了博客环境。<br><strong>其核心就是在博客挂载的Github仓库中新建一个branch分支hexo，其中默认的master进行博文的deploy工作，hexo保存博客的源文件以及环境配置和主题配置文件（设置hexo为默认主分支），这样我们每次重新配置系统只需要从Github中clone一下，然后再进行几步简单环境安装配置操作就完成了。</strong><br>具体步骤如下：<br>1.建立master和hexo两个分支<br>2.安装Node.js<br>3.安装git<br>4.安装hexo<br>5.git clone<br>6.更新theme主题文件配置<br>7.npm安装配置hexo<br>下面我们一步一步来完成！</p>
+<a id="more"></a>
+<h3 id="建立master和hexo两个分支"><a href="#建立master和hexo两个分支" class="headerlink" title="建立master和hexo两个分支"></a>建立master和hexo两个分支</h3><p>其中master分支是默认建立好的，我们在<code>./_config.yml</code>文件中配置deploy布置信息，设置布置生成的静态文件的分支为<code>master</code>，使用<code>hexo deploy</code>命令会自动的将这些静态文件push到Github中去；<br>然后新建一个分支hexo，保存我们所有的源文件，这里需要手动<code>git push</code>，另外，由于hexo中<code>.gitignore</code>文件设置了忽略，所以<code>./theme</code>文件中的主题配置信息不会被push到Github中，所以这里新建一个<code>setting</code>文件夹保存<code>./theme</code>中的主题配置文件，进行备份更新。<br>将hexo分支设置为默认主分支，我们之后只需要通过hexo分支进行博文的更新即可，hexo分支保存博文源文件（Markdown文件），通过<code>hexo g -d</code>命令会自动将生成的静态文件push到master分支上去。</p>
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>对于一台新的电脑进行配置，我们首先需要按如下步骤进行环境的安装配置。</p>
+<p>首先安装Node.js，最佳方法推荐nvm；<br>cURL:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
+<p>Wget:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，重启终端并执行下列命令即可安装 Node.js。<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm <span class="keyword">install</span> stable</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> install git-core</span><br></pre></td></tr></table></figure>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+<p>如果这里报错的话可以尝试添加<code>--unsafe</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g hexo-cli <span class="comment">--unsafe</span></span><br></pre></td></tr></table></figure></p>
+<p>然后安装要用到的一些插件<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-generator-<span class="keyword">index</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-<span class="keyword">archive</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-<span class="keyword">category</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-tag <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-<span class="keyword">server</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-deployer-heroku <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-deployer-rsync <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-deployer-openshift <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-marked@<span class="number">0.2</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-stylus@<span class="number">0.2</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-feed@<span class="number">1</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-sitemap@<span class="number">1</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-generator-searchdb <span class="comment">--save</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>git clone复制repo源文件，其中由于<code>.gitignore</code>文件，hexo目录中的theme主题文件不会被push到Github中，所以我采取的方法是新建一个<code>setting</code>文件夹，将theme文件复制到<code>setting</code>文件中进行备份保存。</p>
+<h3 id="更新theme文件配置"><a href="#更新theme文件配置" class="headerlink" title="更新theme文件配置"></a>更新theme文件配置</h3><p>所以这里git clone之后要进行theme主题配置的更新，执行如下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -rf ./setting/next ./themes</span><br></pre></td></tr></table></figure></p>
+<p>主题与文件夹的名字大家按自己定义的就好。</p>
+<h3 id="npm安装配置Hexo"><a href="#npm安装配置Hexo" class="headerlink" title="npm安装配置Hexo"></a>npm安装配置Hexo</h3><p>执行如下几条命令：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo</span><br><span class="line">npm <span class="keyword">install</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-deployer-git</span><br></pre></td></tr></table></figure></p>
+<p>千万不要执行<code>hexo init</code>，这样会重置hexo的配置文件，配好的文件就丢失啦！</p>
+<h3 id="测试使用"><a href="#测试使用" class="headerlink" title="测试使用"></a>测试使用</h3><p>这时就可以测试一下，使用<code>hexo server</code>、<code>hexo g -d</code>等命令测试一下同步的情况，然后不同的机器可以使用<code>git pull</code>进行数据的同步，每次更新博文就使用<code>git push origin hexo</code>更新到hexo分支上去即可！</p>
+<blockquote>
+<ul>
+<li>PS：今天解决了Next博客主页空白的问题，由于Github Page更新了，所以将<code>/theme/next/source/</code>下的<code>vendor</code>文件夹改名为<code>lib</code>文件夹，并在<code>/theme/next/source/_config.yml</code>文件中进行了对应的替换，最后更新到<code>setting</code>文件夹中。</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/Blog/" rel="tag"># Blog</a>
+          
+            <a href="/tags/Github-Page/" rel="tag"># Github Page</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/" rel="next" title="UNIX编程之冲洗内存流与null追加策略（APUE F5-15）">
+                <i class="fa fa-chevron-left"></i> UNIX编程之冲洗内存流与null追加策略（APUE F5-15）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/08/LeetCode-Rotate/" rel="prev" title="LeetCode Rotate">
+                LeetCode Rotate <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立master和hexo两个分支"><span class="nav-number">1.</span> <span class="nav-text">建立master和hexo两个分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git"><span class="nav-number">3.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone"><span class="nav-number">5.</span> <span class="nav-text">git clone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新theme文件配置"><span class="nav-number">6.</span> <span class="nav-text">更新theme文件配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm安装配置Hexo"><span class="nav-number">7.</span> <span class="nav-text">npm安装配置Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试使用"><span class="nav-number">8.</span> <span class="nav-text">测试使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

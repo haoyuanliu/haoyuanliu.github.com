@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度优先搜索,DFS,公共祖先,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="最近公共祖先问题，即LCA（Lowest Common Ancestors）问题，是一个基于并查集和深度优先搜索的算法问题。题目假设我们已经知道了N个人的信息——他们的父亲是谁，然后对任意输入的两个人名，给出这两个人公共祖先中辈分最低的一个祖先。 并查集方法题目介绍输入输出介绍和样例如下，题目出自hihoCoder。（点击查看原题介绍讲述）【输入】每个测试点（输入文件）有且仅有一组测试数据。每组测">
+<meta name="keywords" content="深度优先搜索,DFS,公共祖先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最近公共祖先问题">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/07/24/最近公共祖先问题/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="最近公共祖先问题，即LCA（Lowest Common Ancestors）问题，是一个基于并查集和深度优先搜索的算法问题。题目假设我们已经知道了N个人的信息——他们的父亲是谁，然后对任意输入的两个人名，给出这两个人公共祖先中辈分最低的一个祖先。 并查集方法题目介绍输入输出介绍和样例如下，题目出自hihoCoder。（点击查看原题介绍讲述）【输入】每个测试点（输入文件）有且仅有一组测试数据。每组测">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最近公共祖先问题">
+<meta name="twitter:description" content="最近公共祖先问题，即LCA（Lowest Common Ancestors）问题，是一个基于并查集和深度优先搜索的算法问题。题目假设我们已经知道了N个人的信息——他们的父亲是谁，然后对任意输入的两个人名，给出这两个人公共祖先中辈分最低的一个祖先。 并查集方法题目介绍输入输出介绍和样例如下，题目出自hihoCoder。（点击查看原题介绍讲述）【输入】每个测试点（输入文件）有且仅有一组测试数据。每组测">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2016/07/24/最近公共祖先问题/">
+
+
+
+
+
+  <title>最近公共祖先问题 | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/24/最近公共祖先问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">最近公共祖先问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-24T09:57:15+08:00">
+                2016-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近公共祖先问题，即LCA（Lowest Common Ancestors）问题，是一个基于并查集和深度优先搜索的算法问题。题目假设我们已经知道了N个人的信息——他们的父亲是谁，然后对任意输入的两个人名，给出这两个人公共祖先中辈分最低的一个祖先。</p>
+<h2 id="并查集方法"><a href="#并查集方法" class="headerlink" title="并查集方法"></a>并查集方法</h2><h3 id="题目介绍"><a href="#题目介绍" class="headerlink" title="题目介绍"></a>题目介绍</h3><p>输入输出介绍和样例如下，题目出自<a href="http://hihocoder.com/problemset/problem/1062" target="_blank" rel="noopener">hihoCoder</a>。（点击查看原题介绍讲述）<br>【输入】<br>每个测试点（输入文件）有且仅有一组测试数据。<br>每组测试数据的第1行为一个整数N，意义如前文所述。<br>每组测试数据的第2~N+1行，每行分别描述一对父子关系，其中第i+1行为两个由大小写字母组成的字符串Father_i, Son_i，分别表示父亲的名字和儿子的名字。<br>每组测试数据的第N+2行为一个整数M，表示小Hi总共询问的次数。<br>每组测试数据的第N+3~N+M+2行，每行分别描述一个询问，其中第N+i+2行为两个由大小写字母组成的字符串Name1_i, Name2_i，分别表示询问中的两个名字。<br>对于100%的数据，满足N&lt;=10^2，M&lt;=10^2, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人）。<br>【输出】<br>对于每组测试数据，输出一行，表示查询的结果：如果根据已知信息，可以判定询问中的两个人存在共同的祖先，则输出他们的所有共同祖先中辈分最低的一个人的名字，否则输出-1。<br>【样例输入】</p>
+<pre><code>11
+JiaYan JiaDaihua
+JiaDaihua JiaFu
+JiaDaihua JiaJing
+JiaJing JiaZhen
+JiaZhen JiaRong
+JiaYuan JiaDaishan
+JiaDaishan JiaShe
+JiaDaishan JiaZheng
+JiaShe JiaLian
+JiaZheng JiaZhu
+JiaZheng JiaBaoyu
+3
+JiaBaoyu JiaLian
+JiaBaoyu JiaZheng
+JiaBaoyu LinDaiyu
+</code></pre><p>【样例输出】</p>
+<pre><code>JiaDaishan
+JiaZheng
+-1
+</code></pre><a id="more"></a>
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><blockquote>
+<ul>
+<li>使用<code>map&lt;string, string&gt;</code>存储两个名字之间的辈分关系；</li>
+<li>使用<code>map&lt;string, int&gt;</code>存储其中一个人名的迭代查找结果，其中int只是为了创建map；</li>
+<li>对第二个人名进行迭代查找，若查找结果在<code>map&lt;string, int&gt;</code>中，则直接打印即为最近公共祖先；</li>
+</ul>
+</blockquote>
+<h3 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, p;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">string</span> fa, son, s1, s2;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; m;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator it;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; vec;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; fa &gt;&gt; son;</span><br><span class="line">        m.insert(make_pair(son, fa));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; p;</span><br><span class="line">    <span class="keyword">while</span>(p--)</span><br><span class="line">    &#123;</span><br><span class="line">        vec.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s1 &gt;&gt; s2;</span><br><span class="line">        vec.insert(make_pair(s1, <span class="number">0</span>));</span><br><span class="line">        it = m.<span class="built_in">find</span>(s1);</span><br><span class="line">        <span class="keyword">while</span>(it != m.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            vec.insert(make_pair((*it).second, <span class="number">0</span>));</span><br><span class="line">            it = m.<span class="built_in">find</span>((*it).second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(vec.<span class="built_in">find</span>(s2) != vec.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        it = m.<span class="built_in">find</span>(s2);</span><br><span class="line">        <span class="keyword">while</span>(it != m.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(vec.<span class="built_in">find</span>((*it).second) != vec.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; (*it).second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                it = m.<span class="built_in">find</span>((*it).second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(it == m.<span class="built_in">end</span>())</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<ul>
+<li>使用上述方法由于需要对数据进行遍历，所以时间效率很低，在用户样本信息较少的情况下比较适用。</li>
+</ul>
+</blockquote>
+<h2 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h2><p>由于上述方法只使用与样本数量较少的情况下，所以接下来我们提出一种能够应用于大样本的深度优先搜索的算法。</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>题目描述与上一题目基本一致，同样来源<a href="http://hihocoder.com/contest/hiho15/problem/1" target="_blank" rel="noopener">hihoCoder</a>，题目详情请点击查看。<br>【输入】<br>每个测试点（输入文件）有且仅有一组测试数据。<br>每组测试数据的第1行为一个整数N，意义如前文所述。<br>每组测试数据的第2~N+1行，每行分别描述一对父子关系，其中第i+1行为两个由大小写字母组成的字符串Father_i, Son_i，分别表示父亲的名字和儿子的名字。<br>每组测试数据的第N+2行为一个整数M，表示小Hi总共询问的次数。<br>每组测试数据的第N+3~N+M+2行，每行分别描述一个询问，其中第N+i+2行为两个由大小写字母组成的字符串Name1_i, Name2_i，分别表示小Hi询问中的两个名字。<br>对于100%的数据，满足N&lt;=10^5，M&lt;=10^5, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人），所有询问中出现过的名字均在之前所描述的N对父子关系中出现过，第一个出现的名字所确定的人是其他所有人的公共祖先。<br>【输出】<br>对于每组测试数据，对于每个小Hi的询问，按照在输入中出现的顺序，各输出一行，表示查询的结果：他们的所有共同祖先中辈分最低的一个人的名字。<br>【样例输入】</p>
+<pre><code>4
+Adam Sam
+Sam Joey
+Sam Micheal
+Adam Kevin
+3
+Sam Sam
+Adam Sam
+Micheal Kevin
+</code></pre><p>【样例输出】</p>
+<pre><code>Sam
+Adam
+Adam
+</code></pre><h3 id="题目分析-1"><a href="#题目分析-1" class="headerlink" title="题目分析"></a>题目分析</h3><blockquote>
+<ul>
+<li>通过对家族树的各个结点进行深度优先遍历，没有遍历到的树的颜色为白色（0），第一次遍历之后为灰色（1），离开时置为黑色（2）；</li>
+<li>遍历至一请求结点A，将其置为灰色，若其对应的询问结点B为白色，则未询问到次结点，继续深度遍历；</li>
+<li>若对应询问结点B为灰色，则两个询问结点在同一分支上，则深度优先搜索尚未离开分支，取请求结点A的名字即为公共祖先；</li>
+<li>若对应询问结点B为黑色，则深度优先搜索已经离开该询问结点B，取该黑色结点B的上一个结点名字即为公共祖先；</li>
+<li>建立如下node结点：<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef struct <span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">&#123;</span></span><br><span class="line"><span class="title">    string</span> name;</span><br><span class="line">    <span class="keyword">node</span><span class="title">* father</span>;</span><br><span class="line">    int color;</span><br><span class="line">    vector<span class="tag">&lt;node*&gt;</span> child;</span><br><span class="line">    <span class="keyword">node</span><span class="title">(string</span> name_) : name(name_)</span><br><span class="line">    &#123;</span><br><span class="line">        father = NULL;</span><br><span class="line">        color = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*<span class="keyword">Node</span><span class="title">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>使用<code>map&lt;string, Node&gt;</code>存储名字与结点的映射关系；使用<code>map&lt;string, vector&lt;pair&lt;Node, int&gt;&gt;&gt;</code>存储询问结点姓名与结点、序号的映射关系。</li>
+</ul>
+</blockquote>
+<h3 id="最终代码-1"><a href="#最终代码-1" class="headerlink" title="最终代码"></a>最终代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    node* father;</span><br><span class="line">    <span class="keyword">int</span> color;</span><br><span class="line">    <span class="built_in">vector</span>&lt;node*&gt; child;</span><br><span class="line">    node(<span class="built_in">string</span> name_) : name(name_)</span><br><span class="line">    &#123;</span><br><span class="line">        father = <span class="literal">NULL</span>;</span><br><span class="line">        color = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*Node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> res[N];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, Node&gt; tree;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, Node&gt;::iterator it;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;Node, <span class="keyword">int</span>&gt; NodeNum;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;NodeNum&gt;&gt; query;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">findRoot</span><span class="params">(Node p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;color == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;father = findRoot(p-&gt;father);</span><br><span class="line">        <span class="keyword">return</span> p-&gt;father;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;color = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;NodeNum&gt; &amp;pChild = query[p-&gt;name];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pChild.<span class="built_in">size</span>(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        Node pQuery = pChild[i].first;</span><br><span class="line">        <span class="keyword">int</span> id = pChild[i].second;</span><br><span class="line">        <span class="keyword">if</span>(pQuery-&gt;color == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        res[id] = findRoot(pQuery)-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; p-&gt;child.<span class="built_in">size</span>(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        dfs(p-&gt;child[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;color = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node root = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">string</span> s1, s2;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s1 &gt;&gt; s2;</span><br><span class="line">        <span class="keyword">if</span>(tree.<span class="built_in">find</span>(s1) == tree.<span class="built_in">end</span>())</span><br><span class="line">            tree[s1] = <span class="keyword">new</span> node(s1);</span><br><span class="line">        <span class="keyword">if</span>(tree.<span class="built_in">find</span>(s2) == tree.<span class="built_in">end</span>())</span><br><span class="line">            tree[s2] = <span class="keyword">new</span> node(s2);</span><br><span class="line">        tree[s1]-&gt;child.push_back(tree[s2]);</span><br><span class="line">        tree[s2]-&gt;father = tree[s1];</span><br><span class="line">        <span class="keyword">if</span>(i ==<span class="number">0</span>)</span><br><span class="line">            root = tree[s1];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s1 &gt;&gt; s2;</span><br><span class="line">        <span class="keyword">if</span>(query.<span class="built_in">find</span>(s1) == query.<span class="built_in">end</span>())</span><br><span class="line">            query[s1] = <span class="built_in">vector</span>&lt;NodeNum&gt;();</span><br><span class="line">        <span class="keyword">if</span>(query.<span class="built_in">find</span>(s2) == query.<span class="built_in">end</span>())</span><br><span class="line">            query[s2] = <span class="built_in">vector</span>&lt;NodeNum&gt;();</span><br><span class="line">        Node p1 = tree[s1];</span><br><span class="line">        Node p2 = tree[s2];</span><br><span class="line">        query[s1].push_back(make_pair(p2, i));</span><br><span class="line">        <span class="keyword">if</span>(s1 != s2)</span><br><span class="line">            query[s2].push_back(make_pair(p1, i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; res[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<ul>
+<li>使用这种深度优先搜索的方法，同时兼顾使用了并查集的思想维护遍历过程中的辈分关系，能够高效地处理较大数据量的公共祖先问题；</li>
+<li>map实在是太好用了，可以建立各种类型之间的映射关系，使用<code>map[key]</code>还可以直接取出<code>&lt;key, value&gt;</code>中的<code>value</code>，即<code>map[key] = value</code>，大大方便了信息的存储与管理；</li>
+<li>首次遍历到结点，将其置为灰色（1），离开该结点时将其置为黑色（2），这种分析问题的方法非常值得借鉴使用。</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度优先搜索/" rel="tag"># 深度优先搜索</a>
+          
+            <a href="/tags/DFS/" rel="tag"># DFS</a>
+          
+            <a href="/tags/公共祖先/" rel="tag"># 公共祖先</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/21/动态规划之二叉苹果树及其变形/" rel="next" title="动态规划之二叉苹果树及其变形">
+                <i class="fa fa-chevron-left"></i> 动态规划之二叉苹果树及其变形
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/26/RMQ问题的ST稀疏树解法/" rel="prev" title="RMQ问题的ST稀疏表解法">
+                RMQ问题的ST稀疏表解法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集方法"><span class="nav-number">1.</span> <span class="nav-text">并查集方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目介绍"><span class="nav-number">1.1.</span> <span class="nav-text">题目介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目分析"><span class="nav-number">1.2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终代码"><span class="nav-number">1.3.</span> <span class="nav-text">最终代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">2.</span> <span class="nav-text">深度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目分析-1"><span class="nav-number">2.2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终代码-1"><span class="nav-number">2.3.</span> <span class="nav-text">最终代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

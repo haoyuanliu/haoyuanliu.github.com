@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="素数,Miller-Rabin,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="本文主要讨论使用Miller-Rabin算法编写素数的判定算法，题目来源于hihocoder。 题目题目要求时间限制:10000ms单点时限:1000ms内存限制:256MB描述使用Miller-Rabin算法进行质数素数测试，要求输入一个数字，对其是否是素数进行判定，并打印出相对应的结果。  提示：Miller-Rabin质数测试  输入第1行：1个正整数t，表示数字的个数，10≤t≤50第2.">
+<meta name="keywords" content="素数,Miller-Rabin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Miller-Rabin质数测试">
+<meta property="og:url" content="http://haoyuanliu.github.io/2016/04/11/Miller-Rabin/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="本文主要讨论使用Miller-Rabin算法编写素数的判定算法，题目来源于hihocoder。 题目题目要求时间限制:10000ms单点时限:1000ms内存限制:256MB描述使用Miller-Rabin算法进行质数素数测试，要求输入一个数字，对其是否是素数进行判定，并打印出相对应的结果。  提示：Miller-Rabin质数测试  输入第1行：1个正整数t，表示数字的个数，10≤t≤50第2.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T05:04:37.495Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Miller-Rabin质数测试">
+<meta name="twitter:description" content="本文主要讨论使用Miller-Rabin算法编写素数的判定算法，题目来源于hihocoder。 题目题目要求时间限制:10000ms单点时限:1000ms内存限制:256MB描述使用Miller-Rabin算法进行质数素数测试，要求输入一个数字，对其是否是素数进行判定，并打印出相对应的结果。  提示：Miller-Rabin质数测试  输入第1行：1个正整数t，表示数字的个数，10≤t≤50第2.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2016/04/11/Miller-Rabin/">
+
+
+
+
+
+  <title>Miller-Rabin质数测试 | 贫贫贫贫僧</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/04/11/Miller-Rabin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Miller-Rabin质数测试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-11T17:22:22+08:00">
+                2016-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要讨论使用Miller-Rabin算法编写素数的判定算法，题目来源于<a href="http://hihocoder.com/contest/hiho92/problem/1" target="_blank" rel="noopener">hihocoder</a>。</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>使用Miller-Rabin算法进行质数素数测试，要求输入一个数字，对其是否是素数进行判定，并打印出相对应的结果。</p>
+<blockquote>
+<p>提示：<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="noopener">Miller-Rabin质数测试</a></p>
+</blockquote>
+<p><strong>输入</strong><br>第1行：1个正整数t，表示数字的个数，<code>10≤t≤50</code><br>第2..t+1行：每行1个正整数，第<code>i+1</code>行表示正整数<code>a[i]</code>，<code>2≤a[i]≤10^18</code><br><strong>输出</strong><br>第1..t行：每行1个字符串，若a[i]为质数，第i行输出”Yes”，否则输出”No”<br><strong>样例输入</strong><br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span> </span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>样例输出</strong><br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">No</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>Miller-Rabin算法是一种基于费马小定理的扩展算法，首先我们需要知道什么是费马小定理，然后还要知道整个Miller-Rabin算法是如何扩展出来的。</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><blockquote>
+<p>费马小定理：对于质数<code>p</code>和任意整数<code>a</code>，有<code>a^p ≡ a(mod p)(同余)</code>。反之，若满足<code>a^p ≡ a(mod p)</code>，<code>p</code>也有很大概率为质数。<br>将两边同时约去一个<code>a</code>，则有<code>a^(p-1) ≡ 1(mod p)</code></p>
+</blockquote>
+<p>也即是说：假设我们要测试<code>n</code>是否为质数。我们可以随机选取一个数<code>a</code>，然后计算<code>a^(n-1) mod n</code>，如果结果不为<code>1</code>，我们可以100%断定<code>n</code>不是质数。<br>否则我们再随机选取一个新的数a进行测试。如此反复多次，如果每次结果都是1，我们就假定n是质数。<br>该测试被称为Fermat测试。需要注意的是：Fermat测试不一定是准确的，有可能出现把合数误判为质数的情况。<br>Miller和Rabin在Fermat测试上，建立了Miller-Rabin质数测试算法。</p>
+<h2 id="二次探测定理"><a href="#二次探测定理" class="headerlink" title="二次探测定理"></a>二次探测定理</h2><blockquote>
+<p>如果<code>p</code>是奇素数，则 <code>x^2 ≡ 1(mod p)</code>的解为 <code>x ≡ 1</code> 或 <code>x ≡ p - 1(mod p)</code><br>如果<code>a^(n-1) ≡ 1 (mod n)</code>成立，Miller-Rabin算法不是立即找另一个<code>a</code>进行测试，而是看<code>n-1</code>是不是偶数。如果<code>n-1</code>是偶数，另<code>u=(n-1)/2</code>，并检查是否满足二次探测定理即<code>a^u ≡ 1</code>或 <code>a^u ≡ n - 1(mod n)</code>。</p>
+</blockquote>
+<p>举个<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="noopener">Matrix67 Blog</a>上的例子，假设<code>n=341</code>，我们选取的<code>a=2</code>。则第一次测试时，<code>2^340 mod 341=1</code>。由于<code>340</code>是偶数，因此我们检查<code>2^170</code>，得到<code>2^170 mod 341=1</code>，满足二次探测定理。同时由于<code>170</code>还是偶数，因此我们进一步检查<code>2^85 mod 341=32</code>。此时不满足二次探测定理，因此可以判定<code>341</code>不为质数。</p>
+<p>将这两条定理合起来，也就是最常见的Miller-Rabin测试。</p>
+<h2 id="加强版测试验证定理"><a href="#加强版测试验证定理" class="headerlink" title="加强版测试验证定理"></a>加强版测试验证定理</h2><blockquote>
+<p>尽可能提取因子<code>2</code>，把<code>n-1</code>表示成<code>d*2^r</code>,如果<code>n</code>是一个素数，那么或者<code>a^d mod n==1</code>，或者存在某个<code>i</code>使得<code>a^(d*2^i) mod n=n-1 (0&lt;=i&lt;r)</code>则我们认为n为素数。（注意<code>i</code>可以等于<code>0</code>，这就把<code>a^d mod n=n-1</code>的情况统一到后面去了）</p>
+</blockquote>
+<p>这里需要注意的是，我们将该定理作为判定条件，仍然是一个不确定的概率判定条件。Miller-Rabin素性测试同样是不确定算法，我们把可以通过以<code>a</code>为底的Miller-Rabin测试的合数称作以a为底的强伪素数(strong pseudoprime)。第一个以2为底的强伪素数为2047。第一个以2和3为底的强伪素数则大到1 373 653。</p>
+<p>所以我们在实际使用过程中，使用<code>rand()</code>函数生成随机数，或者进行多次检测判定，还是能够得到比较高的判定成功率，Miller-Rabin算法对于素数的研究判定有着巨大的辅助作用。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="整体代码"><a href="#整体代码" class="headerlink" title="整体代码"></a>整体代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> llong;</span><br><span class="line"><span class="comment">//求取(x * y) % n</span></span><br><span class="line"><span class="function">llong <span class="title">mod</span><span class="params">(llong x, llong y,llong n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    llong res = <span class="number">0</span>;</span><br><span class="line">    llong temp = x % n;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y &amp; <span class="number">0x1</span>)</span><br><span class="line">            <span class="keyword">if</span>((res += temp) &gt; n)</span><br><span class="line">                res -= n;</span><br><span class="line">        <span class="keyword">if</span>((temp &lt;&lt;= <span class="number">1</span>) &gt;  n)</span><br><span class="line">            temp -= n;</span><br><span class="line">        y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//求取(x ^ y) % n</span></span><br><span class="line"><span class="function">llong <span class="title">get_mod</span><span class="params">(llong x, llong y, llong n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    llong res = <span class="number">1</span>;</span><br><span class="line">    llong temp = x;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y &amp; <span class="number">0x1</span>)</span><br><span class="line">            res = mod(res, temp, n);</span><br><span class="line">        temp = mod(temp, temp, n);</span><br><span class="line">        y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//编写bool函数，判定是否为素数</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_prime</span><span class="params">(llong n, <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!(n &amp; <span class="number">0x1</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    llong k = <span class="number">0</span>, m, a, i;</span><br><span class="line">    <span class="keyword">for</span>(m = n <span class="number">-1</span>; !(m &amp; <span class="number">0x1</span>); m &gt;&gt;= <span class="number">1</span>, ++k);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        a = get_mod(rand() % (n - <span class="number">2</span>) + <span class="number">2</span>, m, n);</span><br><span class="line">        <span class="keyword">if</span>(a != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; k &amp;&amp; a != n<span class="number">-1</span>; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                a = mod(a, a, n);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//根据二次探测定理，只要不满足(a == 1) || (a == n - 1)，就会一直遍历下去，直到最后返回false</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt;= k)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> times;</span><br><span class="line">    llong num;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; times;</span><br><span class="line">    <span class="keyword">while</span>(times--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line">        <span class="keyword">if</span>(is_prime(num, <span class="number">1</span>))</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码分解"><a href="#代码分解" class="headerlink" title="代码分解"></a>代码分解</h2><h3 id="mod-函数"><a href="#mod-函数" class="headerlink" title="mod()函数"></a>mod()函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求取(x * y) % n</span></span><br><span class="line"><span class="function">llong <span class="title">mod</span><span class="params">(llong x, llong y,llong n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    llong res = <span class="number">0</span>;</span><br><span class="line">    llong temp = x % n;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y &amp; <span class="number">0x1</span>)</span><br><span class="line">            <span class="keyword">if</span>((res += temp) &gt; n)</span><br><span class="line">                res -= n;</span><br><span class="line">        <span class="keyword">if</span>((temp &lt;&lt;= <span class="number">1</span>) &gt;  n)</span><br><span class="line">            temp -= n;</span><br><span class="line">        y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数使用移位运算，通过将y转换成二进制形式，十分高效地求取了两个数字乘积的余数。</p>
+<h3 id="get-mod-函数"><a href="#get-mod-函数" class="headerlink" title="get_mod()函数"></a>get_mod()函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求取(x ^ y) % n</span></span><br><span class="line"><span class="function">llong <span class="title">get_mod</span><span class="params">(llong x, llong y, llong n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    llong res = <span class="number">1</span>;</span><br><span class="line">    llong temp = x;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y &amp; <span class="number">0x1</span>)</span><br><span class="line">            res = mod(res, temp, n);</span><br><span class="line">        temp = mod(temp, temp, n);</span><br><span class="line">        y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数是经典的高次幂函数求余算法，即<a href="https://en.wikipedia.org/wiki/Peter_Montgomery_%28mathematician%29" target="_blank" rel="noopener">蒙哥马利算法</a>，在上一篇博文中也有过介绍，<a href="http://haoyuanliu.github.io/2016/04/04/get-mod/">博文链接</a>。<br>其核心思想就是将幂指数转换成二进制，通过移位运算快速地求取余数，避免了数据溢出，而且效率非常高。</p>
+<h3 id="is-prime-函数"><a href="#is-prime-函数" class="headerlink" title="is_prime()函数"></a>is_prime()函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编写bool函数，判定是否为素数</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_prime</span><span class="params">(llong n, <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!(n &amp; <span class="number">0x1</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    llong k = <span class="number">0</span>, m, a, i;</span><br><span class="line">    <span class="keyword">for</span>(m = n <span class="number">-1</span>; !(m &amp; <span class="number">0x1</span>); m &gt;&gt;= <span class="number">1</span>, ++k);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        a = get_mod(rand() % (n - <span class="number">2</span>) + <span class="number">2</span>, m, n);</span><br><span class="line">        <span class="keyword">if</span>(a != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; k &amp;&amp; a != n<span class="number">-1</span>; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                a = mod(a, a, n);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//根据二次探测定理，只要不满足(a == 1) || (a == n - 1)，就会一直遍历下去，直到最后返回false</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt;= k)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即数字是否是素数的判定函数，依照我们在上文提出的加强定理，包含如下要点：</p>
+<blockquote>
+<ul>
+<li>对所需判定的奇数<code>n</code>进行<code>n-1</code>提取因子<code>2</code>，把<code>n-1</code>表示成<code>d*2^r</code>的形式；</li>
+<li>取随机数<code>a=rand()</code>，如果<code>a^d mod n == 1</code>则判定为素数；</li>
+<li>如果<code>a^d mod n ！= 1</code>，则通过循环查找是否有<code>i</code>满足<code>a^(d*2^i) mod n = n-1</code>，若有，则判定为素数；</li>
+<li>如果上述条件都不成立，则遍历结果得到<code>i == k</code>，此时返回<code>false</code></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li><strong>Tips：这里需要注意的是，Miller-Rabin算法是一个不确定算法，仍有一定的错误概率，正如上文所述的，第一个以2为底的强伪素数为2047。第一个以2和3为底的强伪素数则大到1 373 653。在一定的使用范围内仍然可以得到高效、准确的结果！</strong></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/素数/" rel="tag"># 素数</a>
+          
+            <a href="/tags/Miller-Rabin/" rel="tag"># Miller-Rabin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/04/get-mod/" rel="next" title="高次幂函数取模算法">
+                <i class="fa fa-chevron-left"></i> 高次幂函数取模算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/12/sieve/" rel="prev" title="素数之筛法">
+                素数之筛法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目要求"><span class="nav-number">1.1.</span> <span class="nav-text">题目要求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#费马小定理"><span class="nav-number">2.1.</span> <span class="nav-text">费马小定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次探测定理"><span class="nav-number">2.2.</span> <span class="nav-text">二次探测定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加强版测试验证定理"><span class="nav-number">2.3.</span> <span class="nav-text">加强版测试验证定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体代码"><span class="nav-number">3.1.</span> <span class="nav-text">整体代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分解"><span class="nav-number">3.2.</span> <span class="nav-text">代码分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mod-函数"><span class="nav-number">3.2.1.</span> <span class="nav-text">mod()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-mod-函数"><span class="nav-number">3.2.2.</span> <span class="nav-text">get_mod()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is-prime-函数"><span class="nav-number">3.2.3.</span> <span class="nav-text">is_prime()函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
