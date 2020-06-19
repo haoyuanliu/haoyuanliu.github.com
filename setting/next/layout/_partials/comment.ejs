@@ -1,0 +1,16 @@
+<% if (theme.valine && post.comments) { %>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <!-- 当然啦，这个可以在<head></head>中引入 -->
+    <div id="vcomments"></div>
+    <script>
+    new Valine({
+        el: '#vcomments' ,
+        appId: '<%= theme.v_appId %>',
+        appKey: '<%= theme.v_appKey %>',
+        notify:false, 
+        verify:false, 
+        avatar:'mp', 
+        placeholder: 'just go go' 
+    });
+    </script>
+<% } %>
