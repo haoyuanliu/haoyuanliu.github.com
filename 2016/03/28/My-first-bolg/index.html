@@ -388,7 +388,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/03/28/My-first-bolg/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/28/My-first-bolg/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/03/28/My-first-bolg/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -510,14 +510,7 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
     </div>
-
   
 
 
@@ -786,26 +779,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://haoyuanliu.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://haoyuanliu.github.io/2016/03/28/My-first-bolg/';
-          this.page.identifier = '2016/03/28/My-first-bolg/';
-          this.page.title = '写在最开始!';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://haoyuanliu.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -821,12 +794,38 @@
 
 
 
+  
 
 
 
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ki2AIcVXtdPOi5NNludXg7VU-gzGzoHsz',
+        appKey: 'Yfrbd2FhOEJM1kVqmcXvTuUw',
+        placeholder: 'Comment here ^_^!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
