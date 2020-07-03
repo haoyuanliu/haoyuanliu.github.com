@@ -275,7 +275,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
@@ -294,7 +294,7 @@ font:
   enable: false
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default).
-  host:
+  host: https://fonts.cat.net
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -305,13 +305,13 @@ font:
   global:
     external: true
     family: Lato
-    size:
+    size: 
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
   headings:
     external: true
-    family:
+    family: Roboto Slab
     size:
 
   # Font settings for posts.
@@ -330,7 +330,7 @@ font:
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: Roboto Mono
     size:
 
 
@@ -810,3 +810,7 @@ images: images
 
 # Theme version
 version: 5.1
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true
