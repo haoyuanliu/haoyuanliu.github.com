@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring Boot,HanLP,Adapter,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="贫贫贫贫僧" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Spring Boot 工程中HanLP配置路径BUG解决0、 摘要在Spring Boot工程中使用HanLP工具，按照平常的配置，将根路径配置为root=src/main/resources/HanLP/始终加载不成功，总是显示Caused by: java.lang.IllegalArgumentException: 核心词典src/main/resources/HanLP/data/dic">
+<meta name="keywords" content="Spring Boot,HanLP,Adapter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sprint Boot 工程中HanLP配置路径BUG解决">
+<meta property="og:url" content="http://haoyuanliu.github.io/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/index.html">
+<meta property="og:site_name" content="贫贫贫贫僧">
+<meta property="og:description" content="Spring Boot 工程中HanLP配置路径BUG解决0、 摘要在Spring Boot工程中使用HanLP工具，按照平常的配置，将根路径配置为root=src/main/resources/HanLP/始终加载不成功，总是显示Caused by: java.lang.IllegalArgumentException: 核心词典src/main/resources/HanLP/data/dic">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703121603922.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703122108593.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703133737964.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703133825157.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703134140075.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703144659226.png">
+<meta property="og:updated_time" content="2020-07-03T08:25:04.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sprint Boot 工程中HanLP配置路径BUG解决">
+<meta name="twitter:description" content="Spring Boot 工程中HanLP配置路径BUG解决0、 摘要在Spring Boot工程中使用HanLP工具，按照平常的配置，将根路径配置为root=src/main/resources/HanLP/始终加载不成功，总是显示Caused by: java.lang.IllegalArgumentException: 核心词典src/main/resources/HanLP/data/dic">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703121603922.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://haoyuanliu.github.io/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/">
+
+
+
+
+
+  <title>Sprint Boot 工程中HanLP配置路径BUG解决 | 贫贫贫贫僧</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75661126-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5c57b9f4c10e2cab3dc7e9add2874219";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">贫贫贫贫僧</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">面向工资编程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-leetcode">
+          <a href="/LeetCode/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br>
+            
+            LeetCode
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Sprint Boot 工程中HanLP配置路径BUG解决</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-03T16:06:03+08:00">
+                2020-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/07/03/Sprint-Boot-工程中HanLP配置路径BUG解决/" class="leancloud_visitors" data-flag-title="Sprint Boot 工程中HanLP配置路径BUG解决">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Spring-Boot-工程中HanLP配置路径BUG解决"><a href="#Spring-Boot-工程中HanLP配置路径BUG解决" class="headerlink" title="Spring Boot 工程中HanLP配置路径BUG解决"></a>Spring Boot 工程中HanLP配置路径BUG解决</h3><h2 id="0、-摘要"><a href="#0、-摘要" class="headerlink" title="0、 摘要"></a>0、 摘要</h2><p>在Spring Boot工程中使用HanLP工具，按照平常的配置，将根路径配置为<code>root=src/main/resources/HanLP/</code>始终加载不成功，总是显示<code>Caused by: java.lang.IllegalArgumentException: 核心词典src/main/resources/HanLP/data/dictionary/CoreNatureDictionary.txt加载失败</code>的错误，然而平时常规的maven工程中这么用是没有问题的。</p>
+<p>经过查阅源码，最终发现HanLP提供了IO适配器来解析路径，默认的适配器用的是<code>com.hankcs.hanlp.corpus.io.FileIOAdapter</code>，是基于普通文件系统的，我们通过自己定制一个IO适配器，并在配置文件中配置指定适配器的类型，就可以正常读取<code>resources</code>下的data了，这样避免了使用绝对路径，本地运行和服务器运行都比较方便！</p>
+<a id="more"></a>
+<h2 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h2><p>按照常规Maven工程的方式配置hanlp的配置文件，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#本配置文件中的路径的根目录，根目录+其他路径=完整路径（支持相对路径，请参考：https://github.com/hankcs/HanLP/pull/254）</span><br><span class="line">#Windows用户请注意，路径分隔符统一使用/</span><br><span class="line">#root=/Users/bayron/Desktop/tools/HanLP/</span><br><span class="line">root=src/main/resources/HanLP/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#好了，以上为唯一需要修改的部分，以下配置项按需反注释编辑。</span><br><span class="line"></span><br><span class="line">#核心词典路径</span><br><span class="line">CoreDictionaryPath=data/dictionary/CoreNatureDictionary.txt</span><br><span class="line">#2元语法词典路径</span><br><span class="line">BiGramDictionaryPath=data/dictionary/CoreNatureDictionary.ngram.txt</span><br><span class="line">#自定义词典路径，用;隔开多个自定义词典，空格开头表示在同一个目录，使用“文件名 词性”形式则表示这个词典的词性默认是该词性。优先级递减。</span><br><span class="line">#所有词典统一使用UTF-8编码，每一行代表一个单词，格式遵从[单词] [词性A] [A的频次] [词性B] [B的频次] ... 如果不填词性则表示采用词典的默认词性。</span><br><span class="line">CustomDictionaryPath=data/dictionary/custom/CustomDictionary.txt; 现代汉语补充词库.txt; 全国地名大全.txt ns; 人名词典.txt; 机构名词典.txt; 上海地名.txt ns;data/dictionary/person/nrf.txt nrf;</span><br><span class="line">#停用词词典路径</span><br><span class="line">CoreStopWordDictionaryPath=data/dictionary/stopwords.txt</span><br><span class="line">#同义词词典路径</span><br><span class="line">CoreSynonymDictionaryDictionaryPath=data/dictionary/synonym/CoreSynonym.txt</span><br><span class="line">#人名词典路径</span><br><span class="line">PersonDictionaryPath=data/dictionary/person/nr.txt</span><br><span class="line">#人名词典转移矩阵路径</span><br><span class="line">PersonDictionaryTrPath=data/dictionary/person/nr.tr.txt</span><br><span class="line">#繁简词典根目录</span><br><span class="line">tcDictionaryRoot=data/dictionary/tc</span><br><span class="line">#HMM分词模型</span><br><span class="line">HMMSegmentModelPath=data/model/segment/HMMSegmentModel.bin</span><br><span class="line">#分词结果是否展示词性</span><br><span class="line">ShowTermNature=true</span><br><span class="line">#IO适配器，实现com.hankcs.hanlp.corpus.io.IIOAdapter接口以在不同的平台（Hadoop、Redis等）上运行HanLP</span><br><span class="line">#默认的IO适配器如下，该适配器是基于普通文件系统的。</span><br><span class="line">#IOAdapter=com.hankcs.hanlp.corpus.io.FileIOAdapter</span><br><span class="line">#感知机词法分析器</span><br><span class="line">#PerceptronCWSModelPath=data/model/perceptron/pku199801/cws.bin</span><br><span class="line">#PerceptronPOSModelPath=data/model/perceptron/pku199801/pos.bin</span><br><span class="line">#PerceptronNERModelPath=data/model/perceptron/pku199801/ner.bin</span><br><span class="line">#CRF词法分析器</span><br><span class="line">#CRFCWSModelPath=data/model/crf/pku199801/cws.txt</span><br><span class="line">#CRFPOSModelPath=data/model/crf/pku199801/pos.txt</span><br><span class="line">#CRFNERModelPath=data/model/crf/pku199801/ner.txt</span><br><span class="line">#更多配置项请参考 https://github.com/hankcs/HanLP/blob/master/src/main/java/com/hankcs/hanlp/HanLP.java#L59 自行添加</span><br></pre></td></tr></table></figure>
+<p>可以正常解析配置文件并加载词典，并运行，但是迁移到SprintBoot工程之后，就会遇到如下错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2020</span>-<span class="number">07</span>-<span class="number">03</span> <span class="number">11</span>:<span class="number">05</span>:<span class="number">04.984</span>  WARN <span class="number">29664</span> --- [pool-<span class="number">1</span>-thread-<span class="number">1</span>] HanLP                                    : 读取HanLP/data/dictionary/CoreNatureDictionary.txt.bin时发生异常java.io.FileNotFoundException: HanLP\data\dictionary\CoreNatureDictionary.txt.bin (系统找不到指定的路径。)</span><br><span class="line"><span class="number">2020</span>-<span class="number">07</span>-<span class="number">03</span> <span class="number">11</span>:<span class="number">05</span>:<span class="number">04.984</span>  WARN <span class="number">29664</span> --- [pool-<span class="number">1</span>-thread-<span class="number">1</span>] HanLP                                    : 核心词典src/main/resources/HanLP/data/dictionary/CoreNatureDictionary.txt不存在！java.io.FileNotFoundException: src\main\resources\HanLP\data\dictionary\CoreNatureDictionary.txt (系统找不到指定的路径。)</span><br><span class="line">Exception in thread <span class="string">"pool-1-thread-1"</span> java.lang.ExceptionInInitializerError</span><br><span class="line">	at com.hankcs.hanlp.seg.common.Vertex.newB(Vertex.java:<span class="number">455</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.common.WordNet.&lt;init&gt;(WordNet.java:<span class="number">73</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.Viterbi.ViterbiSegment.segSentence(ViterbiSegment.java:<span class="number">40</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.Segment.seg(Segment.java:<span class="number">573</span>)</span><br><span class="line">	at com.hankcs.hanlp.tokenizer.StandardTokenizer.segment(StandardTokenizer.java:<span class="number">50</span>)</span><br><span class="line">	at com.hankcs.hanlp.HanLP.segment(HanLP.java:<span class="number">632</span>)</span><br><span class="line">	at com.ict.mcg.model.HanLPChineseTokenizer.&lt;init&gt;(HanLPChineseTokenizer.java:<span class="number">57</span>)</span><br><span class="line">	at com.ict.mcg.model.HanLPTokenizerFactory.create(HanLPTokenizerFactory.java:<span class="number">18</span>)</span><br><span class="line">	at org.deeplearning4j.iterator.CnnSentenceDataSetIterator.tokenizeSentence(CnnSentenceDataSetIterator.java:<span class="number">158</span>)</span><br><span class="line">	at org.deeplearning4j.iterator.CnnSentenceDataSetIterator.loadSingleSentence(CnnSentenceDataSetIterator.java:<span class="number">110</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNTextClass.predict(CNNTextClass.java:<span class="number">465</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNTextClass.predict(CNNTextClass.java:<span class="number">458</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNContentClassifier.run_predict(CNNContentClassifier.java:<span class="number">31</span>)</span><br><span class="line">	at com.ict.mcg.thrift.service.ClassifyService.doClassification(ClassifyService.java:<span class="number">22</span>)</span><br><span class="line">	at com.ict.mcg.thrift.bean.ClassifyProcessor$Processor$doClassification.getResult(ClassifyProcessor.java:<span class="number">155</span>)</span><br><span class="line">	at com.ict.mcg.thrift.bean.ClassifyProcessor$Processor$doClassification.getResult(ClassifyProcessor.java:<span class="number">135</span>)</span><br><span class="line">	at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:<span class="number">38</span>)</span><br><span class="line">	at org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:<span class="number">38</span>)</span><br><span class="line">	at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:<span class="number">313</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1149</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">624</span>)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:<span class="number">748</span>)</span><br><span class="line">Caused by: java.lang.IllegalArgumentException: 核心词典src/main/resources/HanLP/data/dictionary/CoreNatureDictionary.txt加载失败</span><br><span class="line">	at com.hankcs.hanlp.dictionary.CoreDictionary.&lt;clinit&gt;(CoreDictionary.java:<span class="number">44</span>)</span><br><span class="line">	... <span class="number">22</span> more</span><br></pre></td></tr></table></figure>
+<h2 id="2、将路径配置为绝对路径"><a href="#2、将路径配置为绝对路径" class="headerlink" title="2、将路径配置为绝对路径"></a>2、将路径配置为绝对路径</h2><p>如果将上面配置文件中的路径配置为如下的绝对路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root=F:\\project\\ClassifyRPC\\ClassifyServer\\src\\main\\resources\\HanLP\\</span><br></pre></td></tr></table></figure>
+<p>经过测试可以验证，HanLP的配置文件和词典可以正常解析加载，没有问题！</p>
+<h2 id="3、-将路径配置为classpath-开头的"><a href="#3、-将路径配置为classpath-开头的" class="headerlink" title="3、 将路径配置为classpath:开头的"></a>3、 将路径配置为<u>classpath:</u>开头的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root=classpath:/resources/HanLP/</span><br></pre></td></tr></table></figure>
+<p>结果还是报错：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2020</span>-<span class="number">07</span>-<span class="number">03</span> <span class="number">11</span>:<span class="number">23</span>:<span class="number">41.749</span>  WARN <span class="number">29840</span> --- [pool-<span class="number">1</span>-thread-<span class="number">1</span>] HanLP                                    : 读取classpath:/resources/HanLP/data/dictionary/CoreNatureDictionary.txt.bin时发生异常java.io.FileNotFoundException: classpath:\resources\HanLP\data\dictionary\CoreNatureDictionary.txt.bin (文件名、目录名或卷标语法不正确。)</span><br><span class="line"><span class="number">2020</span>-<span class="number">07</span>-<span class="number">03</span> <span class="number">11</span>:<span class="number">23</span>:<span class="number">41.750</span>  WARN <span class="number">29840</span> --- [pool-<span class="number">1</span>-thread-<span class="number">1</span>] HanLP                                    : 核心词典classpath:/resources/HanLP/data/dictionary/CoreNatureDictionary.txt不存在！java.io.FileNotFoundException: classpath:\resources\HanLP\data\dictionary\CoreNatureDictionary.txt (文件名、目录名或卷标语法不正确。)</span><br><span class="line">Exception in thread <span class="string">"pool-1-thread-1"</span> java.lang.ExceptionInInitializerError</span><br><span class="line">	at com.hankcs.hanlp.seg.common.Vertex.newB(Vertex.java:<span class="number">455</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.common.WordNet.&lt;init&gt;(WordNet.java:<span class="number">73</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.Viterbi.ViterbiSegment.segSentence(ViterbiSegment.java:<span class="number">40</span>)</span><br><span class="line">	at com.hankcs.hanlp.seg.Segment.seg(Segment.java:<span class="number">573</span>)</span><br><span class="line">	at com.hankcs.hanlp.tokenizer.StandardTokenizer.segment(StandardTokenizer.java:<span class="number">50</span>)</span><br><span class="line">	at com.hankcs.hanlp.HanLP.segment(HanLP.java:<span class="number">632</span>)</span><br><span class="line">	at com.ict.mcg.model.HanLPChineseTokenizer.&lt;init&gt;(HanLPChineseTokenizer.java:<span class="number">57</span>)</span><br><span class="line">	at com.ict.mcg.model.HanLPTokenizerFactory.create(HanLPTokenizerFactory.java:<span class="number">18</span>)</span><br><span class="line">	at org.deeplearning4j.iterator.CnnSentenceDataSetIterator.tokenizeSentence(CnnSentenceDataSetIterator.java:<span class="number">158</span>)</span><br><span class="line">	at org.deeplearning4j.iterator.CnnSentenceDataSetIterator.loadSingleSentence(CnnSentenceDataSetIterator.java:<span class="number">110</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNTextClass.predict(CNNTextClass.java:<span class="number">465</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNTextClass.predict(CNNTextClass.java:<span class="number">458</span>)</span><br><span class="line">	at com.ict.mcg.model.CNNContentClassifier.run_predict(CNNContentClassifier.java:<span class="number">31</span>)</span><br><span class="line">	at com.ict.mcg.thrift.service.ClassifyService.doClassification(ClassifyService.java:<span class="number">22</span>)</span><br><span class="line">	at com.ict.mcg.thrift.bean.ClassifyProcessor$Processor$doClassification.getResult(ClassifyProcessor.java:<span class="number">155</span>)</span><br><span class="line">	at com.ict.mcg.thrift.bean.ClassifyProcessor$Processor$doClassification.getResult(ClassifyProcessor.java:<span class="number">135</span>)</span><br><span class="line">	at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:<span class="number">38</span>)</span><br><span class="line">	at org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:<span class="number">38</span>)</span><br><span class="line">	at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:<span class="number">313</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1149</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">624</span>)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:<span class="number">748</span>)</span><br><span class="line">Caused by: java.lang.IllegalArgumentException: 核心词典classpath:/resources/HanLP/data/dictionary/CoreNatureDictionary.txt加载失败</span><br><span class="line">	at com.hankcs.hanlp.dictionary.CoreDictionary.&lt;clinit&gt;(CoreDictionary.java:<span class="number">44</span>)</span><br><span class="line">	... <span class="number">22</span> more</span><br></pre></td></tr></table></figure>
+<h2 id="4、原因探究"><a href="#4、原因探究" class="headerlink" title="4、原因探究"></a>4、原因探究</h2><h3 id="4-1-hanlp源码读取root路径的逻辑："><a href="#4-1-hanlp源码读取root路径的逻辑：" class="headerlink" title="4.1 hanlp源码读取root路径的逻辑："></a>4.1 hanlp源码读取root路径的逻辑：</h3><p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703121603922.png" alt="image-20200703121603922"></p>
+<p>在HanLP.class源码中，我们看到根目录root就是直接读取我们配置文件中的路径，并且兼容windows文件系统路径，字典等路径就是根据这个root路径进行拼装，比如我们配置root为<code>src/main/resources/HanLP/</code>，则后续路径都是以<code>src/main/resources/HanLP/</code>开头的，读取失败应该是因为代码中没有取到这个相对路径的文件；</p>
+<h3 id="4-2-文件加载逻辑"><a href="#4-2-文件加载逻辑" class="headerlink" title="4.2 文件加载逻辑"></a>4.2 文件加载逻辑</h3><p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703122108593.png" alt="image-20200703122108593"></p>
+<p>在CoreDictionary.java中的42行进行了词典的加载，这里出错，从而导致了上述错误；</p>
+<p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703133737964.png" alt="image-20200703133737964"></p>
+<p>继续向下追踪，在IOUtil.java中，首先判断了IOAdapter是否为null，如果为null，则调用系统的FileInputStream，其中调用了<code>new File()</code>操作，对于相对路径的文件，确实会打开失败！</p>
+<p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703133825157.png" alt="image-20200703133825157"></p>
+<p>那么如果<code>IOAdapter</code>不为null的话，会调用<code>IOAdapter.open(path)</code>，<code>IOAdapter</code>的实现类<code>ResourceIOAdapter</code>中的open函数如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703134140075.png" alt="image-20200703134140075"></p>
+<p>由上面代码可以看到这时就会去Resource中去寻找配置文件，我们尝试将<code>IOAdapter</code>激活，使其不为null；</p>
+<h3 id="4-3-激活IOAdapter"><a href="#4-3-激活IOAdapter" class="headerlink" title="4.3 激活IOAdapter"></a>4.3 激活IOAdapter</h3><h4 id="4-3-1-IIOAdapter适配器接口及示例"><a href="#4-3-1-IIOAdapter适配器接口及示例" class="headerlink" title="4.3.1 IIOAdapter适配器接口及示例"></a>4.3.1 IIOAdapter适配器接口及示例</h4><p><code>IOAdapter</code>其实是接口<code>IIOAdapter</code>的一个实例，其中<code>IIOAdapter</code>接口默认有两个实现，分别是<code>FileIOAdapter</code>和<code>ResourceIOAdapter</code>；</p>
+<p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-03/image-20200703144659226.png" alt="image-20200703144659226"></p>
+<p>其中<code>FileIOAdapter</code>的代码逻辑如下，他是基于普通文件系统进行处理的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * &lt;summary&gt;&lt;/summary&gt;</span></span><br><span class="line"><span class="comment"> * &lt;author&gt;Hankcs&lt;/author&gt;</span></span><br><span class="line"><span class="comment"> * &lt;email&gt;me@hankcs.com&lt;/email&gt;</span></span><br><span class="line"><span class="comment"> * &lt;create-date&gt;2016-09-07 PM4:42&lt;/create-date&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;copyright file="FileIOAdapter.java" company="码农场"&gt;</span></span><br><span class="line"><span class="comment"> * Copyright (c) 2008-2016, 码农场. All Right Reserved, http://www.hankcs.com/</span></span><br><span class="line"><span class="comment"> * This source is subject to Hankcs. Please contact Hankcs to get more information.</span></span><br><span class="line"><span class="comment"> * &lt;/copyright&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.hankcs.hanlp.corpus.io;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于普通文件系统的IO适配器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hankcs</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileIOAdapter</span> <span class="keyword">implements</span> <span class="title">IIOAdapter</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputStream <span class="title">open</span><span class="params">(String path)</span> <span class="keyword">throws</span> FileNotFoundException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> OutputStream <span class="title">create</span><span class="params">(String path)</span> <span class="keyword">throws</span> FileNotFoundException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FileOutputStream(path);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ResourceIOAdapter</code>听上去特别像我们需要的文件处理适配器，具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * &lt;author&gt;Hankcs&lt;/author&gt;</span></span><br><span class="line"><span class="comment"> * &lt;email&gt;me@hankcs.com&lt;/email&gt;</span></span><br><span class="line"><span class="comment"> * &lt;create-date&gt;2016-09-24 AM8:34&lt;/create-date&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;copyright file="ResourceIOAdapter.java" company="码农场"&gt;</span></span><br><span class="line"><span class="comment"> * Copyright (c) 2016, 码农场. All Right Reserved, http://www.hankcs.com/</span></span><br><span class="line"><span class="comment"> * This source is subject to Hankcs. Please contact Hankcs to get more information.</span></span><br><span class="line"><span class="comment"> * &lt;/copyright&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.hankcs.hanlp.corpus.io;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从jar包资源读取文件的适配器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hankcs</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceIOAdapter</span> <span class="keyword">implements</span> <span class="title">IIOAdapter</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputStream <span class="title">open</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> IOUtil.isResource(path) ? IOUtil.getResourceAsStream(<span class="string">"/"</span> + path) : <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> OutputStream <span class="title">create</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (IOUtil.isResource(path)) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"不支持写入jar包资源路径"</span> + path);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FileOutputStream(path);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显，<code>ResourceIOAdapter</code>是为了处理从jar包资源读取文件的适配器；</p>
+<h4 id="4-3-2-自己定制IIOAdapter适配器"><a href="#4-3-2-自己定制IIOAdapter适配器" class="headerlink" title="4.3.2 自己定制IIOAdapter适配器"></a>4.3.2 自己定制IIOAdapter适配器</h4><p>既然现有的适配器都不能满足我们的需要，那么我们就自己定制一个适配器，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ict.mcg.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.hankcs.hanlp.corpus.io.IIOAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceFileIoAdapter</span> <span class="keyword">implements</span> <span class="title">IIOAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputStream <span class="title">open</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(path);</span><br><span class="line">        InputStream is = <span class="keyword">new</span> FileInputStream(resource.getFile());</span><br><span class="line">        <span class="keyword">return</span> is;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> OutputStream <span class="title">create</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(path);</span><br><span class="line">        OutputStream os = <span class="keyword">new</span> FileOutputStream(resource.getFile());</span><br><span class="line">        <span class="keyword">return</span> os;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在代码中加入上述适配器类，我们就不需要指定hanlp词典等绝对路径了，只需要将HanLP.data放到项目的resource下，并指定IOAdapter实例的类别，就可以愉快的开发了！</p>
+<p>具体配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root=HanLP/</span><br><span class="line">IOAdapter=com.ict.mcg.config.ResourceFileIoAdapter</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
+          
+            <a href="/tags/HanLP/" rel="tag"><i class="fa fa-tag"></i> HanLP</a>
+          
+            <a href="/tags/Adapter/" rel="tag"><i class="fa fa-tag"></i> Adapter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/19/git使用ssh或者http方式pull和push代码/" rel="next" title="git使用ssh或者http方式pull和push代码">
+                <i class="fa fa-chevron-left"></i> git使用ssh或者http方式pull和push代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="刘浩远">
+            
+              <p class="site-author-name" itemprop="name">刘浩远</p>
+              <p class="site-description motion-element" itemprop="description">刘浩远扯淡的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/haoyuanliu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="haoyuan_liu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-工程中HanLP配置路径BUG解决"><span class="nav-text">Spring Boot 工程中HanLP配置路径BUG解决</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#0、-摘要"><span class="nav-text">0、 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、问题描述"><span class="nav-text">1、问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、将路径配置为绝对路径"><span class="nav-text">2、将路径配置为绝对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、-将路径配置为classpath-开头的"><span class="nav-text">3、 将路径配置为classpath:开头的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、原因探究"><span class="nav-text">4、原因探究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-hanlp源码读取root路径的逻辑："><span class="nav-text">4.1 hanlp源码读取root路径的逻辑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-文件加载逻辑"><span class="nav-text">4.2 文件加载逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-激活IOAdapter"><span class="nav-text">4.3 激活IOAdapter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-IIOAdapter适配器接口及示例"><span class="nav-text">4.3.1 IIOAdapter适配器接口及示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-自己定制IIOAdapter适配器"><span class="nav-text">4.3.2 自己定制IIOAdapter适配器</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘浩远</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz',
+        appKey: 'RLYUaI7RXmRYaC1MYL4BVVqB',
+        placeholder: 'Comment here ^_^!',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('2');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("XIUhPHgjvLiM4NRSGHAKwVL7-gzGzoHsz", "RLYUaI7RXmRYaC1MYL4BVVqB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
