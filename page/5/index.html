@@ -332,6 +332,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/26/RMQ问题的ST稀疏树解法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/26/RMQ问题的ST稀疏树解法/" itemprop="url">RMQ问题的ST稀疏表解法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-26T17:59:21+08:00">
+                2016-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/26/RMQ问题的ST稀疏树解法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/07/26/RMQ问题的ST稀疏树解法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/07/26/RMQ问题的ST稀疏树解法/" class="leancloud_visitors" data-flag-title="RMQ问题的ST稀疏表解法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>RMQ问题(Random Minimum/Maximum Query, 即区间最值问题)，指的是给定一个长度为n的数列A，对于A数列进行若干次询问，询问在闭区间[l, r]之中的最小/最大值是多少。RMQ问题有很多种解法，包括朴素算法、线段树、ST算法等，本文主要介绍使用ST稀疏表算法。</p>
+<h2 id="ST算法思想"><a href="#ST算法思想" class="headerlink" title="ST算法思想"></a>ST算法思想</h2><p>ST(Sparse Table, 稀疏表)可以以O(nlogn)的时间效率对RMQ问题进行预处理，然后以O(1)的时间效率回答每个问题。<br>ST算法的实质是一种动态规划算法，我们定义了状态数组<code>dp[i][j]</code>表示从数组下标i开始包含$2^j$个数组元素在内的子数组中最小/大值。则此时，假设我们令$dp[1][0] = 2$, $dp[2][0] = 3$,则$dp[1][1] = min(dp[1][0], dp[2][0])$。即当我们需要求$dp[i][j+1]$的时候，我们可以将这一段子数组分成两段，分别求取两段的最值$dp[i][j]$和$dp[i+2^j][j]$，最后取这两个的最值的比较结果就可以得到结果。所以预处理的状态转移方程为$$dp[i][j+1] = min(dp[i][j], dp[i+2^j][j])$$<br>只要初始化当$j==0$的时候，最值是本身就可以很轻松的完成预处理。<br>针对题目要求，求取对任意给定的闭区间<code>[l,r]</code>中的最值，我只要找到小于这个区间长度的最大的2的非负整数次幂——T，分别求取前一段$dp[l][T]$和后一段$dp[r - s^T + 1][T]$最后进行比较就可以得出整个区间的结果，所以$$RMQ(l, r) = min(dp[l][T], dp[r - 2^T + 1][T])$$<br>其中$T = log_2(r-l+1)$。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/26/RMQ问题的ST稀疏树解法/#espandi" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/24/最近公共祖先问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -470,7 +641,7 @@ JiaZheng
 </code></pre>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/24/最近公共祖先问题/#more" rel="contents">
+            <a class="btn" href="/2016/07/24/最近公共祖先问题/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -658,7 +829,7 @@ JiaZheng
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/21/动态规划之二叉苹果树及其变形/#more" rel="contents">
+            <a class="btn" href="/2016/07/21/动态规划之二叉苹果树及其变形/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -828,7 +999,7 @@ JiaZheng
           <p>动态规划是我们最常用的算法之一，在我看来动态规划就是利用额外内存空间将运算过程中所需要的重复变量进行记录，下次访问使用的时候直接进行读取从而减少了额外的重复计算，提高了算法的效率，从某种角度来说也算是空间换取时间的一种方式。道理很简单，动态规划的核心是我们对问题的分割和思考，如何构建状态转移方程、分割事件，如何分解一整个问题，这才是动态规划最核心的解决问题的核心思想。<br>树归即树形动态规划，是在树形结构中使用动态规划的一类问题。因为树形结构没有环，进行深度优先遍历搜索的时候不会重复进行，再加上树形结构本身有着良好的性质和特点，树归的问题非常多，思路也特别有意思。下面将对我在学习过程中遇到的树归问题进行介绍和记录。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/19/动态规划之树形规划/#more" rel="contents">
+            <a class="btn" href="/2016/07/19/动态规划之树形规划/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1000,7 +1171,7 @@ JiaZheng
 <p>这里定义了一个<code>node</code>结构表示二叉树中的一个结点，<code>Node</code>表示指向一个<code>node</code>结点的指针。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/#more" rel="contents">
+            <a class="btn" href="/2016/07/12/二叉树系列之————二叉树的递归遍历与非递归遍历/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1520,7 +1691,7 @@ JiaZheng
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/05/29/最长回文字符串/#more" rel="contents">
+            <a class="btn" href="/2016/05/29/最长回文字符串/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1698,7 +1869,7 @@ JiaZheng
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/05/24/EightQueen/#more" rel="contents">
+            <a class="btn" href="/2016/05/24/EightQueen/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1870,7 +2041,7 @@ JiaZheng
 <p>正如下图所示：<br><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-04-29/bug1.gif" alt="BUG"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/29/mysql/#more" rel="contents">
+            <a class="btn" href="/2016/04/29/mysql/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1878,177 +2049,6 @@ JiaZheng
         
       
     </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/04/21/birthday/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="刘浩远">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="贫贫贫贫僧">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/21/birthday/" itemprop="url">My Birthday!</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-21T00:11:35+08:00">
-                2016-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/心迹/" itemprop="url" rel="index">
-                    <span itemprop="name">心迹</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/04/21/birthday/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/21/birthday/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/04/21/birthday/" class="leancloud_visitors" data-flag-title="My Birthday!">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天过生日，也是23岁老大不小了，希望在接下来的日子里，继续沿着心中既定的目标，在码农的道路上撒丫子颠儿着跑！<br>附上今天的Github Contributions：<br><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2016-04-21/%E7%94%9F%E6%97%A5.png" alt="Github Contributions"></p>
-<p>附上最近最喜欢的一首歌，为自己小小庆生一下：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/04/21/birthday/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
     
     
     
@@ -2134,7 +2134,7 @@ JiaZheng
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2145,7 +2145,7 @@ JiaZheng
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2156,7 +2156,7 @@ JiaZheng
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
