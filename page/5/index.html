@@ -332,6 +332,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/29/动态RMQ问题解决办法与算法分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/29/动态RMQ问题解决办法与算法分析/" itemprop="url">动态RMQ问题解决办法与算法分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T13:02:23+08:00">
+                2016-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/29/动态RMQ问题解决办法与算法分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/07/29/动态RMQ问题解决办法与算法分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/07/29/动态RMQ问题解决办法与算法分析/" class="leancloud_visitors" data-flag-title="动态RMQ问题解决办法与算法分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在之前的一篇<a href="http://haoyuanliu.github.io/2016/07/26/RMQ%E9%97%AE%E9%A2%98%E7%9A%84ST%E7%A8%80%E7%96%8F%E6%A0%91%E8%A7%A3%E6%B3%95/">博文</a>中，我们介绍了使用Sparse Table（ST稀疏表）解决RMQ问题的方法。使用ST稀疏表对已知数据进行预处理，对于任意的询问请求都可以以<strong>O(1)</strong>的效率进行解答，作为一种离线算法，非常高效快速，特别适合用于进行RMQ问题的求解。<br>现在让我们考虑一种动态的RMQ问题，动态是指在我们询问的过程中，区间内某一位置的值会受到外界干预而发生改变，我们需要做的就是在每次改变的基础上对收到的询问给出正确的结果。<br>对于动态RMQ问题我们有如下三种思路：</p>
+<blockquote>
+<ul>
+<li>使用朴素算法进行遍历查找；</li>
+<li>使用SparseTable稀疏表进行求解，每次变化更新稀疏表；</li>
+<li>使用<a href="https://zh.wikipedia.org/zh/%E7%BA%BF%E6%AE%B5%E6%A0%91" target="_blank" rel="noopener">二分线段树</a>进行求解，每次变化进行相应的信息修改。<br>下面我们在一个较小数据量(10^4)的条件下对上述三种算法进行分析实现。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/29/动态RMQ问题解决办法与算法分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></blockquote></div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/07/27/使用RMQ-ST算法解决最近公共祖先问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1902,184 +2077,6 @@ JiaZheng
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/05/24/EightQueen/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="刘浩远">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="贫贫贫贫僧">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/24/EightQueen/" itemprop="url">EightQueen</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-24T13:54:57+08:00">
-                2016-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/05/24/EightQueen/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/05/24/EightQueen/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/05/24/EightQueen/" class="leancloud_visitors" data-flag-title="EightQueen">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>八皇后问题是一个以国际象棋为背景的问题：如何能够在<code>8×8</code>的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为<code>n×n</code>，而皇后个数也变成<code>n</code>。当且仅当<code>n = 1</code>或<code>n ≥ 4</code>时问题有解。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
-<ul>
-<li>首先观察可以发现，每一行或者每一列都有且只有一个皇后；</li>
-<li>使用一个数组<code>x[8]</code>存储每一行皇后位置所对应的列数。例如：<code>a[2] = 5</code>就表示第二行的皇后位于第五列；</li>
-<li>皇后不在一条直线上可以表示为条件<code>x[i] != x[j]</code>；</li>
-<li>皇后不在一条斜线上可以表示为条件<code>abs(x[i] - x[j]) != abs(i - j)</code>；</li>
-</ul>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/05/24/EightQueen/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2132,7 +2129,7 @@ JiaZheng
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2143,7 +2140,7 @@ JiaZheng
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2154,7 +2151,7 @@ JiaZheng
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

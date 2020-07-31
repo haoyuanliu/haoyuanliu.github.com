@@ -332,6 +332,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/05/24/EightQueen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘浩远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="贫贫贫贫僧">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/24/EightQueen/" itemprop="url">EightQueen</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-24T13:54:57+08:00">
+                2016-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/24/EightQueen/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/05/24/EightQueen/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/05/24/EightQueen/" class="leancloud_visitors" data-flag-title="EightQueen">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>八皇后问题是一个以国际象棋为背景的问题：如何能够在<code>8×8</code>的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为<code>n×n</code>，而皇后个数也变成<code>n</code>。当且仅当<code>n = 1</code>或<code>n ≥ 4</code>时问题有解。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<ul>
+<li>首先观察可以发现，每一行或者每一列都有且只有一个皇后；</li>
+<li>使用一个数组<code>x[8]</code>存储每一行皇后位置所对应的列数。例如：<code>a[2] = 5</code>就表示第二行的皇后位于第五列；</li>
+<li>皇后不在一条直线上可以表示为条件<code>x[i] != x[j]</code>；</li>
+<li>皇后不在一条斜线上可以表示为条件<code>abs(x[i] - x[j]) != abs(i - j)</code>；</li>
+</ul>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/24/EightQueen/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/04/29/mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2047,183 +2225,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://haoyuanliu.github.io/2016/03/30/Ubuntu-14-04下安装ns2-35/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="刘浩远">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="贫贫贫贫僧">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/30/Ubuntu-14-04下安装ns2-35/" itemprop="url">Ubuntu 14.04下安装ns2.35</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-30T16:09:38+08:00">
-                2016-03-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NS2/" itemprop="url" rel="index">
-                    <span itemprop="name">NS2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/30/Ubuntu-14-04下安装ns2-35/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/03/30/Ubuntu-14-04下安装ns2-35/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/03/30/Ubuntu-14-04下安装ns2-35/" class="leancloud_visitors" data-flag-title="Ubuntu 14.04下安装ns2.35">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文主要介绍在Ubuntu 14.04系统下，ns2.35的安装过程，本次选择的版本是2.35最新版本，安装环境是Ubuntu 14.04，其他系统环境和ns的版本安装过程相似，均可参考本文流程。</p>
-<blockquote>
-<p>PS：出现<code>Bug</code>，<code>Error</code>一定用用Google解决，Google大法好！</p>
-</blockquote>
-<hr>
-<h2 id="下载ns2的安装包"><a href="#下载ns2的安装包" class="headerlink" title="下载ns2的安装包"></a>下载ns2的安装包</h2><p>这里我选择的是<code>ns-allinone-2.35.tar.gz</code>压缩格式的<code>all-in-one</code>安装包，<code>all-in-one</code> 安装包包含所有的组件，比较方便，另附下载地址：<br><a href="http://www.isi.edu/nsnam/ns/ns-build.html" target="_blank" rel="noopener">Link</a>： <a href="http://www.isi.edu/nsnam/ns/ns-build.html" target="_blank" rel="noopener">http://www.isi.edu/nsnam/ns/ns-build.html</a></p>
-<hr>
-<h2 id="安装前环境配置"><a href="#安装前环境配置" class="headerlink" title="安装前环境配置"></a>安装前环境配置</h2><p>输入如下代码：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sudo</span> apt-<span class="builtin-name">get</span> install build－essential</span><br><span class="line"><span class="variable">$sudo</span> apt-<span class="builtin-name">get</span> install tcl8.4 tcl8.4-dev tk8.4 tk8.4-dev</span><br><span class="line"><span class="variable">$sduo</span> apt-<span class="builtin-name">get</span> install libxmu-dev libxmu-headers</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/03/30/Ubuntu-14-04下安装ns2-35/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2276,7 +2277,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2287,7 +2288,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2298,7 +2299,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
