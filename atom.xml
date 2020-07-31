@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://haoyuanliu.github.io/"/>
-  <updated>2020-07-31T08:14:03.534Z</updated>
+  <updated>2020-07-31T08:21:36.350Z</updated>
   <id>http://haoyuanliu.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://haoyuanliu.github.io/2020/07/31/%E8%B6%85%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%86%E5%8D%B7%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B/"/>
     <id>http://haoyuanliu.github.io/2020/07/31/超大文件分卷压缩与解压/</id>
     <published>2020-07-31T08:12:56.000Z</published>
-    <updated>2020-07-31T08:14:03.534Z</updated>
+    <updated>2020-07-31T08:21:36.350Z</updated>
     
     <content type="html"><![CDATA[<p>日常开发中，有时候会遇到超大文件的压缩与解压，比如将一个超大的视频数据集上传到百度云，而百度云是有单个文件的大小限制的，也就需要我们按照固定的大小分卷来进行上传。与此同时，将超大的数据集上传到服务器上进行训练等操作，也需要按照分卷压缩的方式，并最终解压出来！</p><p>本文将介绍我处理超大文件压缩解压的方式，并推荐一下<a href="https://www.7-zip.org/" target="_blank" rel="noopener">7-Zip</a>这个压缩软件！</p><a id="more"></a><h3 id="0、软件安装"><a href="#0、软件安装" class="headerlink" title="0、软件安装"></a>0、软件安装</h3><p>首先，你需要在自己电脑上安装一个压缩软件，这里我使用的是7-Zip，不过大部分的软件都有类似的功能，大家灵活取用就可以了！</p><h3 id="1、-分卷压缩"><a href="#1、-分卷压缩" class="headerlink" title="1、 分卷压缩"></a>1、 分卷压缩</h3><p>首先，点击我们想要压缩的数据集文件夹，选择好分卷的大小，如下图所示，这里我选择<code>1000M</code>即<code>1G</code>为一个分卷；</p><p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-31/image-20200731154007974.png" alt="image-20200731154007974"></p><p>分卷完成之后就得到了如下这几个压缩包，每个大小不超过<code>1G</code>，这样无论是我们上传到百度云等云平台还是到服务器都比较方便！</p><p><img src="https://raw.githubusercontent.com/haoyuanliu/blog_pic/master/2020-07-31/image-20200731154836272.png" alt="image-20200731154836272"></p><h3 id="2、-分卷解压"><a href="#2、-分卷解压" class="headerlink" title="2、 分卷解压"></a>2、 分卷解压</h3><p>在<code>linux</code>系统中分卷解压的命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 首先将所有的分卷合并为一个包</span></span><br><span class="line">cat 周杰伦.zip* &gt; Jay.zip</span><br><span class="line"><span class="comment">## 然后解压</span></span><br><span class="line">unzip Jay.zip</span><br></pre></td></tr></table></figure><p>然后就可以愉快地开展后续的工作了！</p>]]></content>
     
@@ -32,10 +32,8 @@
     
     </summary>
     
-      <category term="linux" scheme="http://haoyuanliu.github.io/categories/linux/"/>
+      <category term="Linux" scheme="http://haoyuanliu.github.io/categories/Linux/"/>
     
-    
-      <category term="linux" scheme="http://haoyuanliu.github.io/tags/linux/"/>
     
       <category term="zip" scheme="http://haoyuanliu.github.io/tags/zip/"/>
     

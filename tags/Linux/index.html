@@ -91,7 +91,7 @@
 <meta name="description" content="刘浩远扯淡的地方">
 <meta property="og:type" content="website">
 <meta property="og:title" content="贫贫贫贫僧">
-<meta property="og:url" content="http://haoyuanliu.github.io/tags/linux/index.html">
+<meta property="og:url" content="http://haoyuanliu.github.io/tags/Linux/index.html">
 <meta property="og:site_name" content="贫贫贫贫僧">
 <meta property="og:description" content="刘浩远扯淡的地方">
 <meta property="og:locale" content="zh-Hans">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://haoyuanliu.github.io/tags/linux/">
+  <link rel="canonical" href="http://haoyuanliu.github.io/tags/Linux/">
 
 
 
 
 
-  <title>标签: linux | 贫贫贫贫僧</title>
+  <title>标签: Linux | 贫贫贫贫僧</title>
   
 
 
@@ -324,7 +324,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>linux<small>标签</small>
+        <h1>Linux<small>标签</small>
         </h1>
       </div>
 
@@ -336,17 +336,69 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2020/07/31/超大文件分卷压缩与解压/" itemprop="url">
+            <a class="post-title-link" href="/2017/06/11/gcc-g-编译过程/" itemprop="url">
               
-                <span itemprop="name">超大文件分卷压缩与解压</span>
+                <span itemprop="name">gcc/g++编译过程</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-07-31T16:12:56+08:00" content="2020-07-31">
-          07-31
+        <time class="post-time" itemprop="dateCreated" datetime="2017-06-11T18:08:44+08:00" content="2017-06-11">
+          06-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/11/17/UNIX编程之冲洗内存流与null追加策略（APUE-F5-15）/" itemprop="url">
+              
+                <span itemprop="name">UNIX编程之冲洗内存流与null追加策略（APUE F5-15）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2016-11-17T22:51:06+08:00" content="2016-11-17">
+          11-17
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/09/13/Ubuntu-14-04登陆界面无限循环的解决办法/" itemprop="url">
+              
+                <span itemprop="name">Ubuntu 14.04登陆界面无限循环的解决办法</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2016-09-13T20:37:19+08:00" content="2016-09-13">
+          09-13
         </time>
       </div>
 
@@ -419,7 +471,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -430,7 +482,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1063,65 +1115,6 @@
                 $element.find('.leancloud-visitors-count').text(counter.get('time'));
               },
               error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-er, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
