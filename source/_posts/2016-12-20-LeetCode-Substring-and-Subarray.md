@@ -1,8 +1,12 @@
 ---
 title: LeetCode Substring and Subarray
-date: 2016-12-20 20:50:48
 categories: LeetCode
-tags: [LeetCode, Substring, Subarray]
+tags:
+  - LeetCode
+  - Substring
+  - Subarray
+abbrlink: 82
+date: 2016-12-20 20:50:48
 ---
 
 本文包含如下题目：

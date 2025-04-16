@@ -1,8 +1,11 @@
 ---
 title: LeetCode Bit Manipulation II
-date: 2016-12-25 22:37:04
 categories: LeetCode
-tags: [LeetCode, Bit Manipulation]
+tags:
+  - LeetCode
+  - Bit Manipulation
+abbrlink: 41061
+date: 2016-12-25 22:37:04
 ---
 
 

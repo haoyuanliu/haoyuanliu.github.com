@@ -1,8 +1,11 @@
 ---
 title: LeetCode Divide and Conquer
-date: 2016-12-27 21:06:45
 categories: LeetCode
-tags: [LeetCode, Divide and Conquer]
+tags:
+  - LeetCode
+  - Divide and Conquer
+abbrlink: 20432
+date: 2016-12-27 21:06:45
 ---
 
 本文包含如下题目：

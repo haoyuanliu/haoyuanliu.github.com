@@ -1,8 +1,12 @@
 ---
 title: Sprint Boot 工程中HanLP配置路径BUG解决
-date: 2020-07-03 16:06:03
 categories: Java
-tags: [Spring Boot, HanLP, Adapter]
+tags:
+  - Spring Boot
+  - HanLP
+  - Adapter
+abbrlink: 40145
+date: 2020-07-03 16:06:03
 ---
 
 ### 0、 摘要

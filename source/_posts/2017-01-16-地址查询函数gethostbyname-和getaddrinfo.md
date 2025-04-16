@@ -1,8 +1,11 @@
 ---
 title: 地址查询函数gethostbyname()和getaddrinfo()
-date: 2017-01-16 11:08:20
 categories: 网络编程
-tags: [UNIX/Linux, 网络编程]
+tags:
+  - UNIX/Linux
+  - 网络编程
+abbrlink: 29843
+date: 2017-01-16 11:08:20
 ---
 
 地址查询函数的功能也就是通过主机名或者域名返回详细的主机信息，其中我们最常用的功能就是通过主机名获得主机的IP地址等信息。gethostbyname()和其可重入版本gethostbyname_r()是我们之前较多使用的函数，由于SUSv4已经删除了它们并认为它们已经是过时的了，现在我们更推荐使用getaddrinfo()来完成相应的功能。

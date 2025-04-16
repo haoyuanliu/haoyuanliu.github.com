@@ -1,8 +1,10 @@
 ---
 title: LeetCode String and Integer
-date: 2016-12-13 20:19:18
 categories: LeetCode
-tags: [LeetCode]
+tags:
+  - LeetCode
+abbrlink: 50340
+date: 2016-12-13 20:19:18
 ---
 
 本文将包含如下题目：

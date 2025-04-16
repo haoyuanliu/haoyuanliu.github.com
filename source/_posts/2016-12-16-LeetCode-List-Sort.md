@@ -1,8 +1,12 @@
 ---
 title: LeetCode List Sort
-date: 2016-12-16 22:02:22
 categories: LeetCode
-tags: [LeetCode, Sort, LinkList]
+tags:
+  - LeetCode
+  - Sort
+  - LinkList
+abbrlink: 47956
+date: 2016-12-16 22:02:22
 ---
 
 

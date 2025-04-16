@@ -1,8 +1,10 @@
 ---
 title: LeetCode Path Problems
-date: 2016-12-13 11:28:50
 categories: LeetCode
-tags: [LeetCode]
+tags:
+  - LeetCode
+abbrlink: 10450
+date: 2016-12-13 11:28:50
 ---
 
 本文包含如下题目：

@@ -1,8 +1,11 @@
 ---
 title: LeetCode Greedy
-date: 2017-02-28 17:36:40
 categories: LeetCode
-tags: [LeetCode, Greedy]
+tags:
+  - LeetCode
+  - Greedy
+abbrlink: 54482
+date: 2017-02-28 17:36:40
 ---
 
 本篇文章的主要内容是LeetCode有关贪心算法的习题练习，主要包含如下题目：

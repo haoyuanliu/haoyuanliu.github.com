@@ -1,8 +1,10 @@
 ---
 title: LeetCode Sqrt and Square
-date: 2016-12-14 17:53:37
 categories: LeetCode
-tags: [LeetCode]
+tags:
+  - LeetCode
+abbrlink: 10571
+date: 2016-12-14 17:53:37
 ---
 
 本文包含如下题目：

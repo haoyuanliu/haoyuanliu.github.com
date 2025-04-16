@@ -1,8 +1,12 @@
 ---
 title: Partition算法剖析
-date: 2016-12-18 16:01:12
 categories: Algorithm
-tags: [Algorithm, partition, LeetCode]
+tags:
+  - Algorithm
+  - partition
+  - LeetCode
+abbrlink: 23789
+date: 2016-12-18 16:01:12
 ---
 
 partition算法从字面上就非常好理解，就是分割算法嘛！简单讲就是可以把数组按照一定的分成几个部分，其中最常见的就是快速排序中使用的partition算法，这是一个二分partition算法，将整个数组分解为小于某个数和大于某个数的两个部分，然后递归进行排序算法。

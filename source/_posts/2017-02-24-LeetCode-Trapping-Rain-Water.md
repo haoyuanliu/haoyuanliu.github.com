@@ -1,8 +1,11 @@
 ---
 title: LeetCode Trapping Rain Water
-date: 2017-02-24 16:47:46
 categories: LeetCode
-tags: [LeetCode, Algorithm]
+tags:
+  - LeetCode
+  - Algorithm
+abbrlink: 41859
+date: 2017-02-24 16:47:46
 ---
 
 本文包含如下两个题目：

@@ -1,8 +1,10 @@
 ---
 title: LeetCode String Calculation
-date: 2016-12-14 10:47:34
 categories: LeetCode
-tags: [LeetCode]
+tags:
+  - LeetCode
+abbrlink: 56708
+date: 2016-12-14 10:47:34
 ---
 
 

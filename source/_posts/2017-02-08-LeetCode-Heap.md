@@ -1,8 +1,12 @@
 ---
 title: LeetCode Heap
+categories:
+  - LeetCode
+tags:
+  - LeetCode
+  - Heap
+abbrlink: 55086
 date: 2017-02-08 22:02:01
-categories: [LeetCode]
-tags: [LeetCode, Heap]
 ---
 
 本文包含如下题目：

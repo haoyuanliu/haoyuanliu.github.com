@@ -1,8 +1,11 @@
 ---
 title: 72.Edit Distance
-date: 2016-12-15 20:33:19
 categories: LeetCode
-tags: [LeetCode, DP]
+tags:
+  - LeetCode
+  - DP
+abbrlink: 658
+date: 2016-12-15 20:33:19
 ---
 
 

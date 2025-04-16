@@ -1,8 +1,10 @@
 ---
 title: LeetCode Rotate
-date: 2016-12-08 20:32:13
 categories: LeetCode
-tags: [Leetcode]
+tags:
+  - Leetcode
+abbrlink: 59252
+date: 2016-12-08 20:32:13
 ---
 
 本文包含如下题目：

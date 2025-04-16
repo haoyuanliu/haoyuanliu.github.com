@@ -1,8 +1,11 @@
 ---
 title: LeetCode Tree I
-date: 2017-01-05 19:01:56
 categories: LeetCode
-tags: [LeetCode, Tree]
+tags:
+  - LeetCode
+  - Tree
+abbrlink: 25571
+date: 2017-01-05 19:01:56
 ---
 
 本文包含的题目有：

@@ -1,8 +1,11 @@
 ---
 title: 71. Simplify Path
-date: 2016-12-15 16:55:39
 categories: LeetCode
-tags: [LeetCode, Stack]
+tags:
+  - LeetCode
+  - Stack
+abbrlink: 55219
+date: 2016-12-15 16:55:39
 ---
 
 [题目链接！][1]

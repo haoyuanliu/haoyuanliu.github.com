@@ -1,8 +1,11 @@
 ---
 title: LeetCode Matrix Setting
-date: 2016-12-16 14:51:39
 categories: LeetCode
-tags: [LeetCode, Array]
+tags:
+  - LeetCode
+  - Array
+abbrlink: 46777
+date: 2016-12-16 14:51:39
 ---
 
 本文包含如下题目：

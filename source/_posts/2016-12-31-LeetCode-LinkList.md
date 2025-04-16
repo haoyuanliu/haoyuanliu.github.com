@@ -1,8 +1,11 @@
 ---
 title: LeetCode LinkList
-date: 2016-12-31 19:43:29
 categories: LeetCode
-tags: [LeetCode, LinkList]
+tags:
+  - LeetCode
+  - LinkList
+abbrlink: 34291
+date: 2016-12-31 19:43:29
 ---
 
 本文包含如下题目：

@@ -1,8 +1,11 @@
 ---
 title: Ubuntu14.04系统Chromium安装Adobe Flash插件
-date: 2017-01-04 14:12:41
 categories: Ubuntu
-tags: [Ubuntu, Adobe Flash]
+tags:
+  - Ubuntu
+  - Adobe Flash
+abbrlink: 13947
+date: 2017-01-04 14:12:41
 ---
 
 经历了好几次重装Ubuntu系统，每次安装都需要配置一大堆东西，对于一个几乎放弃了windows系统的人来说，每次重装系统的第一件事就是安装一个Chromium浏览器，谁让我的所有收藏夹都在Chromium账号中。然而每次安装Chromium的Flash插件都需要去网上查找各种教程，每次都要搞好久才能弄好，这次专门记录一下，以便以后需要时用到。

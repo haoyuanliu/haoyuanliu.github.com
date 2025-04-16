@@ -1,8 +1,13 @@
 ---
 title: LeetCode Search 2D Matrix
+categories:
+  - LeetCode
+tags:
+  - LeetCode
+  - Binary Search
+  - Divide and Conquer
+abbrlink: 1416
 date: 2016-12-16 15:49:24
-categories: [LeetCode]
-tags: [LeetCode, Binary Search, Divide and Conquer]
 ---
 
 本文包含如下题目：

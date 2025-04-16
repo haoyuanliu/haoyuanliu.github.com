@@ -1,8 +1,11 @@
 ---
 title: 70 Climbing Stairs
-date: 2016-12-14 18:56:26
 categories: LeetCode
-tags: [LeetCode, DP]
+tags:
+  - LeetCode
+  - DP
+abbrlink: 16799
+date: 2016-12-14 18:56:26
 ---
 
 

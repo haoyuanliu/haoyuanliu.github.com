@@ -1,8 +1,11 @@
 ---
 title: LeetCode Tree II
-date: 2017-01-12 11:53:09
 categories: LeetCode
-tags: [LeetCode, Tree]
+tags:
+  - LeetCode
+  - Tree
+abbrlink: 32739
+date: 2017-01-12 11:53:09
 ---
 
 

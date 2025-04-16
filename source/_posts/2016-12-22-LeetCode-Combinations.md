@@ -1,8 +1,11 @@
 ---
 title: LeetCode Combinations
-date: 2016-12-22 14:58:29
 categories: LeetCode
-tags: [LeetCode, Combination]
+tags:
+  - LeetCode
+  - Combination
+abbrlink: 65349
+date: 2016-12-22 14:58:29
 ---
 
 本文包含如下题目：

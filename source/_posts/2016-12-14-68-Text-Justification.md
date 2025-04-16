@@ -1,8 +1,10 @@
 ---
 title: 68 Text Justification
-date: 2016-12-14 10:09:20
 categories: LeetCode
-tags: [LeetCode]
+tags:
+  - LeetCode
+abbrlink: 23107
+date: 2016-12-14 10:09:20
 ---
 
 ### 解题思路

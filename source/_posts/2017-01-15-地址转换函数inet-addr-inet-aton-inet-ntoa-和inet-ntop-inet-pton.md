@@ -1,8 +1,11 @@
-	---
+---
 title: '地址转换函数inet_addr(), inet_aton(), inet_ntoa()和inet_ntop(), inet_pton()'
-date: 2017-01-15 16:43:01
 categories: 网络编程
-tags: [UNIX/Linux, 网络编程]
+tags:
+  - UNIX/Linux
+  - 网络编程
+abbrlink: 58114
+date: 2017-01-15 16:43:01
 ---
 
 
